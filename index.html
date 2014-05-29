@@ -1,149 +1,125 @@
-<!DOCTYPE html>
-<html>
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Private : image" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Private</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/leejeongwha/private">View on GitHub</a>
-
-          <h1 id="project_title">Private</h1>
-          <h2 id="project_tagline">image</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/leejeongwha/private/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/leejeongwha/private/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p>&lt;!DOCTYPE HTML&gt;</p>
-
-
-
-<p>
-</p>
-
-
-
-<p></p>Bootstrap Image Gallery<div>
-    <div>
-        <div>
-            
-                
-                
-                
-            
-            <a href="https://github.com/blueimp/Bootstrap-Image-Gallery">Bootstrap Image Gallery</a>
+<!DOCTYPE HTML>
+<!--
+/*
+ * Bootstrap Image Gallery Demo 3.0.1
+ * https://github.com/blueimp/Bootstrap-Image-Gallery
+ *
+ * Copyright 2013, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+-->
+<html lang="en">
+<head>
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<![endif]-->
+<meta charset="utf-8">
+<title>Bootstrap Image Gallery</title>
+<meta name="description" content="Bootstrap Image Gallery is an extension to blueimp Gallery, a touch-enabled, responsive and customizable image and video gallery. It displays images and videos in the modal dialog of the Bootstrap framework, features swipe, mouse and keyboard navigation, transition effects, fullscreen support and on-demand content loading and can be extended to display additional content types.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+<link rel="stylesheet" href="http://blueimp.github.io/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.css">
+<link rel="stylesheet" href="http://blueimp.github.io/Bootstrap-Image-Gallery/css/demo.css">
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-fixed-top .navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://github.com/blueimp/Bootstrap-Image-Gallery">Bootstrap Image Gallery</a>
         </div>
-        <div>
-            <ul>
-<li><a href="https://github.com/blueimp/Bootstrap-Image-Gallery/tags">Download</a></li>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="https://github.com/blueimp/Bootstrap-Image-Gallery/tags">Download</a></li>
                 <li><a href="https://github.com/blueimp/Bootstrap-Image-Gallery">Source Code</a></li>
                 <li><a href="https://github.com/blueimp/Bootstrap-Image-Gallery/blob/master/README.md">Documentation</a></li>
-                <li><a href="https://blueimp.net">© Sebastian Tschan</a></li>
+                <li><a href="https://blueimp.net">&copy; Sebastian Tschan</a></li>
             </ul>
-</div>
+        </div>
     </div>
 </div>
-
-<div>
-    <h1>
-<a name="bootstrap-image-gallery-demo" class="anchor" href="#bootstrap-image-gallery-demo"><span class="octicon octicon-link"></span></a>Bootstrap Image Gallery Demo</h1>
+<div class="container">
+    <h1>Bootstrap Image Gallery Demo</h1>
     <blockquote>
         <p>Bootstrap Image Gallery is an extension to <a href="http://blueimp.github.io/Gallery/">blueimp Gallery</a>, a touch-enabled, responsive and customizable image &amp; video gallery.<br>It displays images and videos in the modal dialog of the <a href="http://getbootstrap.com/">Bootstrap</a> framework, features swipe, mouse and keyboard navigation, transition effects, fullscreen support and on-demand content loading and can be extended to display additional content types.</p>
     </blockquote>
-    
-        <div>
-            
-                <i></i>
+    <form class="form-inline">
+        <div class="form-group">
+            <button id="video-gallery-button" type="button" class="btn btn-success btn-lg">
+                <i class="glyphicon glyphicon-film"></i>
                 Launch Video Gallery
-            
+            </button>
         </div>
-        <div>
-            
-                <i></i>
+        <div class="form-group">
+            <button id="image-gallery-button" type="button" class="btn btn-primary btn-lg">
+                <i class="glyphicon glyphicon-picture"></i>
                 Launch Image Gallery
-            
+            </button>
         </div>
-        <div>
-          
-            <i></i>
-             Borderless
-          
-          
-            <i></i>
-             Fullscreen
-          
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-success btn-lg">
+            <i class="glyphicon glyphicon-leaf"></i>
+            <input id="borderless-checkbox" type="checkbox"> Borderless
+          </label>
+          <label class="btn btn-primary btn-lg">
+            <i class="glyphicon glyphicon-fullscreen"></i>
+            <input id="fullscreen-checkbox" type="checkbox"> Fullscreen
+          </label>
         </div>
-    
-    <br><div></div>
+    </form>
+    <br>
+    <!-- The container for the list of example images -->
+    <div id="links"></div>
     <br>
 </div>
-
-
-
-<div>
-    
-    <div></div>
-    
-    <h3></h3>
-    ‹
-    ›
-    ×
-    
-    <ol></ol>
-<div>
-        <div>
-            <div>
-                <div>
-                    ×
-                    <h4></h4>
+<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
                 </div>
-                <div></div>
-                <div>
-                    
-                        <i></i>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
                         Previous
-                    
-                    
+                    </button>
+                    <button type="button" class="btn btn-primary next">
                         Next
-                        <i></i>
-                    
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<p> 
-</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Private maintained by <a href="https://github.com/leejeongwha">leejeongwha</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- Bootstrap JS is not required, but included for the responsive demo navigation and button states -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<script src="http://blueimp.github.io/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.js"></script>
+<script src="http://blueimp.github.io/Bootstrap-Image-Gallery/js/demo.js"></script>
+</body> 
 </html>
