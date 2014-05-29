@@ -1,251 +1,149 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>leejeongwha</title>
+<html>
 
-<!-- Bootstrap core CSS -->
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<!-- Custom styles for this template -->
-<link href="http://getbootstrap.com/examples/carousel/carousel.css" rel="stylesheet">
-</head>
-<!-- NAVBAR
-================================================== -->
-<body>
-	<div class="navbar-wrapper">
-		<div class="container">
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Private : image" />
 
-			<div class="navbar navbar-inverse navbar-static-top"
-				role="navigation">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse"
-							data-target=".navbar-collapse">
-							<span class="sr-only">Toggle navigation</span> <span
-								class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="/private">Home</a>
-					</div>
-					<div class="navbar-collapse collapse">
-						<ul class="nav navbar-nav">
-							<li><a href="#about">About</a></li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a href="#">Action1</a></li>
-									<li><a href="#">Action2</a></li>
-									<li><a href="#">Action3</a></li>
-									<!-- <li class="divider"></li> -->
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-		</div>
-	</div>
+    <title>Private</title>
+  </head>
 
-	<!-- Carousel
-    ================================================== -->
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-		<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1"></li>
-			<li data-target="#myCarousel" data-slide-to="2"></li>
-		</ol>
-		<div class="carousel-inner">
-			<div class="item active">
-				<img data-src="holder.js/900x500/auto/#777:#7a7a7a/text:First slide" alt="First slide">
-				<div class="container">
-					<div class="carousel-caption">
-						<h1>Wedding</h1>
-						<p>
-							Note: If you're viewing this page via a
-							<code>file://</code>
-							URL, the "next" and "previous" Glyphicon buttons on the left and
-							right might not load/display properly due to web browser security
-							rules.
-						</p>
-						<p>
-							<a class="btn btn-lg btn-primary" href="#" role="button">Sign
-								up today</a>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<img data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide">
-				<div class="container">
-					<div class="carousel-caption">
-						<h1>Another example headline.</h1>
-						<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-							quam. Donec id elit non mi porta gravida at eget metus. Nullam id
-							dolor id nibh ultricies vehicula ut id elit.</p>
-						<p>
-							<a class="btn btn-lg btn-primary" href="#" role="button">Learn
-								more</a>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<img data-src="holder.js/900x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide">
-				<div class="container">
-					<div class="carousel-caption">
-						<h1>One more for good measure.</h1>
-						<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-							quam. Donec id elit non mi porta gravida at eget metus. Nullam id
-							dolor id nibh ultricies vehicula ut id elit.</p>
-						<p>
-							<a class="btn btn-lg btn-primary" href="#" role="button">Browse
-								gallery</a>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span
-			class="glyphicon glyphicon-chevron-left"></span></a> <a
-			class="right carousel-control" href="#myCarousel" data-slide="next"><span
-			class="glyphicon glyphicon-chevron-right"></span></a>
-	</div>
-	<!-- /.carousel -->
+  <body>
 
-	<!-- Marketing messaging and featurettes
-    ================================================== -->
-	<!-- Wrap the rest of the page in another container to center all the content. -->
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/leejeongwha/private">View on GitHub</a>
 
-	<div class="container marketing">
-		<!-- Three columns of text below the carousel -->
-		<div class="row">
-			<div class="col-lg-4">
-				<img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
-				<h2>Heading</h2>
-				<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis
-					euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
-					Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-					Praesent commodo cursus magna.</p>
-				<p>
-					<a class="btn btn-default" href="#" role="button">View details
-						&raquo;</a>
-				</p>
-			</div>
-			<!-- /.col-lg-4 -->
-			<div class="col-lg-4">
-				<img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
-				<h2>Heading</h2>
-				<p>Duis mollis, est non commodo luctus, nisi erat porttitor
-					ligula, eget lacinia odio sem nec elit. Cras mattis consectetur
-					purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo,
-					tortor mauris condimentum nibh.</p>
-				<p>
-					<a class="btn btn-default" href="#" role="button">View details
-						&raquo;</a>
-				</p>
-			</div>
-			<!-- /.col-lg-4 -->
-			<div class="col-lg-4">
-				<img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
-				<h2>Heading</h2>
-				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
-					egestas eget quam. Vestibulum id ligula porta felis euismod semper.
-					Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
-					nibh, ut fermentum massa justo sit amet risus.</p>
-				<p>
-					<a class="btn btn-default" href="#" role="button">View details
-						&raquo;</a>
-				</p>
-			</div>
-			<!-- /.col-lg-4 -->
-		</div>
-		<!-- /.row -->
+          <h1 id="project_title">Private</h1>
+          <h2 id="project_tagline">image</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/leejeongwha/private/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/leejeongwha/private/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>&lt;!DOCTYPE HTML&gt;</p>
 
 
-		<!-- START THE FEATURETTES -->
 
-		<hr class="featurette-divider">
-
-		<div class="row featurette">
-			<div class="col-md-7">
-				<h2 class="featurette-heading">
-					First featurette heading. <span class="text-muted">It'll blow your mind.</span>
-				</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor
-					fringilla. Vestibulum id ligula porta felis euismod semper.
-					Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-					Fusce dapibus, tellus ac cursus commodo.</p>
-			</div>
-			<div class="col-md-5">
-				<img class="featurette-image img-responsive"
-					data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-			</div>
-		</div>
-
-		<hr class="featurette-divider">
-
-		<div class="row featurette">
-			<div class="col-md-5">
-				<img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-			</div>
-			<div class="col-md-7">
-				<h2 class="featurette-heading">
-					Oh yeah, it's that good. <span class="text-muted">See for
-						yourself.</span>
-				</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor
-					fringilla. Vestibulum id ligula porta felis euismod semper.
-					Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-					Fusce dapibus, tellus ac cursus commodo.</p>
-			</div>
-		</div>
-
-		<hr class="featurette-divider">
-
-		<div class="row featurette">
-			<div class="col-md-7">
-				<h2 class="featurette-heading">
-					And lastly, this one. <span class="text-muted">Checkmate.</span>
-				</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor
-					fringilla. Vestibulum id ligula porta felis euismod semper.
-					Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-					Fusce dapibus, tellus ac cursus commodo.</p>
-			</div>
-			<div class="col-md-5">
-				<img class="featurette-image img-responsive"
-					data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-			</div>
-		</div>
-
-		<hr class="featurette-divider">
-
-		<!-- /END THE FEATURETTES -->
+<p>
+</p>
 
 
-		<!-- FOOTER -->
-		<footer>
-			<p class="pull-right">
-				<a href="#">Back to top</a>
-			</p>
-			<p>
-				&copy; 2014.05.29 LeeJeongWha
-			</p>
-		</footer>
 
-	</div>
-	<!-- /.container -->
+<p></p>Bootstrap Image Gallery<div>
+    <div>
+        <div>
+            
+                
+                
+                
+            
+            <a href="https://github.com/blueimp/Bootstrap-Image-Gallery">Bootstrap Image Gallery</a>
+        </div>
+        <div>
+            <ul>
+<li><a href="https://github.com/blueimp/Bootstrap-Image-Gallery/tags">Download</a></li>
+                <li><a href="https://github.com/blueimp/Bootstrap-Image-Gallery">Source Code</a></li>
+                <li><a href="https://github.com/blueimp/Bootstrap-Image-Gallery/blob/master/README.md">Documentation</a></li>
+                <li><a href="https://blueimp.net">© Sebastian Tschan</a></li>
+            </ul>
+</div>
+    </div>
+</div>
+
+<div>
+    <h1>
+<a name="bootstrap-image-gallery-demo" class="anchor" href="#bootstrap-image-gallery-demo"><span class="octicon octicon-link"></span></a>Bootstrap Image Gallery Demo</h1>
+    <blockquote>
+        <p>Bootstrap Image Gallery is an extension to <a href="http://blueimp.github.io/Gallery/">blueimp Gallery</a>, a touch-enabled, responsive and customizable image &amp; video gallery.<br>It displays images and videos in the modal dialog of the <a href="http://getbootstrap.com/">Bootstrap</a> framework, features swipe, mouse and keyboard navigation, transition effects, fullscreen support and on-demand content loading and can be extended to display additional content types.</p>
+    </blockquote>
+    
+        <div>
+            
+                <i></i>
+                Launch Video Gallery
+            
+        </div>
+        <div>
+            
+                <i></i>
+                Launch Image Gallery
+            
+        </div>
+        <div>
+          
+            <i></i>
+             Borderless
+          
+          
+            <i></i>
+             Fullscreen
+          
+        </div>
+    
+    <br><div></div>
+    <br>
+</div>
 
 
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<script src="http://getbootstrap.com/assets/js/docs.min.js"></script>
-</body>
+
+<div>
+    
+    <div></div>
+    
+    <h3></h3>
+    ‹
+    ›
+    ×
+    
+    <ol></ol>
+<div>
+        <div>
+            <div>
+                <div>
+                    ×
+                    <h4></h4>
+                </div>
+                <div></div>
+                <div>
+                    
+                        <i></i>
+                        Previous
+                    
+                    
+                        Next
+                        <i></i>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p> 
+</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Private maintained by <a href="https://github.com/leejeongwha">leejeongwha</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
 </html>
