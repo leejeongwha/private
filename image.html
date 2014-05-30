@@ -139,6 +139,21 @@
 <script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
 <script src="http://blueimp.github.io/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.js"></script>
 <script type="text/javascript">
+$('#borderless-checkbox').on('change', function () {
+    var borderless = $(this).is(':checked');
+    $('#blueimp-gallery').data('useBootstrapModal', !borderless);
+    $('#blueimp-gallery').toggleClass('blueimp-gallery-controls', borderless);
+});
+
+$('#fullscreen-checkbox').on('change', function () {
+    $('#blueimp-gallery').data('fullScreen', $(this).is(':checked'));
+});
+
+$('#image-gallery-button').on('click', function (event) {
+    event.preventDefault();
+    blueimp.Gallery($('#links a'), $('#blueimp-gallery').data());
+});
+
 $(document).ready(function() {
 	for(var i=1; i<8; i++) {
 		var tag='<a href="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/gallery/' + i + '.jpg" title="image_' + i + '" data-gallery=""><img src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/gallery/' + i + '_s.jpg"></a>';
