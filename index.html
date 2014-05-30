@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,40 +10,34 @@
 <title>Home Page</title>
 
 <!-- Bootstrap core CSS -->
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
-<link href="http://getbootstrap.com/examples/carousel/carousel.css"
-	rel="stylesheet">
+<link href="http://getbootstrap.com/examples/carousel/carousel.css" rel="stylesheet">
 </head>
-<!-- NAVBAR
-================================================== -->
 <body>
-	<div class="navbar-wrapper">
+	<!-- NAVBAR ================================================== -->
+	<div class="navbar-wrapper" style="margin-top: 20px">
 		<div class="container">
-			<div class="navbar navbar-inverse navbar-static-top"
-				role="navigation">
+			<div class="navbar navbar-inverse navbar-static-top" role="navigation">
 				<div class="container">
 					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse"
-							data-target=".navbar-collapse">
-							<span class="sr-only">Toggle navigation</span> <span
-								class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="#">Home Page</a>
+						<a class="navbar-brand" href="index.html">Home</a>
 					</div>
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Home</a></li>
+							<li><a href="http://blog.naver.com/ljk2491/220015807984">PhotoLog</a></li>
 							<li><a href="about.html">About</a></li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Etc <b class="caret"></b></a>
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Etc<b class="caret"></b>
+							</a>
 								<ul class="dropdown-menu">
 									<li><a href="image.html">Image</a></li>
-									<!--                     <li class="divider"></li> -->
-								</ul></li>
+									<!-- <li class="divider"></li> -->
+								</ul>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -52,9 +45,7 @@
 		</div>
 	</div>
 
-
-	<!-- Carousel
-    ================================================== -->
+	<!-- Carousel ================================================== -->
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
@@ -63,99 +54,88 @@
 			<li data-target="#myCarousel" data-slide-to="2"></li>
 		</ol>
 		<div class="carousel-inner">
-			<div class="item active" style="text-align: center;">
-				<img
-					src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/main1.jpg"
-					alt="First slide" width="900" height="500">
+			<div class="item active">
+				<img src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/main1.jpg"
+					alt="First slide">
 				<div class="container">
 					<div class="carousel-caption">
 						<h1>Hawaii Honeymoon</h1>
 						<p>결혼 후 신혼여행 중 하야트 호텔에서</p>
 						<p>
-							<a class="btn btn-lg btn-primary" href="#" role="button">Sign
-								up today</a>
+							<a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a>
 						</p>
 					</div>
 				</div>
 			</div>
 			<div class="item">
-				<img
-					src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/main2.jpg"
+				<img src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/main2.jpg"
 					alt="Second slide">
 				<div class="container">
 					<div class="carousel-caption">
 						<h1>Bangkok Summer Vacation</h1>
 						<p>방콕에 있는 어느 스카이라운지 레스토랑</p>
 						<p>
-							<a class="btn btn-lg btn-primary" href="#" role="button">Learn
-								more</a>
+							<a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a>
 						</p>
 					</div>
 				</div>
 			</div>
 			<div class="item">
-				<img
-					src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/main3.jpg"
+				<img src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/main3.jpg"
 					alt="Third slide">
 				<div class="container">
 					<div class="carousel-caption">
 						<h1>Engagement</h1>
 						<p>결혼 전 장인 장모님과 함께 백현동의 어느 한 레스토랑에서 저녁식사중</p>
 						<p>
-							<a class="btn btn-lg btn-primary" href="#" role="button">Browse
-								gallery</a>
+							<a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a>
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
 		<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span
-			class="glyphicon glyphicon-chevron-left"></span></a> <a
-			class="right carousel-control" href="#myCarousel" data-slide="next"><span
-			class="glyphicon glyphicon-chevron-right"></span></a>
+			class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control"
+			href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 	</div>
 	<!-- /.carousel -->
 
-	<!-- Marketing messaging and featurettes
-    ================================================== -->
+	<!-- Marketing messaging and featurettes ================================================== -->
 	<!-- Wrap the rest of the page in another container to center all the content. -->
 
 	<div class="container marketing">
-
 		<!-- Three columns of text below the carousel -->
 		<div class="row">
 			<div class="col-lg-4">
-				<img class="img-circle" src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub1.jpeg"
+				<img class="img-circle"
+					src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub1.jpeg"
 					alt="Generic placeholder image">
 				<h2>장동건</h2>
-				<p>카메라를 들이대니 갑작스럽게 표정이 바뀐 선호
-				장동건마냥 표정이 근엄하다</p>
+				<p>카메라를 들이대니 갑작스럽게 표정이 바뀐 선호 장동건마냥 표정이 근엄하다</p>
 				<p>
-					<a class="btn btn-default" href="#" role="button">View details
-						&raquo;</a>
+					<a class="btn btn-default" href="#" role="button">View details &raquo;</a>
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
 			<div class="col-lg-4">
-				<img class="img-circle" src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub2.jpeg"
+				<img class="img-circle"
+					src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub2.jpeg"
 					alt="Generic placeholder image">
 				<h2>깜놀</h2>
-				<p>예쁘게 꽃단장 시키고 사진 한컷
-				카라를 세우니 남자의 향기가..</p>
+				<p>예쁘게 꽃단장 시키고 사진 한컷 카라를 세우니 남자의 향기가..</p>
 				<p>
-					<a class="btn btn-default" href="#" role="button">View details
-						&raquo;</a>
+					<a class="btn btn-default" href="#" role="button">View details &raquo;</a>
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
 			<div class="col-lg-4">
-				<img class="img-circle" src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub3.jpeg"
+				<img class="img-circle"
+					src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub3.jpeg"
 					alt="Generic placeholder image">
 				<h2>배고파</h2>
 				<p>샤워를 끝마치고 배고픈 기운이 올라오니 보채기 시작하는데..</p>
 				<p>
-					<a class="btn btn-default" href="#" role="button">View details
-						&raquo;</a>
+					<a class="btn btn-default" href="#" role="button">View details &raquo;</a>
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
@@ -168,8 +148,7 @@
 				<a href="#">Back to top</a>
 			</p>
 			<p>
-				&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot;
-				<a href="#">Terms</a>
+				2014 &copy; leejeongwha ALL RIGHTS RESERVED &middot; <a href="mailto:ljk2491@naver.com">ljk2491@naver.com</a>
 			</p>
 		</footer>
 
@@ -180,9 +159,7 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script
-		src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 </body>
 </html>
