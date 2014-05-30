@@ -163,12 +163,7 @@
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 	</script type="text/javascript">
 		$("#myCarousel").on("slid", function(event) {
-		  var carousel = $(event.target);
-		  setTimeout(function() {
-		    if (carousel.find(".carousel-indicators .active").data("slide-to") === 1) {
-		      alert("Go go go!");
-		    }
-		  }, 0);
+		  alert(1);
 		});
 	</script>
 </body>
