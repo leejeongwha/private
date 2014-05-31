@@ -60,12 +60,13 @@
 	<div class="container">
 	    <h1>Image Gallery</h1>
 	    <blockquote>
-	        <p>사진찍는걸 좋아하지 않기 때문에 많이 올릴지는 모르겠지만
-	        <br>살면서 중요한 순간 혹은 의미있는 사진들은 남기기 위한곳.
+	        <p> - 중요한 순간 혹은 의미있는 사진들을 남기기 위한 곳 -
+	        <br>곧 있으면 다가올 선호 50일을 기념하기 위한 갤러리 입니다.
 	        </p>
 	    </blockquote>
 	    <form class="form-inline">
 	        <div class="form-group">
+	        	
 	            <button id="image-gallery-button" type="button" class="btn btn-primary btn-lg">
 	                <i class="glyphicon glyphicon-picture"></i>
 	                Launch Image Gallery
@@ -155,7 +156,7 @@ $('#image-gallery-button').on('click', function (event) {
 });
 
 $(document).ready(function() {
-	for(var i=1; i<14; i++) {
+	for(var i=1; i<18; i++) {
 		var tag='<a href="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/gallery/' + i + '.jpg" title="image_' + i + '" data-gallery=""><img src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/gallery/' + i + '_s.jpg"></a>';
 		$("#links").append(tag);
 	}
