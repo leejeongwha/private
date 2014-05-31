@@ -113,10 +113,10 @@
 					src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub1.jpeg"
 					alt="Generic placeholder image">
 				<h2>장동건</h2>
-				<p>카메라를 들이대니 갑작스럽게 표정이 바뀐 선호 장동건마냥 표정이 근엄하다
+				<p>어디한번 찍어 보시게나.. 허허허
 				</p>
 				<p>
-					<a class="btn btn-default" href="#" role="button">View details &raquo;</a>
+					<a class="subCont btn btn-default" href="#" role="button">View details &raquo;</a>
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
@@ -125,9 +125,9 @@
 					src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub2.jpeg"
 					alt="Generic placeholder image">
 				<h2>누구냐넌</h2>
-				<p>예쁘게 꽃단장 시키고 사진 한컷 카라를 세우니 남자의 향기가 물씬~</p>
+				<p>남자다잉~</p>
 				<p>
-					<a class="btn btn-default" href="#" role="button">View details &raquo;</a>
+					<a class="subCont btn btn-default" href="#" role="button">View details &raquo;</a>
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
@@ -136,10 +136,9 @@
 					src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub3.jpeg"
 					alt="Generic placeholder image">
 				<h2>배고파</h2>
-				<p>샤워를 끝마치고 배고픈 기운이 올라오니 보채기 시작하는데..
-				선호엄마가 가장 좋아하는 인중 내리고 보채는 사진</p>
+				<p>선호엄마가 가장 좋아하는 인중 내리고 보채는 사진</p>
 				<p>
-					<a class="btn btn-default" href="#" role="button">View details &raquo;</a>
+					<a class="subCont btn btn-default" href="#" role="button">View details &raquo;</a>
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
@@ -155,9 +154,25 @@
 				2014 &copy; leejeongwha ALL RIGHTS RESERVED &middot; <a href="mailto:ljk2491@naver.com">ljk2491@naver.com</a>
 			</p>
 		</footer>
-
 	</div>
 	<!-- /.container -->
+	
+	<div id="myModal" class="modal fade">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <img src="https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub1.jpeg">
+	      </div>
+	      <div class="modal-body">
+	        <p> &hellip;</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 
 
 	<!-- Bootstrap core JavaScript
@@ -165,5 +180,23 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(".subCont").click(function() {
+			if($(".subCont").index($(this)) == 0) {
+				$('#myModal img').prop("src", "https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub1.jpeg");
+				$('#myModal p').html("카메라를 들이대니 갑작스럽게 표정이 바뀐 선호. 장동건마냥 표정이 근엄하다.");
+			} else if($(".subCont").index($(this)) == 1) {
+				$('#myModal img').prop("src", "https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub2.jpeg");
+				$('#myModal p').html("예쁘게 꽃단장 시키고 사진 한컷 카라를 세우니 남자의 향기가 물씬~");
+			} else {
+				$('#myModal img').prop("src", "https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub3.jpeg");
+				$('#myModal p').html("샤워를 끝마치고 배고픈 기운이 올라오니 보채기 시작하는데 이런표정을 지으니 밥을 안줄래야 안줄수가 없다");
+			}
+			
+			$('#myModal').modal({
+				keyboard: false
+			});
+		});
+	</script>
 </body>
 </html>
