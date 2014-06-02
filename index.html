@@ -12,7 +12,7 @@
 <!-- Bootstrap core CSS -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
-<link href="http://getbootstrap.com/examples/carousel/carousel.css" rel="stylesheet">
+<link href="http://leejeongwha.github.io/private/stylesheets/carousel.css" rel="stylesheet">
 </head>
 <body>
 	<!-- NAVBAR ==================================================-->
@@ -181,20 +181,45 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		$(".subCont").click(function() {
-			if($(".subCont").index($(this)) == 0) {
-				$('#myModal img').prop("src", "https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub1.jpeg");
-				$('#myModal p').html("카메라를 들이대니 갑작스럽게 표정이 바뀐 선호. 장동건마냥 표정이 근엄하다.");
-			} else if($(".subCont").index($(this)) == 1) {
-				$('#myModal img').prop("src", "https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub2.jpeg");
-				$('#myModal p').html("예쁘게 꽃단장 시키고 사진 한컷 카라를 세우니 남자의 향기가 물씬~");
+		var imgUrl = "https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/";
+		
+		function imgReset() {
+			if($(window).width() > 900) {
+				$(".item img").eq(0).attr("src", imgUrl + "main/main1_large.jpg");
+				$(".item img").eq(1).attr("src", imgUrl + "main/main2_large.jpg");
+				$(".item img").eq(2).attr("src", imgUrl + "main/main3_large.jpg");
 			} else {
-				$('#myModal img').prop("src", "https://raw.githubusercontent.com/leejeongwha/private/gh-pages/images/main/sub3.jpeg");
-				$('#myModal p').html("샤워를 끝마치고 배고픈 기운이 올라오니 보채기 시작하는데 이런표정을 지으니 밥을 안줄래야 안줄수가 없다");
+				$(".item img").eq(0).attr("src", imgUrl + "main/main1.jpg");
+				$(".item img").eq(1).attr("src", imgUrl + "main/main2.jpg");
+				$(".item img").eq(2).attr("src", imgUrl + "main/main3.jpg");
 			}
 			
-			$('#myModal').modal({
-				keyboard: false
+		}
+	
+		$(document).ready(function() {
+			imgReset();
+			
+			$(".subCont").click(function() {
+				if($(".subCont").index($(this)) == 0) {
+					$('#myModal img').prop("src", imgUrl + "main/sub1.jpeg");
+					$('#myModal p').html("카메라를 들이대니 갑작스럽게 표정이 바뀐 선호. 장동건마냥 표정이 근엄하다.");
+				} else if($(".subCont").index($(this)) == 1) {
+					$('#myModal img').prop("src", imgUrl + "main/sub2.jpeg");
+					$('#myModal p').html("예쁘게 꽃단장 시키고 사진 한컷 카라를 세우니 남자의 향기가 물씬~");
+				} else {
+					$('#myModal img').prop("src", imgUrl + "main/sub3.jpeg");
+					$('#myModal p').html("샤워를 끝마치고 배고픈 기운이 올라오니 보채기 시작하는데 이런표정을 지으니 밥을 안줄래야 안줄수가 없다");
+				}
+				
+				$('#myModal').modal({
+					keyboard: false
+				});
+				
+				return false;
+			});
+			
+			$(window).resize(function() {
+				imgReset();
 			});
 		});
 	</script>
