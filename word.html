@@ -69,7 +69,10 @@
     
     $( document ).ready(function() {
         let searchParams = new URLSearchParams(window.location.search);
-        let url = "https://raw.githubusercontent.com/leejeongwha/private/gh-pages/word" + searchParams.get("seq") + ".json"
+        let url = "https://raw.githubusercontent.com/leejeongwha/private/gh-pages/word.json"
+        if(searchParams.get("seq")) {
+          url = "https://raw.githubusercontent.com/leejeongwha/private/gh-pages/word" + searchParams.get("seq") + ".json"
+        }
         $.get(url, function(data){
             var data = shuffle(JSON.parse(data));
             data.forEach(element => $(".swiper-wrapper").append(`<div class="swiper-slide">${element}</div>`));
