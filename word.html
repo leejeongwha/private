@@ -75,6 +75,12 @@
 
   <!-- Initialize Swiper -->
   <script>
+    $(document).ready(funcion(){
+        $.get("https://raw.githubusercontent.com/leejeongwha/private/gh-pages/word1.json", function(data){
+            data.forEach(element => console.log(element));
+        })
+    })
+    
     var swiper = new Swiper('.swiper-container', {
       pagination: {
         el: '.swiper-pagination',
