@@ -66,12 +66,15 @@
   <!-- Initialize Swiper -->
   <script>
     let swiper;
+    let elementArray;
     
     $( document ).ready(function() {
         let url = "https://raw.githubusercontent.com/leejeongwha/private/gh-pages/guess.json"
         $.get(url, function(data){
-            var data = shuffle(JSON.parse(data));
-            data.forEach(element => $(".swiper-wrapper").append(`<div class="swiper-slide">${element}</div>`));
+            var data = JSON.parse(data);
+            data.forEach(element => elementArray.push(getRandom(element)));
+            var text = elementArray.join('<br>');
+            $(".swiper-wrapper").append(`<div class="swiper-slide">${text}</div>`);
           
             swiper = new Swiper('.swiper-container', {
               pagination: {
@@ -86,12 +89,8 @@
         })
     });
     
-    function shuffle(a) {
-        for (let i = a.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [a[i], a[j]] = [a[j], a[i]];
-        }
-        return a;
+    function getRandom(list) {
+        return list[Math.floor((Math.random() * list.length))];
     }
   </script>
 </body>
