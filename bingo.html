@@ -8,10 +8,6 @@
         font-size: 20px;
       }
 
-      h1, th {
-        font-family: Georgia, "Times New Roman", Times, serif;
-      }
-
       h1 {
         font-size: 28px;
       }
@@ -107,7 +103,7 @@
       function setSquare(thisSquare) 
       {
           var currSquare = "square" + thisSquare;
-          var colBasis = colPlace[thisSquare]*15;
+          var colBasis = colPlace[thisSquare] * 15;
           var newNum;
 
           do {
@@ -122,7 +118,7 @@
 
       function getNewNum() 
       {
-          return Math.floor(Math.random()*15);
+          return Math.floor(Math.random() * 15);
       }
 
       function anotherCard() {
