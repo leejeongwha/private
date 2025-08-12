@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OO의 반짝반짝 놀이터 ✨</title>
+  <title>이선호의 반짝반짝 놀이터 ✨</title>
   <meta name="description" content="초등학생을 위한 화려하고 동적인 개인 홈페이지 템플릿" />
   <link href="https://fonts.googleapis.com/css2?family=Jua&family=Baloo+2:wght@700&display=swap" rel="stylesheet">
   <style>
@@ -111,8 +111,10 @@
     .mood-btn{ padding:4px; border:2px solid rgba(255,255,255,.3); border-radius:6px; background:var(--panel); cursor:pointer; font-size:16px }
     .mood-btn.selected{ border-color:var(--accent); background:var(--accent) }
     
-    .avatar-btn{ padding:8px; border:2px solid rgba(255,255,255,.3); border-radius:8px; background:var(--panel); cursor:pointer; font-size:24px }
-    .avatar-btn:hover{ border-color:var(--accent); transform:scale(1.1) }
+    .avatar-btn{ padding:8px; border:2px solid rgba(255,255,255,.3); border-radius:12px; background:var(--panel); cursor:pointer; font-size:24px; display:flex; align-items:center; justify-content:center; min-height:56px; transition:all 0.2s ease }
+    .avatar-btn:hover{ border-color:var(--accent); transform:scale(1.05); box-shadow:0 4px 12px rgba(124,58,237,0.3) }
+    .avatar-btn img{ border-radius:50%; transition:transform 0.2s ease }
+    .avatar-btn:hover img{ transform:scale(1.1) }
     
     .rating-system{ margin-top:8px; display:flex; justify-content:space-between; align-items:center }
     .rating-stars{ display:flex; gap:2px }
@@ -157,7 +159,7 @@
       <div class="brand" aria-label="사이트 로고">
         <div class="logo" aria-hidden="true"><span>★</span></div>
         <div>
-          <div style="font-size:22px">OO의 반짝반짝 놀이터</div>
+          <div style="font-size:22px">이선호의 반짝반짝 놀이터</div>
           <div class="kicker">그림 · 코딩 · 과학 실험 · 게임</div>
         </div>
       </div>
@@ -172,7 +174,7 @@
     <section class="hero" id="about">
       <div class="card">
         <div class="kicker">WELCOME</div>
-        <h1>안녕! 나는 <span style="color:var(--accent)" id="nameDisplay">OO</span>야 🎉<br/>
+        <h1>안녕! 나는 <span style="color:var(--accent)" id="nameDisplay">이선호</span>야 🎉<br/>
           반짝이는 것과 재밌는 걸 아주 좋아해!</h1>
         <p>여기는 내가 만든 작품들을 모아놓은 놀이터야. 아래 버튼을 눌러 <strong>테마를 바꾸거나</strong> <strong>파티 모드</strong>를 켜봐!</p>
         <div class="actions">
@@ -183,7 +185,9 @@
       </div>
       <div class="card mascot" aria-label="마스코트">
         <div class="bubble">
-          <div class="face" id="mascotFace">🌟</div>
+          <div class="face" id="mascotFace" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+            <div style="font-size: 70px;">🌟</div>
+          </div>
         </div>
         <div class="kicker" style="margin-top:8px">반짝! 반짝! 오늘도 즐거운 하루 ✨</div>
       </div>
@@ -298,16 +302,30 @@
           <p style="text-align: center; margin: 8px 0 0; color: var(--muted);">오늘도 놀러와 줘서 고마워! 🎈</p>
         </div>
         <div class="card">
-          <h3>🎭 내 아바타</h3>
+          <h3>⭐ 내 아바타</h3>
           <div style="text-align: center; margin: 12px 0;">
-            <div id="currentAvatar" style="font-size: 60px; margin: 8px 0;">🌟</div>
-            <div style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
-              <button class="avatar-btn" data-avatar="🌟">🌟</button>
-              <button class="avatar-btn" data-avatar="🦄">🦄</button>
-              <button class="avatar-btn" data-avatar="🐱">🐱</button>
-              <button class="avatar-btn" data-avatar="🚀">🚀</button>
-              <button class="avatar-btn" data-avatar="🎈">🎈</button>
-              <button class="avatar-btn" data-avatar="🎨">🎨</button>
+            <div id="currentAvatar" style="width: 80px; height: 80px; margin: 8px auto; border-radius: 50%; border: 3px solid var(--accent); background: var(--panel); display: flex; align-items: center; justify-content: center;">
+              <div style="font-size: 60px;">🌟</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 300px; margin: 0 auto;">
+              <!-- 붕괴 스타레일 5성 캐릭터들 - 대표 이모지 사용 -->
+              <button class="avatar-btn" data-avatar="🕷️" data-name="카프카" title="카프카 - 스텔라론 헌터" style="background: linear-gradient(135deg, #8B0E5F, #FF1493);">🕷️</button>
+              <button class="avatar-btn" data-avatar="⚔️" data-name="블레이드" title="블레이드 - 불멸의 검객" style="background: linear-gradient(135deg, #8B0000, #FF6347);">⚔️</button>
+              <button class="avatar-btn" data-avatar="🦋" data-name="젤레" title="젤레 - 나비의 무희" style="background: linear-gradient(135deg, #4B0082, #9370DB);">🦋</button>
+              <button class="avatar-btn" data-avatar="⚡" data-name="경원" title="경원 - 일곱 천군의 대장군" style="background: linear-gradient(135deg, #FFD700, #FFA500);">⚡</button>
+              <button class="avatar-btn" data-avatar="❄️" data-name="브로냐" title="브로냐 - 최고 수호자" style="background: linear-gradient(135deg, #B0E0E6, #4682B4);">❄️</button>
+              <button class="avatar-btn" data-avatar="🤖" data-name="클라라" title="클라라 - 기계와 소녀" style="background: linear-gradient(135deg, #F5F5DC, #DAA520);">🤖</button>
+              <button class="avatar-btn" data-avatar="🔥" data-name="히메코" title="히메코 - 아스트랄 익스프레스" style="background: linear-gradient(135deg, #FF4500, #FF8C00);">🔥</button>
+              <button class="avatar-btn" data-avatar="🌌" data-name="벨트" title="벨트 - 반중력의 달인" style="background: linear-gradient(135deg, #2F4F4F, #708090);">🌌</button>
+              <button class="avatar-btn" data-avatar="🛡️" data-name="제파드" title="제파드 - 철벽의 수호자" style="background: linear-gradient(135deg, #4169E1, #87CEEB);">🛡️</button>
+              <button class="avatar-btn" data-avatar="🎮" data-name="은랑" title="은랑 - 천재 해커" style="background: linear-gradient(135deg, #9932CC, #DA70D6);">🎮</button>
+              <button class="avatar-btn" data-avatar="💐" data-name="라차" title="라차 - 풍부한 상인" style="background: linear-gradient(135deg, #32CD32, #98FB98);">💐</button>
+              <button class="avatar-btn" data-avatar="🔮" data-name="부현" title="부현 - 태복사의 대복경" style="background: linear-gradient(135deg, #FF69B4, #FFB6C1);">🔮</button>
+              <button class="avatar-btn" data-avatar="🐉" data-name="음월군" title="음월군 - 단항의 진정한 모습" style="background: linear-gradient(135deg, #00CED1, #40E0D0);">🐉</button>
+              <button class="avatar-btn" data-avatar="🐾" data-name="링크스" title="링크스 - 설지 탐험대" style="background: linear-gradient(135deg, #F0F8FF, #B0C4DE);">🐾</button>
+              <!-- 기본 이모지 옵션들 -->
+              <button class="avatar-btn" data-avatar="🌟" data-name="별" title="기본 별">🌟</button>
+              <button class="avatar-btn" data-avatar="🦄" data-name="유니콘" title="유니콘">🦄</button>
             </div>
           </div>
         </div>
@@ -449,7 +467,7 @@
       </div>
     </section>
 
-    <footer>© <span id="year"></span> OO의 놀이터 — 반짝이는 하루가 되길! ✨</footer>
+    <footer>© <span id="year"></span> 이선호의 놀이터 — 반짝이는 하루가 되길! ✨</footer>
   </div>
 
   <script>
@@ -487,19 +505,34 @@
       }
     });
 
-    // 아바타 시스템
+    // 아바타 시스템 (간소화된 이모지 기반)
     let currentAvatar = storage.get('avatar') || '🌟';
-    function updateAvatar(emoji) {
-      currentAvatar = emoji;
-      document.getElementById('currentAvatar').textContent = emoji;
-      document.getElementById('mascotFace').textContent = emoji;
-      storage.set('avatar', emoji);
+    let currentAvatarName = storage.get('avatarName') || '별';
+    
+    function updateAvatar(avatar, name = '') {
+      currentAvatar = avatar;
+      currentAvatarName = name || '별';
+      
+      // 현재 아바타 표시 영역 업데이트
+      const currentAvatarEl = document.getElementById('currentAvatar');
+      currentAvatarEl.innerHTML = `<div style="font-size: 60px; line-height: 74px;">${avatar}</div>`;
+      
+      // 마스코트 영역 업데이트
+      const mascotFaceEl = document.getElementById('mascotFace');
+      mascotFaceEl.innerHTML = `<div style="font-size: 70px;">${avatar}</div>`;
+      
+      storage.set('avatar', avatar);
+      storage.set('avatarName', currentAvatarName);
     }
-    updateAvatar(currentAvatar);
+    
+    // 페이지 로드 시 저장된 아바타 복원
+    updateAvatar(currentAvatar, currentAvatarName);
     
     document.querySelectorAll('.avatar-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        updateAvatar(btn.dataset.avatar);
+        const avatar = btn.dataset.avatar;
+        const name = btn.dataset.name || btn.textContent;
+        updateAvatar(avatar, name);
         createParticle('✨');
       });
     });
