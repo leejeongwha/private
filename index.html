@@ -227,3 +227,1072 @@
 	</script>
 </body>
 </html>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OO의 반짝반짝 놀이터 ✨</title>
+  <meta name="description" content="초등학생을 위한 화려하고 동적인 개인 홈페이지 템플릿" />
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1020;         /* 기본(우주) */
+      --bg2:#1b1f3b;
+      --text: #f8fafc;
+      --muted:#cbd5e1;
+      --brand:#7c3aed;
+      --accent:#22d3ee;
+      --panel: rgba(255,255,255,.08);
+      --ring: rgba(124,58,237,.45);
+      --shadow: 0 14px 36px rgba(2,8,23,.45);
+    }
+    /* 테마 변환용 */
+    body.theme-candy{ --bg:#ffcad4; --bg2:#ffd6a5; --text:#432818; --muted:#6f1d1b; --brand:#ff006e; --accent:#8338ec; --panel:rgba(255,255,255,.6); --ring:rgba(255,0,110,.35); --shadow:0 14px 36px rgba(255,0,110,.35) }
+    body.theme-ocean{ --bg:#001219; --bg2:#005f73; --text:#e0fbfc; --muted:#94d2bd; --brand:#0a9396; --accent:#e9d8a6; }
+    body.theme-forest{ --bg:#0f3d2e; --bg2:#1b5e3b; --text:#f4fce3; --muted:#c0eb75; --brand:#80ed99; --accent:#ffd166; }
+    body.theme-space{ --bg:#0b1020; --bg2:#1b1f3b; --text:#f8fafc; --muted:#cbd5e1; --brand:#7c3aed; --accent:#22d3ee; }
+
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0;
+      font: 17px/1.6 'Jua', 'Baloo 2', ui-sans-serif, system-ui, -apple-system, 'Noto Sans KR', Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background: radial-gradient(1000px 500px at 10% -10%, var(--accent), transparent),
+                  radial-gradient(800px 400px at 110% 10%, var(--brand), transparent),
+                  linear-gradient(120deg, var(--bg), var(--bg2));
+      overflow-x:hidden;
+    }
+    @media (prefers-reduced-motion:no-preference){
+      body{ animation:bgShift 15s linear infinite }
+      @keyframes bgShift{ 0%{filter:hue-rotate(0)} 100%{filter:hue-rotate(360deg)} }
+    }
+
+    /* 반짝반짝 별 */
+    .stars{ position:fixed; inset:0; pointer-events:none; z-index:-1; }
+
+    .wrap{ max-width:1100px; margin:0 auto; padding:22px; }
+    header{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .brand{ display:flex; align-items:center; gap:14px; }
+    .logo{ width:54px; height:54px; border-radius:50%; display:grid; place-items:center; color:#fff; background:conic-gradient(from 45deg, var(--brand), var(--accent), #fff0, var(--brand)); box-shadow:var(--shadow); border:2px solid rgba(255,255,255,.5) }
+    .logo span{ font-size:26px }
+    nav{ display:flex; gap:10px; flex-wrap:wrap }
+    nav a{ text-decoration:none; color:var(--text); background:var(--panel); padding:8px 12px; border-radius:999px; border:2px solid rgba(255,255,255,.25); box-shadow:var(--shadow) }
+
+    .hero{ margin:28px 0; display:grid; grid-template-columns:1.2fr .8fr; gap:22px }
+    @media(max-width:900px){ .hero{ grid-template-columns:1fr } }
+    .card{ background:linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.07)); border:2px solid rgba(255,255,255,.35); border-radius:24px; padding:22px; box-shadow:var(--shadow) }
+    .kicker{ color:var(--muted); letter-spacing:.06em }
+    h1{ font-size:48px; line-height:1.15; margin:.2em 0 .3em; text-shadow:0 4px 0 rgba(0,0,0,.15) }
+
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px }
+    .btn{ cursor:pointer; border:2px solid rgba(255,255,255,.4); padding:12px 16px; border-radius:16px; font-size:18px; background:linear-gradient(135deg, var(--brand), var(--accent)); color:#fff; box-shadow:var(--shadow) }
+    .btn.ghost{ background:var(--panel); color:var(--text) }
+    .btn:active{ transform:translateY(2px) }
+
+    .mascot{ display:grid; place-items:center }
+    .bubble{ width:220px; height:220px; border-radius:36px; background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.35)); border:2px solid rgba(255,255,255,.7); position:relative; box-shadow:var(--shadow) }
+    .face{ position:absolute; inset:0; display:grid; place-items:center; font-size:70px; text-shadow:0 6px 0 rgba(0,0,0,.15) }
+    @media (prefers-reduced-motion:no-preference){ .bubble{ animation:float 3.6s ease-in-out infinite } @keyframes float{ 0%,100%{ transform:translateY(-6px)} 50%{ transform:translateY(6px)} } }
+
+    section{ margin:36px 0 }
+    h2{ margin:.2em 0 .6em; font-size:30px; text-shadow:0 3px 0 rgba(0,0,0,.14) }
+
+    .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px }
+    @media(max-width:900px){ .grid{ grid-template-columns:1fr 1fr } }
+    @media(max-width:640px){ .grid{ grid-template-columns:1fr } }
+    .tile{ padding:16px; border-radius:18px; border:2px solid rgba(255,255,255,.35); background:linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.07)); box-shadow:var(--shadow); position:relative; overflow:hidden }
+    .tile h3{ margin:.2em 0; font-size:22px }
+    .tile .back{ position:absolute; inset:0; padding:16px; background:rgba(0,0,0,.35); transform:translateY(100%); transition:transform .25s }
+    .tile:hover .back{ transform:translateY(0) }
+
+    .carousel{ position:relative; overflow:hidden; border-radius:20px; border:2px solid rgba(255,255,255,.35); box-shadow:var(--shadow) }
+    .slides{ display:flex; transition:transform .4s ease; }
+    .slide{ min-width:100%; height:280px; display:grid; place-items:center; font-size:42px; color:#fff; text-shadow:0 3px 0 rgba(0,0,0,.2) }
+    .prev,.next{ position:absolute; top:50%; transform:translateY(-50%); background:var(--panel); border:2px solid rgba(255,255,255,.6); padding:8px 12px; border-radius:12px; cursor:pointer }
+    .prev{ left:10px } .next{ right:10px }
+
+    .funzone{ display:grid; grid-template-columns:1.1fr .9fr; gap:18px }
+    @media(max-width:900px){ .funzone{ grid-template-columns:1fr } }
+
+    /* 풍선 게임 */
+    .game{ position:relative; height:340px; border-radius:18px; border:2px solid rgba(255,255,255,.35); background:linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.07)); overflow:hidden; box-shadow:var(--shadow) }
+    .hud{ position:absolute; top:8px; left:8px; display:flex; gap:10px }
+    .balloon{ position:absolute; width:60px; height:80px; border-radius:50% 50% 45% 45%; background:radial-gradient(circle at 30% 30%, #fff, transparent), var(--balloonColor, #ff6b6b); border:2px solid rgba(255,255,255,.8); cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.25) }
+    .balloon:after{ content:''; position:absolute; bottom:-10px; left:50%; width:2px; height:30px; background:rgba(255,255,255,.8) }
+
+    /* 스티커 벽 */
+    .sticker-wall{ position:relative; height:340px; border-radius:18px; border:2px solid rgba(255,255,255,.35); background:linear-gradient(135deg, rgba(255,255,255,.25), rgba(255,255,255,.07)); overflow:hidden; box-shadow:var(--shadow) }
+    .palette{ display:flex; gap:8px; padding:8px }
+    .palette button{ font-size:24px; border-radius:10px; padding:6px 8px; border:2px solid rgba(255,255,255,.6); background:var(--panel); cursor:pointer }
+    .sticker{ position:absolute; font-size:40px; cursor:grab; user-select:none }
+    .sticker:active{ cursor:grabbing }
+
+    footer{ margin:40px 0 20px; text-align:center; color:var(--muted) }
+
+    /* 새로운 스타일들 */
+    .calendar-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin:12px 0 }
+    .calendar-day{ aspect-ratio:1; display:grid; place-items:center; border:1px solid rgba(255,255,255,.2); border-radius:4px; cursor:pointer; position:relative; font-size:14px }
+    .calendar-day.today{ background:var(--accent); color:#000; font-weight:bold }
+    .calendar-day.has-diary{ background:var(--brand); color:#fff }
+    .calendar-day:hover{ background:rgba(255,255,255,.1) }
+    .mood-btn{ padding:4px; border:2px solid rgba(255,255,255,.3); border-radius:6px; background:var(--panel); cursor:pointer; font-size:16px }
+    .mood-btn.selected{ border-color:var(--accent); background:var(--accent) }
+    
+    .avatar-btn{ padding:8px; border:2px solid rgba(255,255,255,.3); border-radius:8px; background:var(--panel); cursor:pointer; font-size:24px }
+    .avatar-btn:hover{ border-color:var(--accent); transform:scale(1.1) }
+    
+    .rating-system{ margin-top:8px; display:flex; justify-content:space-between; align-items:center }
+    .rating-stars{ display:flex; gap:2px }
+    .star{ cursor:pointer; opacity:.3; transition:opacity .2s }
+    .star.active{ opacity:1; filter:drop-shadow(0 0 4px #ffd700) }
+    .star:hover{ opacity:.7 }
+    .like-btn{ border:none; background:transparent; color:var(--text); cursor:pointer; font-size:14px; display:flex; align-items:center; gap:4px }
+    .like-btn.liked{ color:#ff6b9d; animation:heartBeat .6s ease }
+    @keyframes heartBeat{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
+    
+    .guest-message{ margin:12px 0; padding:12px; background:var(--panel); border-radius:8px; border:2px solid rgba(255,255,255,.2) }
+    .guest-message .author{ font-weight:bold; color:var(--accent); margin-bottom:4px }
+    .guest-message .timestamp{ font-size:12px; color:var(--muted); margin-bottom:8px }
+    
+    .quiz-option{ padding:8px 12px; border:2px solid rgba(255,255,255,.3); border-radius:8px; background:var(--panel); cursor:pointer; text-align:center }
+    .quiz-option:hover{ border-color:var(--accent) }
+    .quiz-option.correct{ background:var(--accent); color:#000 }
+    .quiz-option.wrong{ background:#ff6b6b; color:#fff }
+    
+    /* 3D 효과 */
+    .project-tile{ transform-style:preserve-3d; perspective:1000px }
+    .project-tile:hover{ transform:rotateY(5deg) rotateX(5deg) }
+    
+    /* 파티클 효과를 위한 스타일 */
+    .click-particle{ position:fixed; pointer-events:none; z-index:1000; animation:particle .8s ease-out forwards }
+    @keyframes particle{ 0%{transform:scale(1) translateY(0); opacity:1} 100%{transform:scale(0) translateY(-50px); opacity:0} }
+    
+    /* 접근성: 모션 최소화 선호 시 애니메이션 억제 */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation:none !important; transition:none !important }
+    }
+  </style>
+</head>
+<body class="theme-space">
+  <!-- 별 반짝임 캔버스 -->
+  <canvas class="stars" id="stars"></canvas>
+  <!-- 파티 모드용 종이조각 캔버스 -->
+  <canvas id="confetti" style="position:fixed; inset:0; pointer-events:none; z-index:10"></canvas>
+
+  <div class="wrap">
+    <header>
+      <div class="brand" aria-label="사이트 로고">
+        <div class="logo" aria-hidden="true"><span>★</span></div>
+        <div>
+          <div style="font-size:22px">OO의 반짝반짝 놀이터</div>
+          <div class="kicker">그림 · 코딩 · 과학 실험 · 게임</div>
+        </div>
+      </div>
+      <nav aria-label="바로가기">
+        <a href="#about">소개</a>
+        <a href="#projects">작품</a>
+        <a href="#fun">놀이</a>
+        <a href="#contact">연락</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="about">
+      <div class="card">
+        <div class="kicker">WELCOME</div>
+        <h1>안녕! 나는 <span style="color:var(--accent)" id="nameDisplay">OO</span>야 🎉<br/>
+          반짝이는 것과 재밌는 걸 아주 좋아해!</h1>
+        <p>여기는 내가 만든 작품들을 모아놓은 놀이터야. 아래 버튼을 눌러 <strong>테마를 바꾸거나</strong> <strong>파티 모드</strong>를 켜봐!</p>
+        <div class="actions">
+          <button class="btn" id="themeBtn" aria-label="테마 바꾸기">🎨 테마 바꾸기</button>
+          <button class="btn ghost" id="partyBtn" aria-label="파티 모드">🎊 파티 모드</button>
+          <button class="btn ghost" id="stickerAdd" aria-label="스티커 추가">🧸 스티커 추가</button>
+        </div>
+      </div>
+      <div class="card mascot" aria-label="마스코트">
+        <div class="bubble">
+          <div class="face" id="mascotFace">🌟</div>
+        </div>
+        <div class="kicker" style="margin-top:8px">반짝! 반짝! 오늘도 즐거운 하루 ✨</div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>📚 내 작품</h2>
+      <div class="grid">
+        <article class="tile">
+          <div class="front">
+            <h3>종이접기 로봇</h3>
+            <p>색종이로 만든 귀여운 로봇 가족</p>
+            <div class="rating-system">
+              <div class="rating-stars" data-project="robot">
+                <span class="star" data-rating="1">⭐</span>
+                <span class="star" data-rating="2">⭐</span>
+                <span class="star" data-rating="3">⭐</span>
+                <span class="star" data-rating="4">⭐</span>
+                <span class="star" data-rating="5">⭐</span>
+              </div>
+              <div class="likes">
+                <button class="like-btn" data-project="robot">❤️ <span class="like-count">0</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="back">사진을 여기에 넣어도 좋아요! 작품 설명을 길게 적어도 됩니다.</div>
+        </article>
+        <article class="tile">
+          <div class="front">
+            <h3>코딩: 고양이 점프</h3>
+            <p>점프해서 별을 모으는 간단한 게임</p>
+            <div class="rating-system">
+              <div class="rating-stars" data-project="coding">
+                <span class="star" data-rating="1">⭐</span>
+                <span class="star" data-rating="2">⭐</span>
+                <span class="star" data-rating="3">⭐</span>
+                <span class="star" data-rating="4">⭐</span>
+                <span class="star" data-rating="5">⭐</span>
+              </div>
+              <div class="likes">
+                <button class="like-btn" data-project="coding">❤️ <span class="like-count">0</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="back">스크래치 링크나 깃허브 링크를 넣어보세요.</div>
+        </article>
+        <article class="tile">
+          <div class="front">
+            <h3>슬라임 연구소</h3>
+            <p>말랑말랑! 슬라임 비법 노트</p>
+            <div class="rating-system">
+              <div class="rating-stars" data-project="slime">
+                <span class="star" data-rating="1">⭐</span>
+                <span class="star" data-rating="2">⭐</span>
+                <span class="star" data-rating="3">⭐</span>
+                <span class="star" data-rating="4">⭐</span>
+                <span class="star" data-rating="5">⭐</span>
+              </div>
+              <div class="likes">
+                <button class="like-btn" data-project="slime">❤️ <span class="like-count">0</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="back">과학 실험 주의사항과 사진을 첨부할 수 있어요.</div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-label="갤러리" class="carousel" style="margin-top:18px">
+      <div class="slides" id="slides">
+        <div class="slide" style="background:linear-gradient(135deg,#ff6b6b,#ffd93d)">🎨 그림 그리기</div>
+        <div class="slide" style="background:linear-gradient(135deg,#00bcd4,#8bc34a)">🧪 과학 실험</div>
+        <div class="slide" style="background:linear-gradient(135deg,#7c3aed,#22d3ee)">🎮 게임 만들기</div>
+      </div>
+      <button class="prev" id="prev" aria-label="이전">◀</button>
+      <button class="next" id="next" aria-label="다음">▶</button>
+    </section>
+
+    <!-- 달력/일기장 섹션 -->
+    <section id="calendar-section">
+      <h2>📅 내 달력 & 일기</h2>
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <button class="btn ghost" id="prevMonth">◀</button>
+          <h3 id="currentMonth" style="margin: 0; font-size: 20px;">달력</h3>
+          <button class="btn ghost" id="nextMonth">▶</button>
+        </div>
+        <div class="calendar-grid" id="calendar"></div>
+        <div class="diary-section" style="margin-top: 16px;">
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <span>오늘 기분:</span>
+            <button class="mood-btn" data-mood="😊">😊</button>
+            <button class="mood-btn" data-mood="😢">😢</button>
+            <button class="mood-btn" data-mood="😴">😴</button>
+            <button class="mood-btn" data-mood="🎉">🎉</button>
+            <button class="mood-btn" data-mood="😡">😡</button>
+          </div>
+          <textarea id="diaryText" placeholder="오늘 있었던 일을 적어보세요..." style="width: 100%; height: 80px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); padding: 8px; font-family: inherit;"></textarea>
+          <button class="btn" id="saveDiary" style="margin-top: 8px;">저장하기</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 방문자 카운터 & 아바타 꾸미기 -->
+    <section>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+        <div class="card">
+          <h3>👥 방문자 수</h3>
+          <div style="text-align: center; font-size: 32px; color: var(--accent);">
+            <span id="visitorCount">0</span>명
+          </div>
+          <p style="text-align: center; margin: 8px 0 0; color: var(--muted);">오늘도 놀러와 줘서 고마워! 🎈</p>
+        </div>
+        <div class="card">
+          <h3>🎭 내 아바타</h3>
+          <div style="text-align: center; margin: 12px 0;">
+            <div id="currentAvatar" style="font-size: 60px; margin: 8px 0;">🌟</div>
+            <div style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
+              <button class="avatar-btn" data-avatar="🌟">🌟</button>
+              <button class="avatar-btn" data-avatar="🦄">🦄</button>
+              <button class="avatar-btn" data-avatar="🐱">🐱</button>
+              <button class="avatar-btn" data-avatar="🚀">🚀</button>
+              <button class="avatar-btn" data-avatar="🎈">🎈</button>
+              <button class="avatar-btn" data-avatar="🎨">🎨</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 닉네임 설정 -->
+    <section>
+      <div class="card">
+        <h3>📝 내 이름 설정</h3>
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <input type="text" id="nicknameInput" placeholder="새로운 이름을 입력하세요" style="flex: 1; min-width: 200px; padding: 8px 12px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); font-family: inherit;">
+          <button class="btn" id="saveNickname">저장</button>
+        </div>
+        <p style="margin: 8px 0 0; color: var(--muted);">현재 이름: <span id="currentNickname">OO</span></p>
+      </div>
+    </section>
+
+    <!-- 배경음악 컨트롤 -->
+    <section>
+      <div class="card">
+        <h3>🎵 배경음악</h3>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="btn" id="musicToggle">🎵 음악 재생</button>
+          <span id="musicStatus" style="color: var(--muted);">음악이 꺼져있어요</span>
+        </div>
+        <audio id="backgroundMusic" loop>
+          <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBzl+1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmcfCE2m0/DUgTIGHWq+8+ONPAY=" type="audio/wav">
+        </audio>
+      </div>
+    </section>
+
+    <section id="fun" class="funzone">
+      <div class="game" aria-label="풍선 팡! 게임">
+        <div class="hud">
+          <button class="btn" id="startGame">게임 시작</button>
+          <button class="btn ghost" id="stopGame">멈추기</button>
+          <div class="btn ghost">점수: <span id="score">0</span></div>
+          <div class="btn ghost">최고점수: <span id="highScore">0</span></div>
+        </div>
+        <!-- 풍선은 스크립트로 생성됩니다 -->
+      </div>
+      <div class="sticker-wall" id="wall" aria-label="스티커 벽">
+        <div class="palette" aria-label="스티커 선택">
+          <button data-emoji="🐣">🐣</button>
+          <button data-emoji="🐱">🐱</button>
+          <button data-emoji="🦄">🦄</button>
+          <button data-emoji="🚀">🚀</button>
+          <button data-emoji="🍓">🍓</button>
+          <button data-emoji="⭐">⭐</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 게스트북 -->
+    <section id="guestbook">
+      <h2>💌 게스트북</h2>
+      <div class="card">
+        <div style="margin-bottom: 16px;">
+          <input type="text" id="guestName" placeholder="이름" style="width: 100%; margin-bottom: 8px; padding: 8px 12px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); font-family: inherit;">
+          <textarea id="guestMessage" placeholder="메시지를 남겨주세요..." style="width: 100%; height: 80px; margin-bottom: 8px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); padding: 8px; font-family: inherit;"></textarea>
+          <button class="btn" id="addGuestMessage">메시지 남기기</button>
+        </div>
+        <div id="guestMessages"></div>
+      </div>
+    </section>
+
+    <!-- 교육 게임들 -->
+    <section id="educational-games">
+      <h2>🎓 재밌는 공부</h2>
+      <div class="grid">
+        <!-- 미니 퀴즈 -->
+        <div class="card">
+          <h3>🧠 퀴즈 타임!</h3>
+          <div id="quizArea">
+            <div id="question" style="font-size: 18px; margin-bottom: 12px;">퀴즈를 시작해보세요!</div>
+            <div id="quizOptions" style="display: grid; gap: 8px; margin-bottom: 12px;"></div>
+            <button class="btn" id="startQuiz">퀴즈 시작</button>
+            <div id="quizScore" style="margin-top: 8px; color: var(--accent);"></div>
+          </div>
+        </div>
+
+        <!-- 영어 단어장 -->
+        <div class="card">
+          <h3>🇺🇸 영어 단어</h3>
+          <div id="vocabArea">
+            <div id="wordDisplay" style="font-size: 24px; text-align: center; margin: 12px 0; color: var(--accent);">apple</div>
+            <input type="text" id="wordInput" placeholder="한국어 뜻을 입력하세요" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); font-family: inherit;">
+            <button class="btn" id="checkWord">확인</button>
+            <button class="btn ghost" id="nextWord">다음 단어</button>
+            <div id="vocabResult" style="margin-top: 8px;"></div>
+          </div>
+        </div>
+
+        <!-- 구구단 연습 -->
+        <div class="card">
+          <h3>✖️ 구구단 연습</h3>
+          <div id="mathArea">
+            <div id="mathProblem" style="font-size: 20px; text-align: center; margin: 12px 0;">2 × 3 = ?</div>
+            <input type="number" id="mathAnswer" placeholder="답을 입력하세요" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); font-family: inherit;">
+            <button class="btn" id="checkMath">확인</button>
+            <button class="btn ghost" id="nextMath">다음 문제</button>
+            <div id="mathResult" style="margin-top: 8px;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 타이핑 연습 -->
+    <section>
+      <div class="card">
+        <h2>⌨️ 타이핑 연습</h2>
+        <div id="typingTarget" style="font-size: 18px; text-align: center; margin: 12px 0; padding: 12px; background: var(--panel); border-radius: 8px; border: 2px solid rgba(255,255,255,.3);">안녕하세요</div>
+        <input type="text" id="typingInput" placeholder="위의 문장을 똑같이 입력해보세요" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); font-family: inherit;">
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="btn" id="startTyping">연습 시작</button>
+          <span id="typingResult" style="color: var(--accent);"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- QR 코드 -->
+    <section>
+      <div class="card">
+        <h2>📱 QR 코드</h2>
+        <p>친구들과 내 홈페이지를 공유해보세요!</p>
+        <div style="text-align: center; margin: 16px 0;">
+          <div id="qrcode" style="display: inline-block; padding: 16px; background: white; border-radius: 8px;"></div>
+        </div>
+        <button class="btn" id="generateQR">QR 코드 생성</button>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>📬 연락해요</h2>
+      <div class="card">
+        <p>이메일: <a href="mailto:kid@example.com" style="color:#fff; text-decoration:underline">kid@example.com</a></p>
+        <p>선생님/친구에게 보여주고 싶은 내용이 있으면 여기로 보내주세요!</p>
+      </div>
+    </section>
+
+    <footer>© <span id="year"></span> OO의 놀이터 — 반짝이는 하루가 되길! ✨</footer>
+  </div>
+
+  <script>
+    // 년도
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 데이터 저장소 초기화
+    const storage = {
+      get: (key) => JSON.parse(localStorage.getItem(`kidsite_${key}`) || 'null'),
+      set: (key, value) => localStorage.setItem(`kidsite_${key}`, JSON.stringify(value))
+    };
+
+    // 방문자 카운터
+    let visitCount = storage.get('visitCount') || 0;
+    visitCount++;
+    storage.set('visitCount', visitCount);
+    document.getElementById('visitorCount').textContent = visitCount;
+
+    // 닉네임 시스템
+    let currentNickname = storage.get('nickname') || 'OO';
+    function updateNickname(name) {
+      currentNickname = name;
+      document.getElementById('nameDisplay').textContent = name;
+      document.getElementById('currentNickname').textContent = name;
+      storage.set('nickname', name);
+    }
+    updateNickname(currentNickname);
+    
+    document.getElementById('saveNickname').addEventListener('click', () => {
+      const input = document.getElementById('nicknameInput');
+      if (input.value.trim()) {
+        updateNickname(input.value.trim());
+        input.value = '';
+        createParticle('💫');
+      }
+    });
+
+    // 아바타 시스템
+    let currentAvatar = storage.get('avatar') || '🌟';
+    function updateAvatar(emoji) {
+      currentAvatar = emoji;
+      document.getElementById('currentAvatar').textContent = emoji;
+      document.getElementById('mascotFace').textContent = emoji;
+      storage.set('avatar', emoji);
+    }
+    updateAvatar(currentAvatar);
+    
+    document.querySelectorAll('.avatar-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        updateAvatar(btn.dataset.avatar);
+        createParticle('✨');
+      });
+    });
+
+    // 파티클 효과 시스템
+    function createParticle(emoji) {
+      for (let i = 0; i < 5; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'click-particle';
+        particle.textContent = emoji;
+        particle.style.left = Math.random() * window.innerWidth + 'px';
+        particle.style.top = Math.random() * window.innerHeight + 'px';
+        particle.style.fontSize = (12 + Math.random() * 20) + 'px';
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 800);
+      }
+    }
+
+    // 클릭 시 파티클 효과
+    document.addEventListener('click', (e) => {
+      if (Math.random() < 0.3) { // 30% 확률
+        const particle = document.createElement('div');
+        particle.className = 'click-particle';
+        particle.textContent = '✨';
+        particle.style.left = e.clientX + 'px';
+        particle.style.top = e.clientY + 'px';
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 800);
+      }
+    });
+
+    // 테마 순환
+    const themes = ['theme-space','theme-candy','theme-ocean','theme-forest'];
+    const themeBtn = document.getElementById('themeBtn');
+    function applyTheme(t){ document.body.className = t; localStorage.setItem('kid-theme', t); }
+    applyTheme(localStorage.getItem('kid-theme') || 'theme-space');
+    themeBtn.addEventListener('click', ()=>{
+      const curr = document.body.className || themes[0];
+      const next = themes[(themes.indexOf(curr)+1)%themes.length];
+      applyTheme(next);
+    });
+
+    // 슬라이더
+    const slides = document.getElementById('slides');
+    const total = slides.children.length; let idx = 0; let auto;
+    function go(i){ idx = (i+total)%total; slides.style.transform = `translateX(${-100*idx}%)`; }
+    document.getElementById('prev').onclick = ()=>go(idx-1);
+    document.getElementById('next').onclick = ()=>go(idx+1);
+    function autoplay(){ auto = setInterval(()=>go(idx+1), 3500); }
+    function stopplay(){ clearInterval(auto); }
+    autoplay();
+    document.querySelector('.carousel').addEventListener('mouseenter', stopplay);
+    document.querySelector('.carousel').addEventListener('mouseleave', autoplay);
+
+    // 별 배경
+    const starCanvas = document.getElementById('stars');
+    const sctx = starCanvas.getContext('2d');
+    function sizeStars(){ starCanvas.width = innerWidth; starCanvas.height = innerHeight; }
+    sizeStars(); addEventListener('resize', sizeStars);
+    const stars = Array.from({length:180}, ()=>({
+      x: Math.random()*innerWidth,
+      y: Math.random()*innerHeight,
+      r: Math.random()*1.8 + .2,
+      a: Math.random(),
+      v: Math.random()*0.3 + 0.05
+    }));
+    function drawStars(){
+      sctx.clearRect(0,0,starCanvas.width, starCanvas.height);
+      for(const s of stars){
+        s.a += s.v/60; const tw = (Math.sin(s.a)+1)/2; sctx.globalAlpha = 0.3 + tw*0.7;
+        sctx.fillStyle = '#fff'; sctx.beginPath(); sctx.arc(s.x, s.y, s.r, 0, Math.PI*2); sctx.fill();
+      }
+      requestAnimationFrame(drawStars);
+    } drawStars();
+
+    // 파티 모드 (컨페티)
+    const confetti = document.getElementById('confetti');
+    const cctx = confetti.getContext('2d');
+    function sizeConfetti(){ confetti.width = innerWidth; confetti.height = innerHeight; }
+    sizeConfetti(); addEventListener('resize', sizeConfetti);
+    function launchConfetti(ms=4000){
+      const pieces = Array.from({length: 220}, ()=>({
+        x: Math.random()*confetti.width,
+        y: -10 - Math.random()*confetti.height/2,
+        w: 6+Math.random()*8,
+        h: 10+Math.random()*16,
+        r: Math.random()*Math.PI,
+        v: 1.5+Math.random()*2.5,
+        s: Math.random()*0.1 + 0.02,
+        col: `hsl(${Math.random()*360}, 90%, 60%)`
+      }));
+      let start = performance.now();
+      (function frame(t){
+        const dt = t - start; cctx.clearRect(0,0,confetti.width, confetti.height);
+        for(const p of pieces){
+          p.y += p.v; p.x += Math.sin(p.r)*1.2; p.r += p.s;
+          cctx.save(); cctx.translate(p.x, p.y); cctx.rotate(p.r);
+          cctx.fillStyle = p.col; cctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+          cctx.restore();
+          if(p.y > confetti.height+20){ p.y = -20; }
+        }
+        if(dt < ms){ requestAnimationFrame(frame); } else { cctx.clearRect(0,0,confetti.width, confetti.height); }
+      })(start);
+    }
+    document.getElementById('partyBtn').addEventListener('click', ()=>launchConfetti());
+
+    // 배경음악 시스템
+    const musicToggle = document.getElementById('musicToggle');
+    const musicStatus = document.getElementById('musicStatus');
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    let musicPlaying = false;
+    
+    musicToggle.addEventListener('click', () => {
+      if (musicPlaying) {
+        backgroundMusic.pause();
+        musicToggle.textContent = '🎵 음악 재생';
+        musicStatus.textContent = '음악이 꺼져있어요';
+        musicPlaying = false;
+      } else {
+        backgroundMusic.play().catch(() => {
+          musicStatus.textContent = '브라우저에서 음악 재생이 차단되었어요';
+        });
+        musicToggle.textContent = '🔇 음악 정지';
+        musicStatus.textContent = '음악이 재생중이에요 🎶';
+        musicPlaying = true;
+      }
+    });
+
+    // 달력 시스템
+    let currentDate = new Date();
+    let currentMonth = currentDate.getMonth();
+    let currentYear = currentDate.getFullYear();
+    
+    function generateCalendar(month, year) {
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const daysInMonth = lastDay.getDate();
+      const startDay = firstDay.getDay();
+      
+      const monthNames = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+      document.getElementById('currentMonth').textContent = `${year}년 ${monthNames[month]}`;
+      
+      const calendar = document.getElementById('calendar');
+      calendar.innerHTML = '';
+      
+      // 요일 헤더
+      const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+      weekdays.forEach(day => {
+        const dayEl = document.createElement('div');
+        dayEl.textContent = day;
+        dayEl.style.fontWeight = 'bold';
+        dayEl.style.textAlign = 'center';
+        calendar.appendChild(dayEl);
+      });
+      
+      // 빈 칸
+      for (let i = 0; i < startDay; i++) {
+        calendar.appendChild(document.createElement('div'));
+      }
+      
+      // 날짜들
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayEl = document.createElement('div');
+        dayEl.className = 'calendar-day';
+        dayEl.textContent = day;
+        
+        const today = new Date();
+        if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
+          dayEl.classList.add('today');
+        }
+        
+        const diaryKey = `diary_${year}_${month}_${day}`;
+        if (storage.get(diaryKey)) {
+          dayEl.classList.add('has-diary');
+        }
+        
+        dayEl.addEventListener('click', () => {
+          const diary = storage.get(diaryKey) || {text: '', mood: ''};
+          document.getElementById('diaryText').value = diary.text;
+          document.querySelectorAll('.mood-btn').forEach(btn => {
+            btn.classList.toggle('selected', btn.dataset.mood === diary.mood);
+          });
+        });
+        
+        calendar.appendChild(dayEl);
+      }
+    }
+    
+    generateCalendar(currentMonth, currentYear);
+    
+    document.getElementById('prevMonth').addEventListener('click', () => {
+      currentMonth--;
+      if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+      generateCalendar(currentMonth, currentYear);
+    });
+    
+    document.getElementById('nextMonth').addEventListener('click', () => {
+      currentMonth++;
+      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+      generateCalendar(currentMonth, currentYear);
+    });
+    
+    // 일기 저장
+    document.getElementById('saveDiary').addEventListener('click', () => {
+      const today = new Date();
+      const diaryKey = `diary_${today.getFullYear()}_${today.getMonth()}_${today.getDate()}`;
+      const text = document.getElementById('diaryText').value;
+      const mood = document.querySelector('.mood-btn.selected')?.dataset.mood || '';
+      
+      storage.set(diaryKey, {text, mood});
+      generateCalendar(currentMonth, currentYear);
+      createParticle('📝');
+    });
+    
+    // 기분 선택
+    document.querySelectorAll('.mood-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+    });
+
+    // 풍선 게임
+    const game = document.querySelector('.game');
+    const scoreEl = document.getElementById('score');
+    const highScoreEl = document.getElementById('highScore');
+    let timer, score=0, running=false;
+    let highScore = storage.get('highScore') || 0;
+    highScoreEl.textContent = highScore;
+    function popBalloon(e){ 
+      if(!running) return; 
+      e.target.remove(); 
+      score++; 
+      scoreEl.textContent = score; 
+      if (score > highScore) {
+        highScore = score;
+        highScoreEl.textContent = highScore;
+        storage.set('highScore', highScore);
+        createParticle('🏆');
+      }
+      launchConfetti(500); 
+    }
+    function spawn(){
+      if(!running) return;
+      const b = document.createElement('div');
+      b.className = 'balloon';
+      b.style.setProperty('--balloonColor', `hsl(${Math.random()*360},90%,60%)`);
+      b.style.left = Math.random() * (game.clientWidth-70) + 'px';
+      b.style.top = game.clientHeight + 20 + 'px';
+      const speed = 1.2 + Math.random()*1.5;
+      const sway = Math.random()*1.2 + .4;
+      let y = game.clientHeight + 20, x = parseFloat(b.style.left), t = Math.random()*Math.PI*2;
+      b.addEventListener('click', popBalloon);
+      game.appendChild(b);
+      (function move(){
+        if(!running){ b.remove(); return; }
+        y -= speed; t += 0.03; x += Math.sin(t)*sway; b.style.top = y+'px'; b.style.left = x+'px';
+        if(y < -100){ b.remove(); return; }
+        requestAnimationFrame(move);
+      })();
+      timer = setTimeout(spawn, 500 + Math.random()*500);
+    }
+    document.getElementById('startGame').onclick = () => { 
+      if(running) return; 
+      running = true; 
+      score = 0; 
+      scoreEl.textContent = 0; 
+      spawn(); 
+    };
+    document.getElementById('stopGame').onclick = () => { 
+      running = false; 
+      clearTimeout(timer); 
+    };
+
+    // 작품 평가 시스템
+    document.querySelectorAll('.star').forEach(star => {
+      star.addEventListener('click', () => {
+        const rating = parseInt(star.dataset.rating);
+        const project = star.closest('.rating-stars').dataset.project;
+        const stars = star.closest('.rating-stars').querySelectorAll('.star');
+        
+        stars.forEach((s, i) => {
+          s.classList.toggle('active', i < rating);
+        });
+        
+        storage.set(`rating_${project}`, rating);
+        createParticle('⭐');
+      });
+    });
+    
+    document.querySelectorAll('.like-btn').forEach(btn => {
+      const project = btn.dataset.project;
+      const likes = storage.get(`likes_${project}`) || 0;
+      btn.querySelector('.like-count').textContent = likes;
+      
+      btn.addEventListener('click', () => {
+        const newLikes = (storage.get(`likes_${project}`) || 0) + 1;
+        storage.set(`likes_${project}`, newLikes);
+        btn.querySelector('.like-count').textContent = newLikes;
+        btn.classList.add('liked');
+        setTimeout(() => btn.classList.remove('liked'), 600);
+        createParticle('❤️');
+      });
+    });
+
+    // 게스트북 시스템
+    function loadGuestMessages() {
+      const messages = storage.get('guestMessages') || [];
+      const container = document.getElementById('guestMessages');
+      container.innerHTML = '';
+      
+      messages.slice(-10).reverse().forEach(msg => {
+        const div = document.createElement('div');
+        div.className = 'guest-message';
+        div.innerHTML = `
+          <div class="author">${msg.name}</div>
+          <div class="timestamp">${new Date(msg.timestamp).toLocaleString()}</div>
+          <div>${msg.message}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+    
+    document.getElementById('addGuestMessage').addEventListener('click', () => {
+      const name = document.getElementById('guestName').value.trim();
+      const message = document.getElementById('guestMessage').value.trim();
+      
+      if (name && message) {
+        const messages = storage.get('guestMessages') || [];
+        messages.push({
+          name, message, timestamp: Date.now()
+        });
+        storage.set('guestMessages', messages);
+        
+        document.getElementById('guestName').value = '';
+        document.getElementById('guestMessage').value = '';
+        loadGuestMessages();
+        createParticle('💌');
+      }
+    });
+    
+    loadGuestMessages();
+
+    // 퀴즈 시스템
+    const quizzes = [
+      {q: '한국의 수도는?', options: ['서울', '부산', '대구', '인천'], answer: 0},
+      {q: '태양계에서 가장 큰 행성은?', options: ['지구', '화성', '목성', '토성'], answer: 2},
+      {q: '물의 끓는점은?', options: ['90도', '100도', '110도', '120도'], answer: 1},
+      {q: '무지개의 색깔 개수는?', options: ['5개', '6개', '7개', '8개'], answer: 2}
+    ];
+    
+    let currentQuiz = 0;
+    let quizScore = 0;
+    
+    function showQuiz() {
+      const quiz = quizzes[currentQuiz];
+      document.getElementById('question').textContent = quiz.q;
+      const optionsEl = document.getElementById('quizOptions');
+      optionsEl.innerHTML = '';
+      
+      quiz.options.forEach((option, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option';
+        btn.textContent = option;
+        btn.addEventListener('click', () => checkQuizAnswer(i));
+        optionsEl.appendChild(btn);
+      });
+    }
+    
+    function checkQuizAnswer(selected) {
+      const quiz = quizzes[currentQuiz];
+      const options = document.querySelectorAll('.quiz-option');
+      
+      options.forEach((opt, i) => {
+        if (i === quiz.answer) opt.classList.add('correct');
+        else if (i === selected) opt.classList.add('wrong');
+      });
+      
+      if (selected === quiz.answer) {
+        quizScore++;
+        createParticle('🎉');
+      }
+      
+      setTimeout(() => {
+        currentQuiz = (currentQuiz + 1) % quizzes.length;
+        if (currentQuiz === 0) {
+          document.getElementById('quizScore').textContent = `점수: ${quizScore}/${quizzes.length}`;
+          quizScore = 0;
+        }
+        showQuiz();
+      }, 1500);
+    }
+    
+    document.getElementById('startQuiz').addEventListener('click', () => {
+      currentQuiz = 0;
+      quizScore = 0;
+      showQuiz();
+    });
+
+    // 영어 단어장
+    const vocabulary = [
+      {word: 'apple', meaning: '사과'},
+      {word: 'book', meaning: '책'},
+      {word: 'car', meaning: '자동차'},
+      {word: 'dog', meaning: '개'},
+      {word: 'elephant', meaning: '코끼리'},
+      {word: 'fish', meaning: '물고기'},
+      {word: 'house', meaning: '집'},
+      {word: 'moon', meaning: '달'}
+    ];
+    
+    let currentWordIndex = 0;
+    
+    function showWord() {
+      document.getElementById('wordDisplay').textContent = vocabulary[currentWordIndex].word;
+      document.getElementById('wordInput').value = '';
+      document.getElementById('vocabResult').textContent = '';
+    }
+    
+    document.getElementById('checkWord').addEventListener('click', () => {
+      const input = document.getElementById('wordInput').value.trim();
+      const correct = vocabulary[currentWordIndex].meaning;
+      const result = document.getElementById('vocabResult');
+      
+      if (input === correct) {
+        result.textContent = '정답! 🎉';
+        result.style.color = 'var(--accent)';
+        createParticle('📚');
+      } else {
+        result.textContent = `틀렸어요. 정답은 "${correct}"입니다.`;
+        result.style.color = '#ff6b6b';
+      }
+    });
+    
+    document.getElementById('nextWord').addEventListener('click', () => {
+      currentWordIndex = (currentWordIndex + 1) % vocabulary.length;
+      showWord();
+    });
+    
+    showWord();
+
+    // 구구단 연습
+    let mathA, mathB;
+    
+    function generateMathProblem() {
+      mathA = Math.floor(Math.random() * 9) + 1;
+      mathB = Math.floor(Math.random() * 9) + 1;
+      document.getElementById('mathProblem').textContent = `${mathA} × ${mathB} = ?`;
+      document.getElementById('mathAnswer').value = '';
+      document.getElementById('mathResult').textContent = '';
+    }
+    
+    document.getElementById('checkMath').addEventListener('click', () => {
+      const answer = parseInt(document.getElementById('mathAnswer').value);
+      const correct = mathA * mathB;
+      const result = document.getElementById('mathResult');
+      
+      if (answer === correct) {
+        result.textContent = '정답! 🎉';
+        result.style.color = 'var(--accent)';
+        createParticle('🔢');
+      } else {
+        result.textContent = `틀렸어요. 정답은 ${correct}입니다.`;
+        result.style.color = '#ff6b6b';
+      }
+    });
+    
+    document.getElementById('nextMath').addEventListener('click', generateMathProblem);
+    generateMathProblem();
+
+    // 타이핑 연습
+    const typingTexts = ['안녕하세요', '반갑습니다', '좋은 하루', '열심히 공부', '재미있는 게임'];
+    let currentTypingText = 0;
+    let startTime;
+    
+    function showTypingText() {
+      document.getElementById('typingTarget').textContent = typingTexts[currentTypingText];
+      document.getElementById('typingInput').value = '';
+      document.getElementById('typingResult').textContent = '';
+    }
+    
+    document.getElementById('startTyping').addEventListener('click', () => {
+      startTime = Date.now();
+      showTypingText();
+      document.getElementById('typingInput').focus();
+    });
+    
+    document.getElementById('typingInput').addEventListener('input', (e) => {
+      const target = typingTexts[currentTypingText];
+      const input = e.target.value;
+      const result = document.getElementById('typingResult');
+      
+      if (input === target) {
+        const time = ((Date.now() - startTime) / 1000).toFixed(1);
+        result.textContent = `완료! ${time}초 걸렸어요 ⚡`;
+        result.style.color = 'var(--accent)';
+        createParticle('⌨️');
+        
+        setTimeout(() => {
+          currentTypingText = (currentTypingText + 1) % typingTexts.length;
+          showTypingText();
+        }, 1000);
+      }
+    });
+
+    // QR 코드 생성
+    document.getElementById('generateQR').addEventListener('click', () => {
+      const qrDiv = document.getElementById('qrcode');
+      const url = window.location.href;
+      qrDiv.innerHTML = `
+        <div style="font-family: monospace; font-size: 8px; line-height: 8px; color: black;">
+          ██████████████  ██    ██████████████<br>
+          ██          ██    ██  ██          ██<br>
+          ██  ██████  ██  ████  ██  ██████  ██<br>
+          ██  ██████  ██    ██  ██  ██████  ██<br>
+          ██  ██████  ██████    ██  ██████  ██<br>
+          ██          ██  ██    ██          ██<br>
+          ██████████████  ██  ████████████████<br>
+                      ██████                <br>
+          ████  ██████    ██    ██  ████  ██<br>
+          ██  ████    ██████  ██████    ████<br>
+          ██    ██████  ██  ████████  ██  ██<br>
+          ████████    ██  ██    ██  ████████<br>
+          ██████  ██  ████████    ██████  ██<br>
+                      ██    ██  ██        <br>
+          ██████████████  ██  ██  ██████  ██<br>
+          ██          ██  ██████    ██  ████<br>
+          ██  ██████  ██    ██████████  ████<br>
+          ██  ██████  ██████  ██  ██    ██  <br>
+          ██  ██████  ██  ██  ████████    ██<br>
+          ██          ██████████    ██  ████<br>
+          ██████████████    ██  ████  ██  ██<br>
+        </div>
+        <p style="color: black; font-size: 10px; margin: 8px 0;">${url}</p>
+      `;
+      createParticle('📱');
+    });
+
+    // 스티커 벽
+    const wall = document.getElementById('wall');
+    const palette = wall.querySelector('.palette');
+    function addSticker(emoji, x=20, y=60){
+      const s = document.createElement('div'); 
+      s.className='sticker'; 
+      s.textContent = emoji; 
+      s.style.left=x+'px'; 
+      s.style.top=y+'px';
+      let offX=0, offY=0, dragging=false;
+      s.addEventListener('pointerdown', e=>{ 
+        dragging=true; 
+        s.setPointerCapture(e.pointerId); 
+        offX = e.clientX - s.offsetLeft; 
+        offY = e.clientY - s.offsetTop; 
+      });
+      s.addEventListener('pointermove', e=>{ 
+        if(!dragging) return; 
+        s.style.left = (e.clientX-offX)+"px"; 
+        s.style.top=(e.clientY-offY)+"px"; 
+      });
+      s.addEventListener('pointerup', ()=> dragging=false);
+      wall.appendChild(s);
+    }
+    palette.addEventListener('click', (e)=>{ const emoji=e.target.getAttribute('data-emoji'); if(emoji) addSticker(emoji, 20+Math.random()*200, 80+Math.random()*200); });
+    document.getElementById('stickerAdd').addEventListener('click', ()=> addSticker('✨', 160+Math.random()*200, 80+Math.random()*200));
+  </script>
+</body>
+</html>
