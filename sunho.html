@@ -498,6 +498,7 @@
           <button class="btn" id="startGame">게임 시작</button>
           <button class="btn ghost" id="stopGame">멈추기</button>
           <div class="btn ghost">점수: <span id="score">0</span></div>
+          <div class="btn ghost">놓친 풍선: <span id="missedBalloons">0</span>/3</div>
           <div class="btn ghost">최고점수: <span id="highScore">0</span></div>
         </div>
         <!-- 풍선은 스크립트로 생성됩니다 -->
@@ -1212,9 +1213,53 @@
     const game = document.querySelector('.game');
     const scoreEl = document.getElementById('score');
     const highScoreEl = document.getElementById('highScore');
-    let timer, score=0, running=false;
+    const missedBalloonsEl = document.getElementById('missedBalloons');
+    let timer, score=0, missedBalloons=0, running=false;
     let highScore = storage.get('highScore') || 0;
     highScoreEl.textContent = highScore;
+    // 게임 오버 처리
+    function gameOver() {
+      running = false;
+      clearTimeout(timer);
+      
+      // 모든 풍선 제거
+      document.querySelectorAll('.balloon').forEach(balloon => balloon.remove());
+      
+      // 게임 오버 메시지 표시
+      const gameOverDiv = document.createElement('div');
+      gameOverDiv.style.cssText = `
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0,0,0,0.8);
+        color: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        z-index: 100;
+        border: 2px solid var(--accent);
+      `;
+      gameOverDiv.innerHTML = `
+        <h3 style="margin: 0 0 10px 0; color: var(--accent);">🎮 게임 오버!</h3>
+        <p style="margin: 0 0 10px 0;">풍선을 ${missedBalloons}개 놓쳤습니다.</p>
+        <p style="margin: 0; color: var(--accent);">최종 점수: ${score}점</p>
+      `;
+      
+      game.appendChild(gameOverDiv);
+      
+      // 3초 후 게임 오버 메시지 제거
+      setTimeout(() => {
+        if (gameOverDiv.parentNode) {
+          gameOverDiv.remove();
+        }
+      }, 3000);
+      
+      createParticle('💥');
+      launchConfetti(300);
+    }
+    
+    // 풍선 터트리기
     function popBalloon(e){ 
       if(!running) return; 
       e.target.remove(); 
@@ -1226,7 +1271,20 @@
         storage.set('highScore', highScore);
         createParticle('🏆');
       }
+      createParticle('🎈');
       launchConfetti(500); 
+    }
+    
+    // 풍선 놓침 처리
+    function missBalloon() {
+      if(!running) return;
+      missedBalloons++;
+      missedBalloonsEl.textContent = missedBalloons;
+      createParticle('💔');
+      
+      if (missedBalloons >= 3) {
+        gameOver();
+      }
     }
     function spawn(){
       if(!running) return;
@@ -1238,26 +1296,59 @@
       const speed = 1.2 + Math.random()*1.5;
       const sway = Math.random()*1.2 + .4;
       let y = game.clientHeight + 20, x = parseFloat(b.style.left), t = Math.random()*Math.PI*2;
+      let missed = false; // 놓침 여부 추적
+      
       b.addEventListener('click', popBalloon);
       game.appendChild(b);
+      
       (function move(){
         if(!running){ b.remove(); return; }
-        y -= speed; t += 0.03; x += Math.sin(t)*sway; b.style.top = y+'px'; b.style.left = x+'px';
-        if(y < -100){ b.remove(); return; }
+        y -= speed; t += 0.03; x += Math.sin(t)*sway; 
+        b.style.top = y+'px'; 
+        b.style.left = x+'px';
+        
+        // 풍선이 화면 밖으로 사라지면 놓침 처리
+        if(y < -100){ 
+          if (!missed && running) {
+            missed = true;
+            missBalloon();
+          }
+          b.remove(); 
+          return; 
+        }
         requestAnimationFrame(move);
       })();
+      
       timer = setTimeout(spawn, 500 + Math.random()*500);
     }
     document.getElementById('startGame').onclick = () => { 
       if(running) return; 
       running = true; 
       score = 0; 
+      missedBalloons = 0;
       scoreEl.textContent = 0; 
+      missedBalloonsEl.textContent = 0;
+      
+      // 기존 게임 오버 메시지 제거
+      const existingGameOver = game.querySelector('div[style*="position: absolute"]');
+      if (existingGameOver) {
+        existingGameOver.remove();
+      }
+      
       spawn(); 
     };
     document.getElementById('stopGame').onclick = () => { 
       running = false; 
       clearTimeout(timer); 
+      
+      // 모든 풍선 제거
+      document.querySelectorAll('.balloon').forEach(balloon => balloon.remove());
+      
+      // 게임 오버 메시지도 제거
+      const existingGameOver = game.querySelector('div[style*="position: absolute"]');
+      if (existingGameOver) {
+        existingGameOver.remove();
+      }
     };
 
     // 작품 평가 시스템
