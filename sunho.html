@@ -174,8 +174,7 @@
     <section class="hero" id="about">
       <div class="card">
         <div class="kicker">WELCOME</div>
-        <h1>안녕! 나는 <span style="color:var(--accent)" id="nameDisplay">이선호</span>야 🎉<br/>
-          반짝이는 것과 재밌는 걸 아주 좋아해!</h1>
+        <h1>안녕! 나는 <span style="color:var(--accent)" id="nameDisplay">이선호</span>야</h1>
         <p>여기는 내가 만든 작품들을 모아놓은 놀이터야. 아래 버튼을 눌러 <strong>테마를 바꾸거나</strong> <strong>파티 모드</strong>를 켜봐!</p>
         <div class="actions">
           <button class="btn" id="themeBtn" aria-label="테마 바꾸기">🎨 테마 바꾸기</button>
@@ -453,9 +452,16 @@
         <h2>📱 QR 코드</h2>
         <p>친구들과 내 홈페이지를 공유해보세요!</p>
         <div style="text-align: center; margin: 16px 0;">
-          <div id="qrcode" style="display: inline-block; padding: 16px; background: white; border-radius: 8px;"></div>
+          <div id="qrcode" style="display: inline-block; padding: 16px; background: white; border-radius: 8px; min-height: 200px; min-width: 200px; display: flex; align-items: center; justify-content: center; color: #666;">
+            QR 코드를 생성하려면 아래 버튼을 클릭하세요
+          </div>
         </div>
         <button class="btn" id="generateQR">QR 코드 생성</button>
+        <div style="margin-top: 12px; text-align: center;">
+          <p style="font-size: 14px; color: var(--muted);">
+            QR 코드는 Google Charts API를 사용하여 생성됩니다
+          </p>
+        </div>
       </div>
     </section>
 
@@ -1038,35 +1044,26 @@
       }
     });
 
-    // QR 코드 생성
+    // QR 코드 생성 (실제 작동하는 QR 코드)
     document.getElementById('generateQR').addEventListener('click', () => {
       const qrDiv = document.getElementById('qrcode');
       const url = window.location.href;
+      
+      // Google Charts QR Code API 사용
+      const qrApiUrl = `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(url)}&choe=UTF-8`;
+      
       qrDiv.innerHTML = `
-        <div style="font-family: monospace; font-size: 8px; line-height: 8px; color: black;">
-          ██████████████  ██    ██████████████<br>
-          ██          ██    ██  ██          ██<br>
-          ██  ██████  ██  ████  ██  ██████  ██<br>
-          ██  ██████  ██    ██  ██  ██████  ██<br>
-          ██  ██████  ██████    ██  ██████  ██<br>
-          ██          ██  ██    ██          ██<br>
-          ██████████████  ██  ████████████████<br>
-                      ██████                <br>
-          ████  ██████    ██    ██  ████  ██<br>
-          ██  ████    ██████  ██████    ████<br>
-          ██    ██████  ██  ████████  ██  ██<br>
-          ████████    ██  ██    ██  ████████<br>
-          ██████  ██  ████████    ██████  ██<br>
-                      ██    ██  ██        <br>
-          ██████████████  ██  ██  ██████  ██<br>
-          ██          ██  ██████    ██  ████<br>
-          ██  ██████  ██    ██████████  ████<br>
-          ██  ██████  ██████  ██  ██    ██  <br>
-          ██  ██████  ██  ██  ████████    ██<br>
-          ██          ██████████    ██  ████<br>
-          ██████████████    ██  ████  ██  ██<br>
+        <div style="text-align: center;">
+          <img src="${qrApiUrl}" alt="QR 코드" style="max-width: 200px; max-height: 200px; border-radius: 8px;" 
+               onerror="this.parentElement.innerHTML='<div style=\\'color: #ff6b6b; padding: 20px;\\'>QR 코드 생성에 실패했습니다.<br>인터넷 연결을 확인해주세요.</div>'">
+          <p style="color: black; font-size: 10px; margin: 8px 0; word-break: break-all; max-width: 200px;">${url}</p>
+          <div style="margin-top: 8px;">
+            <button onclick="navigator.share && navigator.share({title: '이선호의 놀이터', url: '${url}'}).catch(()=>{})" 
+                    style="background: #4CAF50; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">
+              📤 공유하기
+            </button>
+          </div>
         </div>
-        <p style="color: black; font-size: 10px; margin: 8px 0;">${url}</p>
       `;
       createParticle('📱');
     });
