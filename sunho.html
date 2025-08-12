@@ -97,12 +97,11 @@
     .balloon{ position:absolute; width:60px; height:80px; border-radius:50% 50% 45% 45%; background:radial-gradient(circle at 30% 30%, #fff, transparent), var(--balloonColor, #ff6b6b); border:2px solid rgba(255,255,255,.8); cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.25) }
     .balloon:after{ content:''; position:absolute; bottom:-10px; left:50%; width:2px; height:30px; background:rgba(255,255,255,.8) }
 
-    /* 스티커 벽 */
-    .sticker-wall{ position:relative; height:340px; border-radius:18px; border:2px solid rgba(255,255,255,.35); background:linear-gradient(135deg, rgba(255,255,255,.25), rgba(255,255,255,.07)); overflow:hidden; box-shadow:var(--shadow) }
-    .palette{ display:flex; gap:8px; padding:8px }
-    .palette button{ font-size:24px; border-radius:10px; padding:6px 8px; border:2px solid rgba(255,255,255,.6); background:var(--panel); cursor:pointer }
-    .sticker{ position:absolute; font-size:40px; cursor:grab; user-select:none }
-    .sticker:active{ cursor:grabbing }
+    /* 반응속도 테스트 스타일 */
+    .reaction-ready { background: #ffa502 !important; }
+    .reaction-go { background: #2ed573 !important; }
+    .reaction-too-early { background: #ff4757 !important; }
+    .reaction-finished { background: #5352ed !important; }
 
     footer{ margin:40px 0 20px; text-align:center; color:var(--muted) }
 
@@ -237,7 +236,7 @@
     .music-controls-extra {
       margin-top: 8px;
     }
-
+    
     /* 접근성: 모션 최소화 선호 시 애니메이션 억제 */
     @media (prefers-reduced-motion: reduce){
       *{ animation:none !important; transition:none !important }
@@ -282,7 +281,7 @@
         <div class="bubble">
           <div class="face" id="mascotFace" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; overflow: hidden; border-radius: 36px;">
             <img src="https://i.namu.wiki/i/VpTDNNfmewtZAj1IBjrnBKJAAaKUea1VvWoBKw3aQiX1xRUggJFVPf2TICD_908_Y51nJRFTspwETu-sWdKEwg.webp" alt="마스코트" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.innerHTML='<div style=\\'font-size: 70px;\\'>💻</div>'">
-          </div>
+        </div>
         </div>
         <div class="kicker" style="margin-top:8px">프로필 이미지</div>
       </div>
@@ -492,26 +491,60 @@
       </div>
     </section>
 
-    <section id="fun" class="funzone">
-      <div class="game" aria-label="풍선 팡! 게임">
-        <div class="hud">
-          <button class="btn" id="startGame">게임 시작</button>
-          <button class="btn ghost" id="stopGame">멈추기</button>
-          <div class="btn ghost">점수: <span id="score">0</span></div>
-          <div class="btn ghost">놓친 풍선: <span id="missedBalloons">0</span>/3</div>
-          <div class="btn ghost">최고점수: <span id="highScore">0</span></div>
+    <!-- 풍선 팝 게임 -->
+    <section id="balloon-game">
+      <div class="card">
+        <h3>🎈 풍선 팝 게임</h3>
+        <p style="color: var(--muted); margin-bottom: 16px;">풍선을 클릭해서 터트리세요! 3개를 놓치면 게임 오버입니다.</p>
+        
+        <!-- 게임 컨트롤 -->
+        <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+          <button class="btn" id="startGame">🎮 게임 시작</button>
+          <button class="btn ghost" id="stopGame">⏹️ 멈추기</button>
         </div>
+        
+        <!-- 게임 상태 -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px;">
+          <div class="btn ghost" style="pointer-events: none;">점수: <span id="score">0</span></div>
+          <div class="btn ghost" style="pointer-events: none;">놓친: <span id="missedBalloons">0</span>/3</div>
+          <div class="btn ghost" style="pointer-events: none;">최고: <span id="highScore">0</span></div>
+        </div>
+        
+        <!-- 게임 화면 -->
+        <div class="game" aria-label="풍선 팡! 게임" style="height: 300px; border: 2px solid rgba(255,255,255,.35); border-radius: 18px; background: linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.07)); position: relative; overflow: hidden; box-shadow: var(--shadow);">
         <!-- 풍선은 스크립트로 생성됩니다 -->
       </div>
-      <div class="sticker-wall" id="wall" aria-label="스티커 벽">
-        <div class="palette" aria-label="스티커 선택">
-          <button data-emoji="🐣">🐣</button>
-          <button data-emoji="🐱">🐱</button>
-          <button data-emoji="🦄">🦄</button>
-          <button data-emoji="🚀">🚀</button>
-          <button data-emoji="🍓">🍓</button>
-          <button data-emoji="⭐">⭐</button>
+      </div>
+    </section>
+
+    <!-- 반응속도 테스트 -->
+    <section id="reaction-test">
+      <div class="card">
+        <h3>⚡ 반응속도 테스트</h3>
+        <p style="color: var(--muted); margin-bottom: 16px;">지금클릭이 나타나면 최대한 빠르게 클릭하세요!</p>
+        
+        <!-- 게임 컨트롤 -->
+        <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+          <button class="btn" id="startReaction">🚀 테스트 시작</button>
+          <button class="btn ghost" id="resetReaction">🔄 초기화</button>
         </div>
+        
+        <!-- 게임 상태 -->
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px;">
+          <div class="btn ghost" style="pointer-events: none;">현재: <span id="currentTime">-</span>ms</div>
+          <div class="btn ghost" style="pointer-events: none;">최고: <span id="bestTime">-</span>ms</div>
+        </div>
+        
+        <!-- 게임 화면 -->
+        <div id="reactionArea" style="height: 200px; border: 3px solid rgba(255,255,255,.35); border-radius: 18px; background: #ff4757; position: relative; overflow: hidden; box-shadow: var(--shadow); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+          <div id="reactionMessage" style="color: white; font-size: 24px; font-weight: bold; text-align: center; user-select: none;">
+            🔴 대기 중<br>
+            <span style="font-size: 16px;">시작 버튼을 눌러주세요</span>
+          </div>
+        </div>
+        
+        <!-- 결과 표시 -->
+        <div id="reactionResult" style="margin-top: 12px; text-align: center; color: var(--accent); font-weight: bold; min-height: 24px;"></div>
       </div>
     </section>
 
@@ -971,7 +1004,7 @@
     
     // 음악 일시정지
     function pauseMusic() {
-      backgroundMusic.pause();
+        backgroundMusic.pause();
       isPlaying = false;
       isPaused = true;
       musicStatus.textContent = '일시정지';
@@ -1262,7 +1295,11 @@
     // 풍선 터트리기
     function popBalloon(e){ 
       if(!running) return; 
+      
+      // 풍선이 터트려졌음을 표시 (놓침 방지)
+      e.target.dataset.popped = 'true';
       e.target.remove(); 
+      
       score++; 
       scoreEl.textContent = score; 
       if (score > highScore) {
@@ -1307,9 +1344,9 @@
         b.style.top = y+'px'; 
         b.style.left = x+'px';
         
-        // 풍선이 화면 밖으로 사라지면 놓침 처리
+        // 풍선이 화면 밖으로 사라지면 놓침 처리 (터트려지지 않은 경우에만)
         if(y < -100){ 
-          if (!missed && running) {
+          if (!missed && running && !b.dataset.popped) {
             missed = true;
             missBalloon();
           }
@@ -2274,37 +2311,204 @@
                     style="background: #4CAF50; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">
               📋 URL 복사
             </button>
-          </div>
+        </div>
         </div>
       `;
       createParticle('📱');
     });
 
-    // 스티커 벽
-    const wall = document.getElementById('wall');
-    const palette = wall.querySelector('.palette');
-    function addSticker(emoji, x=20, y=60){
-      const s = document.createElement('div'); 
-      s.className='sticker'; 
-      s.textContent = emoji; 
-      s.style.left=x+'px'; 
-      s.style.top=y+'px';
-      let offX=0, offY=0, dragging=false;
-      s.addEventListener('pointerdown', e=>{ 
-        dragging=true; 
-        s.setPointerCapture(e.pointerId); 
-        offX = e.clientX - s.offsetLeft; 
-        offY = e.clientY - s.offsetTop; 
-      });
-      s.addEventListener('pointermove', e=>{ 
-        if(!dragging) return; 
-        s.style.left = (e.clientX-offX)+"px"; 
-        s.style.top=(e.clientY-offY)+"px"; 
-      });
-      s.addEventListener('pointerup', ()=> dragging=false);
-      wall.appendChild(s);
+    // 반응속도 테스트 게임 초기화
+    function initializeReactionGame() {
+      const reactionArea = document.getElementById('reactionArea');
+      const reactionMessage = document.getElementById('reactionMessage');
+      const reactionResult = document.getElementById('reactionResult');
+      const currentTimeEl = document.getElementById('currentTime');
+      const bestTimeEl = document.getElementById('bestTime');
+      const startReactionBtn = document.getElementById('startReaction');
+      const resetReactionBtn = document.getElementById('resetReaction');
+      
+      // 엘리먼트 존재 확인
+      if (!reactionArea || !reactionMessage || !reactionResult || !currentTimeEl || !bestTimeEl || !startReactionBtn || !resetReactionBtn) {
+        console.error('반응속도 테스트 엘리먼트를 찾을 수 없습니다:', {
+          reactionArea: !!reactionArea,
+          reactionMessage: !!reactionMessage,
+          reactionResult: !!reactionResult,
+          currentTimeEl: !!currentTimeEl,
+          bestTimeEl: !!bestTimeEl,
+          startReactionBtn: !!startReactionBtn,
+          resetReactionBtn: !!resetReactionBtn
+        });
+        return;
+      }
+    
+      // 게임 상태 변수들
+      let reactionState = 'waiting'; // waiting, ready, go, finished
+      let startTime = 0;
+      let reactionTimeout = null;
+      let bestReactionTime = storage.get('bestReactionTime') || null;
+      
+      // 초기 UI 설정
+      function initializeReactionUI() {
+        try {
+          if (bestReactionTime) {
+            bestTimeEl.textContent = bestReactionTime;
+          } else {
+            bestTimeEl.textContent = '-';
+          }
+          currentTimeEl.textContent = '-';
+          console.log('반응속도 테스트 UI 초기화 완료', { bestReactionTime });
+        } catch (error) {
+          console.error('UI 초기화 오류:', error);
+        }
+      }
+    
+    function updateReactionDisplay(state, message, bgClass = '') {
+      reactionState = state;
+      reactionMessage.innerHTML = message;
+      
+      // 모든 클래스 제거
+      reactionArea.classList.remove('reaction-ready', 'reaction-go', 'reaction-too-early', 'reaction-finished');
+      
+      // 새 클래스 추가
+      if (bgClass) {
+        reactionArea.classList.add(bgClass);
+      }
     }
-    palette.addEventListener('click', (e)=>{ const emoji=e.target.getAttribute('data-emoji'); if(emoji) addSticker(emoji, 20+Math.random()*200, 80+Math.random()*200); });
+    
+      function startReactionTest() {
+        console.log('테스트 시작 버튼 클릭됨', { reactionState });
+        
+        if (reactionState !== 'waiting') {
+          console.log('테스트가 이미 진행 중입니다');
+          return;
+        }
+        
+        try {
+          updateReactionDisplay('ready', 
+            '🟡 준비하세요...', 
+            'reaction-ready'
+          );
+          
+          // 1-5초 사이 랜덤 시간 후 초록색으로 변경
+          const delay = 1000 + Math.random() * 4000;
+          console.log('테스트 시작됨, 대기시간:', delay + 'ms');
+          
+          reactionTimeout = setTimeout(() => {
+            if (reactionState === 'ready') {
+              startTime = Date.now();
+              updateReactionDisplay('go', 
+                '🟢 지금 클릭!<br><span style="font-size: 16px;">최대한 빠르게!</span>', 
+                'reaction-go'
+              );
+              console.log('GO 신호 표시됨');
+            }
+          }, delay);
+        } catch (error) {
+          console.error('테스트 시작 오류:', error);
+        }
+      }
+    
+      function handleReactionClick() {
+        console.log('화면 클릭됨', { reactionState });
+        
+        try {
+          if (reactionState === 'ready') {
+            // 너무 일찍 클릭함
+            console.log('너무 일찍 클릭됨');
+            clearTimeout(reactionTimeout);
+            updateReactionDisplay('waiting', 
+              '🔴 너무 빨라요!<br><span style="font-size: 16px;">다시 시도해보세요</span>', 
+              'reaction-too-early'
+            );
+            reactionResult.textContent = '❌ 너무 일찍 클릭했어요! 초록색을 기다려주세요.';
+            createParticle('❌');
+            
+          } else if (reactionState === 'go') {
+            // 정상적인 반응
+            const reactionTime = Date.now() - startTime;
+            console.log('정상 클릭됨, 반응시간:', reactionTime + 'ms');
+            
+            // 현재 시간 즉시 표시
+            currentTimeEl.textContent = reactionTime;
+            
+            updateReactionDisplay('finished', 
+              `⚡ 완료!<br><span style="font-size: 16px;">${reactionTime}ms</span>`, 
+              'reaction-finished'
+            );
+            
+            // 최고 기록 체크 및 업데이트
+            let isNewRecord = false;
+            if (!bestReactionTime || reactionTime < bestReactionTime) {
+              bestReactionTime = reactionTime;
+              bestTimeEl.textContent = bestReactionTime;
+              storage.set('bestReactionTime', bestReactionTime);
+              isNewRecord = true;
+              console.log('새로운 최고 기록!', reactionTime + 'ms');
+            }
+            
+            // 결과 메시지 표시
+            if (isNewRecord) {
+              reactionResult.textContent = `🏆 새로운 최고 기록! ${reactionTime}ms`;
+              createParticle('🏆');
+              launchConfetti(300);
+            } else {
+              let grade = '';
+              if (reactionTime < 200) grade = '🚀 초인급!';
+              else if (reactionTime < 300) grade = '⚡ 매우 빠름!';
+              else if (reactionTime < 400) grade = '👍 빠름!';
+              else if (reactionTime < 500) grade = '😊 보통';
+              else grade = '🐢 느림';
+              
+              reactionResult.textContent = `${grade} 반응시간: ${reactionTime}ms`;
+              createParticle('⚡');
+            }
+            
+            // 3초 후 자동으로 대기 상태로 복귀
+            setTimeout(() => {
+              updateReactionDisplay('waiting', 
+                '🔴 대기 중<br><span style="font-size: 16px;">시작 버튼을 눌러주세요</span>'
+              );
+            }, 3000);
+          } else {
+            console.log('클릭 무시됨 - 잘못된 상태:', reactionState);
+          }
+        } catch (error) {
+          console.error('클릭 처리 오류:', error);
+        }
+      }
+    
+      function resetReactionTest() {
+        console.log('초기화 버튼 클릭됨');
+        
+        try {
+          clearTimeout(reactionTimeout);
+          updateReactionDisplay('waiting', 
+            '🔴 대기 중<br><span style="font-size: 16px;">시작 버튼을 눌러주세요</span>'
+          );
+          reactionResult.textContent = '';
+          
+          // UI 초기화
+          initializeReactionUI();
+          
+          console.log('반응속도 테스트 초기화 완료');
+        } catch (error) {
+          console.error('초기화 오류:', error);
+        }
+      }
+    
+      // 이벤트 리스너 등록
+      startReactionBtn.addEventListener('click', startReactionTest);
+      resetReactionBtn.addEventListener('click', resetReactionTest);
+      reactionArea.addEventListener('click', handleReactionClick);
+      
+      // 초기화 실행
+      initializeReactionUI();
+      
+      console.log('반응속도 테스트 게임 초기화 완료');
+    }
+    
+    // 게임 초기화 실행
+    initializeReactionGame();
     // 일반 운세 시스템
     const fortunes = [
       {
