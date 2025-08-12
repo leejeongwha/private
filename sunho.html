@@ -186,11 +186,11 @@
       </div>
       <div class="card mascot" aria-label="마스코트">
         <div class="bubble">
-          <div class="face" id="mascotFace" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
-            <div style="font-size: 70px;">💻</div>
+          <div class="face" id="mascotFace" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; overflow: hidden; border-radius: 36px;">
+            <img src="https://i.namu.wiki/i/VpTDNNfmewtZAj1IBjrnBKJAAaKUea1VvWoBKw3aQiX1xRUggJFVPf2TICD_908_Y51nJRFTspwETu-sWdKEwg.webp" alt="마스코트" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.innerHTML='<div style=\\'font-size: 70px;\\'>💻</div>'">
           </div>
         </div>
-        <div class="kicker" style="margin-top:8px">혁신적인 개발자 포트폴리오 ⚡</div>
+        <div class="kicker" style="margin-top:8px">프로필 이미지</div>
       </div>
     </section>
 
@@ -305,28 +305,32 @@
         <div class="card">
           <h3>🎨 프로필</h3>
           <div style="text-align: center; margin: 12px 0;">
-            <div id="currentAvatar" style="width: 80px; height: 80px; margin: 8px auto; border-radius: 50%; border: 3px solid var(--accent); background: var(--panel); display: flex; align-items: center; justify-content: center;">
-              <div style="font-size: 60px;">🌟</div>
+            <div id="currentAvatar" style="width: 80px; height: 80px; margin: 8px auto; border-radius: 50%; border: 3px solid var(--accent); background: var(--panel); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+              <img src="https://i.namu.wiki/i/VpTDNNfmewtZAj1IBjrnBKJAAaKUea1VvWoBKw3aQiX1xRUggJFVPf2TICD_908_Y51nJRFTspwETu-sWdKEwg.webp" alt="아바타" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.innerHTML='<div style=\\'font-size: 60px;\\'>🌟</div>'">
             </div>
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 300px; margin: 0 auto;">
-              <!-- 붕괴 스타레일 5성 캐릭터들 - 대표 이모지 사용 -->
-              <button class="avatar-btn" data-avatar="🕷️" data-name="카프카" title="카프카 - 스텔라론 헌터" style="background: linear-gradient(135deg, #8B0E5F, #FF1493);">🕷️</button>
-              <button class="avatar-btn" data-avatar="⚔️" data-name="블레이드" title="블레이드 - 불멸의 검객" style="background: linear-gradient(135deg, #8B0000, #FF6347);">⚔️</button>
-              <button class="avatar-btn" data-avatar="🦋" data-name="젤레" title="젤레 - 나비의 무희" style="background: linear-gradient(135deg, #4B0082, #9370DB);">🦋</button>
-              <button class="avatar-btn" data-avatar="⚡" data-name="경원" title="경원 - 일곱 천군의 대장군" style="background: linear-gradient(135deg, #FFD700, #FFA500);">⚡</button>
-              <button class="avatar-btn" data-avatar="❄️" data-name="브로냐" title="브로냐 - 최고 수호자" style="background: linear-gradient(135deg, #B0E0E6, #4682B4);">❄️</button>
-              <button class="avatar-btn" data-avatar="🤖" data-name="클라라" title="클라라 - 기계와 소녀" style="background: linear-gradient(135deg, #F5F5DC, #DAA520);">🤖</button>
-              <button class="avatar-btn" data-avatar="🔥" data-name="히메코" title="히메코 - 아스트랄 익스프레스" style="background: linear-gradient(135deg, #FF4500, #FF8C00);">🔥</button>
-              <button class="avatar-btn" data-avatar="🌌" data-name="벨트" title="벨트 - 반중력의 달인" style="background: linear-gradient(135deg, #2F4F4F, #708090);">🌌</button>
-              <button class="avatar-btn" data-avatar="🛡️" data-name="제파드" title="제파드 - 철벽의 수호자" style="background: linear-gradient(135deg, #4169E1, #87CEEB);">🛡️</button>
-              <button class="avatar-btn" data-avatar="🎮" data-name="은랑" title="은랑 - 천재 해커" style="background: linear-gradient(135deg, #9932CC, #DA70D6);">🎮</button>
-              <button class="avatar-btn" data-avatar="💐" data-name="라차" title="라차 - 풍부한 상인" style="background: linear-gradient(135deg, #32CD32, #98FB98);">💐</button>
-              <button class="avatar-btn" data-avatar="🔮" data-name="부현" title="부현 - 태복사의 대복경" style="background: linear-gradient(135deg, #FF69B4, #FFB6C1);">🔮</button>
-              <button class="avatar-btn" data-avatar="🐉" data-name="음월군" title="음월군 - 단항의 진정한 모습" style="background: linear-gradient(135deg, #00CED1, #40E0D0);">🐉</button>
-              <button class="avatar-btn" data-avatar="🐾" data-name="링크스" title="링크스 - 설지 탐험대" style="background: linear-gradient(135deg, #F0F8FF, #B0C4DE);">🐾</button>
-              <!-- 기본 이모지 옵션들 -->
-              <button class="avatar-btn" data-avatar="🌟" data-name="별" title="기본 별">🌟</button>
-              <button class="avatar-btn" data-avatar="🦄" data-name="유니콘" title="유니콘">🦄</button>
+              <!-- 프로필 이미지들 -->
+              <button class="avatar-btn" data-avatar="https://i.namu.wiki/i/VpTDNNfmewtZAj1IBjrnBKJAAaKUea1VvWoBKw3aQiX1xRUggJFVPf2TICD_908_Y51nJRFTspwETu-sWdKEwg.webp" data-name="프로필 1" title="프로필 1" style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 4px;">
+                <img src="https://i.namu.wiki/i/VpTDNNfmewtZAj1IBjrnBKJAAaKUea1VvWoBKw3aQiX1xRUggJFVPf2TICD_908_Y51nJRFTspwETu-sWdKEwg.webp" alt="프로필 1" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;" onerror="this.parentElement.innerHTML='🖼️'">
+              </button>
+              <button class="avatar-btn" data-avatar="https://i.namu.wiki/i/3Zeq3pS2xzTmTdwj5wfWvopztHlR3L40WvEhIzNu-5DXmE2EKeQpcJkAPlbN2x5zql22RHDtbZDuZGE0Yi5CWQ.webp" data-name="프로필 2" title="프로필 2" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f); padding: 4px;">
+                <img src="https://i.namu.wiki/i/3Zeq3pS2xzTmTdwj5wfWvopztHlR3L40WvEhIzNu-5DXmE2EKeQpcJkAPlbN2x5zql22RHDtbZDuZGE0Yi5CWQ.webp" alt="프로필 2" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;" onerror="this.parentElement.innerHTML='🖼️'">
+              </button>
+              <button class="avatar-btn" data-avatar="https://i.namu.wiki/i/VLzQd8jag-zowwN8W578f1z178FAI4RiVxiSOCP8I5OqFoXeyOO-JEnPN3vJiMYZy68JTAlDqx9bfrkN4pvP5A.webp" data-name="프로필 3" title="프로필 3" style="background: linear-gradient(135deg, #4ecdc4, #44a08d); padding: 4px;">
+                <img src="https://i.namu.wiki/i/VLzQd8jag-zowwN8W578f1z178FAI4RiVxiSOCP8I5OqFoXeyOO-JEnPN3vJiMYZy68JTAlDqx9bfrkN4pvP5A.webp" alt="프로필 3" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;" onerror="this.parentElement.innerHTML='🖼️'">
+              </button>
+              <button class="avatar-btn" data-avatar="https://i.namu.wiki/i/A4qwk8LsNTKtd8JEs0J4SufQnJDgU9Rxm3_AsYdoQQl4RbVMXR7qkrDNRy2jztFMstieGz8XnWQOK9-h5AxkGA.webp" data-name="프로필 4" title="프로필 4" style="background: linear-gradient(135deg, #fa709a, #fee140); padding: 4px;">
+                <img src="https://i.namu.wiki/i/A4qwk8LsNTKtd8JEs0J4SufQnJDgU9Rxm3_AsYdoQQl4RbVMXR7qkrDNRy2jztFMstieGz8XnWQOK9-h5AxkGA.webp" alt="프로필 4" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;" onerror="this.parentElement.innerHTML='🖼️'">
+              </button>
+              <button class="avatar-btn" data-avatar="https://i.namu.wiki/i/He4lkEz6sGrtpkwUJbDMRvv7Z6MDWgEbNt03KKVezRBQTOPGPH6IMto52edRuuJHJTtLjl7zY_HmbJ3Ls13DDA.webp" data-name="프로필 5" title="프로필 5" style="background: linear-gradient(135deg, #a8edea, #fed6e3); padding: 4px;">
+                <img src="https://i.namu.wiki/i/He4lkEz6sGrtpkwUJbDMRvv7Z6MDWgEbNt03KKVezRBQTOPGPH6IMto52edRuuJHJTtLjl7zY_HmbJ3Ls13DDA.webp" alt="프로필 5" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;" onerror="this.parentElement.innerHTML='🖼️'">
+              </button>
+              <button class="avatar-btn" data-avatar="https://i.namu.wiki/i/IBfgE7SjqhlSoh3BvV2_ZjT_te2tvCcBSvP_lUpYfgOgpUiP38BSS6fwsWxRYSmat38mZE44IERhTFXsK0-XhA.webp" data-name="프로필 6" title="프로필 6" style="background: linear-gradient(135deg, #ffecd2, #fcb69f); padding: 4px;">
+                <img src="https://i.namu.wiki/i/IBfgE7SjqhlSoh3BvV2_ZjT_te2tvCcBSvP_lUpYfgOgpUiP38BSS6fwsWxRYSmat38mZE44IERhTFXsK0-XhA.webp" alt="프로필 6" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;" onerror="this.parentElement.innerHTML='🖼️'">
+              </button>
+              <button class="avatar-btn" data-avatar="https://i.namu.wiki/i/EsxfMCaoj9J5Sipm18in8GHacDo4WNNnGt6C_FDU7RC2d0ChApakXp_p0nbjkYgQcI01Ak8175DflmBJd4dd8A.webp" data-name="프로필 7" title="프로필 7" style="background: linear-gradient(135deg, #d299c2, #fef9d7); padding: 4px;">
+                <img src="https://i.namu.wiki/i/EsxfMCaoj9J5Sipm18in8GHacDo4WNNnGt6C_FDU7RC2d0ChApakXp_p0nbjkYgQcI01Ak8175DflmBJd4dd8A.webp" alt="프로필 7" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;" onerror="this.parentElement.innerHTML='🖼️'">
+              </button>
             </div>
           </div>
         </div>
@@ -515,9 +519,10 @@
       }
     });
 
-    // 아바타 시스템 (간소화된 이모지 기반)
-    let currentAvatar = storage.get('avatar') || '🌟';
-    let currentAvatarName = storage.get('avatarName') || '별';
+    // 아바타 시스템 (이미지 및 이모지 지원)
+    let currentAvatar = storage.get('avatar') || 'https://i.namu.wiki/i/VpTDNNfmewtZAj1IBjrnBKJAAaKUea1VvWoBKw3aQiX1xRUggJFVPf2TICD_908_Y51nJRFTspwETu-sWdKEwg.webp';
+    let currentAvatarName = storage.get('avatarName') || '프로필';
+    const defaultAvatarImage = 'https://i.namu.wiki/i/VpTDNNfmewtZAj1IBjrnBKJAAaKUea1VvWoBKw3aQiX1xRUggJFVPf2TICD_908_Y51nJRFTspwETu-sWdKEwg.webp';
     
     function updateAvatar(avatar, name = '') {
       currentAvatar = avatar;
@@ -525,11 +530,23 @@
       
       // 현재 아바타 표시 영역 업데이트
       const currentAvatarEl = document.getElementById('currentAvatar');
-      currentAvatarEl.innerHTML = `<div style="font-size: 60px; line-height: 74px;">${avatar}</div>`;
+      if (avatar.startsWith('http')) {
+        // 이미지 URL인 경우
+        currentAvatarEl.innerHTML = `<img src="${avatar}" alt="아바타" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.innerHTML='<div style=\\'font-size: 60px;\\'>🌟</div>'">`;
+      } else {
+        // 이모지인 경우
+        currentAvatarEl.innerHTML = `<div style="font-size: 60px; line-height: 74px;">${avatar}</div>`;
+      }
       
       // 마스코트 영역 업데이트
       const mascotFaceEl = document.getElementById('mascotFace');
-      mascotFaceEl.innerHTML = `<div style="font-size: 70px;">${avatar}</div>`;
+      if (avatar.startsWith('http')) {
+        // 이미지 URL인 경우
+        mascotFaceEl.innerHTML = `<img src="${avatar}" alt="마스코트" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.innerHTML='<div style=\\'font-size: 70px;\\'>💻</div>'">`;
+      } else {
+        // 이모지인 경우
+        mascotFaceEl.innerHTML = `<div style="font-size: 70px;">${avatar}</div>`;
+      }
       
       storage.set('avatar', avatar);
       storage.set('avatarName', currentAvatarName);
