@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>이선호 | Developer Portfolio</title>
-  <meta name="description" content="창의적이고 혁신적인 개발자 이선호의 포트폴리오 웹사이트" />
+  <title>SUNHO.DEV | Full-Stack Developer Portfolio</title>
+  <meta name="description" content="이선호(SUNHO) - 창의적이고 혁신적인 풀스택 개발자의 포트폴리오 웹사이트" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -46,8 +46,10 @@
     .wrap{ max-width:1100px; margin:0 auto; padding:22px; }
     header{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
     .brand{ display:flex; align-items:center; gap:14px; }
-    .logo{ width:54px; height:54px; border-radius:50%; display:grid; place-items:center; color:#fff; background:conic-gradient(from 45deg, var(--brand), var(--accent), #fff0, var(--brand)); box-shadow:var(--shadow); border:2px solid rgba(255,255,255,.5) }
-    .logo span{ font-size:26px }
+    .logo{ width:54px; height:54px; border-radius:12px; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%); box-shadow:var(--shadow); border:2px solid rgba(255,255,255,.3); position:relative; overflow:hidden; }
+    .logo::before{ content:''; position:absolute; inset:0; background:linear-gradient(45deg, transparent 30%, rgba(255,255,255,.2) 50%, transparent 70%); transform:translateX(-100%); transition:transform 0.6s ease; }
+    .logo:hover::before{ transform:translateX(100%); }
+    .logo span{ font-size:18px; font-weight:700; font-family:'JetBrains Mono', monospace; letter-spacing:-0.5px; }
     nav{ display:flex; gap:10px; flex-wrap:wrap }
     nav a{ text-decoration:none; color:var(--text); background:var(--panel); padding:8px 12px; border-radius:999px; border:2px solid rgba(255,255,255,.25); box-shadow:var(--shadow) }
 
@@ -159,10 +161,10 @@
   <div class="wrap">
     <header>
       <div class="brand" aria-label="사이트 로고">
-        <div class="logo" aria-hidden="true"><span>★</span></div>
+        <div class="logo" aria-hidden="true"><span>SH</span></div>
         <div>
-          <div style="font-size:22px">이선호의 반짝반짝 놀이터</div>
-          <div class="kicker">그림 · 코딩 · 과학 실험 · 게임</div>
+          <div style="font-size:22px; font-weight:600;">SUNHO.DEV</div>
+          <div class="kicker">Full-Stack Developer & Creative Technologist</div>
         </div>
       </div>
       <nav aria-label="바로가기">
@@ -181,7 +183,7 @@
         <div class="actions">
           <button class="btn" id="themeBtn" aria-label="테마 바꾸기">🎯 테마 변경</button>
           <button class="btn ghost" id="partyBtn" aria-label="파티 모드">✨ 이펙트</button>
-          <button class="btn ghost" id="stickerAdd" aria-label="스티커 추가">📌 스티커</button>
+          <button class="btn ghost" id="fortuneBtn" aria-label="오늘의 운세">🔮 운세 보기</button>
         </div>
       </div>
       <div class="card mascot" aria-label="마스코트">
@@ -191,6 +193,22 @@
           </div>
         </div>
         <div class="kicker" style="margin-top:8px">프로필 이미지</div>
+      </div>
+    </section>
+
+    <!-- 운세 표시 영역 -->
+    <section id="fortuneSection" style="display: none;">
+      <div class="card">
+        <h3>🔮 오늘의 운세</h3>
+        <div id="fortuneContent" style="text-align: center; padding: 20px; border-radius: 12px; background: linear-gradient(135deg, rgba(255,255,255,.1), rgba(255,255,255,.05)); border: 2px solid rgba(255,255,255,.2);">
+          <div id="fortuneEmoji" style="font-size: 60px; margin-bottom: 16px;">🔮</div>
+          <div id="fortuneTitle" style="font-size: 20px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">운세를 확인해보세요!</div>
+          <div id="fortuneText" style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">🔮 운세 보기 버튼을 클릭해주세요</div>
+          <div id="fortuneScore" style="font-size: 14px; color: var(--muted);"></div>
+        </div>
+        <div style="text-align: center; margin-top: 16px;">
+          <button class="btn ghost" id="fortuneRefresh">🎲 다시 뽑기</button>
+        </div>
       </div>
     </section>
 
@@ -306,7 +324,7 @@
           <h3>🎨 프로필</h3>
           <div style="text-align: center; margin: 12px 0;">
             <div id="currentAvatar" style="width: 80px; height: 80px; margin: 8px auto; border-radius: 50%; border: 3px solid var(--accent); background: var(--panel); display: flex; align-items: center; justify-content: center; overflow: hidden;">
-              <img src="https://i.namu.wiki/i/VpTDNNfmewtZAj1IBjrnBKJAAaKUea1VvWoBKw3aQiX1xRUggJFVPf2TICD_908_Y51nJRFTspwETu-sWdKEwg.webp" alt="아바타" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.innerHTML='<div style=\\'font-size: 60px;\\'>🌟</div>'">
+              <img src="https://i.namu.wiki/i/VpTDNNfmewtZAj1IBjrnBKJAAaKUea1VvWoBKw3aQiX1xRUggJFVPf2TICD_908_Y51nJRFTspwETu-sWdKEwg.webp" alt="프로필 1" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%;" onerror="this.parentElement.innerHTML='🖼️'">
             </div>
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 300px; margin: 0 auto;">
               <!-- 프로필 이미지들 -->
@@ -352,20 +370,33 @@
     <!-- 배경음악 컨트롤 -->
     <section>
       <div class="card">
-        <h3>🎧 사운드</h3>
-        <div style="display: flex; gap: 8px; align-items: center;">
-          <button class="btn" id="musicToggle">🎵 음악 재생</button>
-          <span id="musicStatus" style="color: var(--muted);">음악이 꺼져있어요</span>
+        <h3>🎧 음악 플레이어</h3>
+        
+        <!-- 현재 곡 정보 -->
+        <div id="musicInfo" style="margin-bottom: 16px; text-align: center;">
+          <div id="currentTrackName" style="font-weight: 600; color: var(--accent); font-size: 16px; margin-bottom: 4px;">♪ 곡을 선택해주세요</div>
+          <div id="trackNumber" style="color: var(--muted); font-size: 12px; margin-bottom: 8px;">0 / 0</div>
+          <div id="musicStatus" style="color: var(--muted); font-size: 12px;">음악이 꺼져있어요</div>
         </div>
-        <audio id="backgroundMusic" loop>
-          <source src="https://www.soundjay.com/misc/sounds/magic-chime-02.mp3" type="audio/mpeg">
-          <source src="https://pixabay.com/music/video-games-retro-arcade-124735/" type="audio/mpeg">
-          <!-- 대체 게임 OST 스타일 음악 -->
-          <source src="https://freesound.org/data/previews/316/316847_5365442-lq.mp3" type="audio/mpeg">
+        
+        <!-- 음악 컨트롤 버튼들 -->
+        <div style="display: flex; gap: 8px; justify-content: center; align-items: center; margin-bottom: 12px;">
+          <button class="btn ghost" id="prevTrack" title="이전곡">⏮️</button>
+          <button class="btn" id="playPauseBtn" title="재생/일시정지">▶️</button>
+          <button class="btn ghost" id="stopBtn" title="정지">⏹️</button>
+          <button class="btn ghost" id="nextTrack" title="다음곡">⏭️</button>
+        </div>
+        
+        <!-- 추가 컨트롤 -->
+        <div style="display: flex; gap: 8px; justify-content: center; align-items: center;">
+          <button class="btn ghost" id="shuffleBtn" title="셔플">🔀</button>
+          <button class="btn ghost" id="repeatBtn" title="반복">🔁</button>
+          <button class="btn ghost" id="volumeBtn" title="볼륨">🔊</button>
+        </div>
+        
+        <audio id="backgroundMusic">
+          <source id="currentSource" src="" type="audio/mpeg">
         </audio>
-        <p style="font-size: 12px; color: var(--muted); margin-top: 8px;">
-          🎮 레트로 게임 스타일 BGM
-        </p>
       </div>
     </section>
 
@@ -408,10 +439,11 @@
     <section id="educational-games">
       <h2>🧠 학습 도구</h2>
       <div class="grid">
-        <!-- 미니 퀴즈 -->
+        <!-- 세계역사 퀴즈 -->
         <div class="card">
-          <h3>💡 퀴즈</h3>
+          <h3>🏛️ 세계역사 퀴즈</h3>
           <div id="quizArea">
+            <div id="quizCategory" style="font-size: 14px; color: var(--muted); margin-bottom: 8px; text-align: center;">고대사</div>
             <div id="question" style="font-size: 18px; margin-bottom: 12px;">퀴즈를 시작해보세요!</div>
             <div id="quizOptions" style="display: grid; gap: 8px; margin-bottom: 12px;"></div>
             <button class="btn" id="startQuiz">퀴즈 시작</button>
@@ -423,7 +455,7 @@
         <div class="card">
           <h3>🌐 영어</h3>
           <div id="vocabArea">
-            <div id="wordDisplay" style="font-size: 24px; text-align: center; margin: 12px 0; color: var(--accent);">apple</div>
+            <div id="wordDisplay" style="font-size: 24px; text-align: center; margin: 12px 0; color: var(--accent);">beautiful</div>
             <input type="text" id="wordInput" placeholder="한국어 뜻을 입력하세요" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); font-family: inherit;">
             <button class="btn" id="checkWord">확인</button>
             <button class="btn ghost" id="nextWord">다음 단어</button>
@@ -431,11 +463,13 @@
           </div>
         </div>
 
-        <!-- 구구단 연습 -->
+        <!-- 중학 수학 -->
         <div class="card">
           <h3>🔢 수학</h3>
           <div id="mathArea">
-            <div id="mathProblem" style="font-size: 20px; text-align: center; margin: 12px 0;">2 × 3 = ?</div>
+            <div id="mathType" style="font-size: 14px; text-align: center; color: var(--muted); margin-bottom: 8px;">일차방정식</div>
+            <div id="mathProblem" style="font-size: 20px; text-align: center; margin: 12px 0;">2x + 5 = 11</div>
+            <div id="mathQuestion" style="font-size: 16px; text-align: center; margin-bottom: 8px; color: var(--accent);">x = ?</div>
             <input type="number" id="mathAnswer" placeholder="답을 입력하세요" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); font-family: inherit;">
             <button class="btn" id="checkMath">확인</button>
             <button class="btn ghost" id="nextMath">다음 문제</button>
@@ -666,27 +700,315 @@
     }
     document.getElementById('partyBtn').addEventListener('click', ()=>launchConfetti());
 
-    // 배경음악 시스템
-    const musicToggle = document.getElementById('musicToggle');
+    // 음악 플레이어 시스템
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const prevTrack = document.getElementById('prevTrack');
+    const nextTrack = document.getElementById('nextTrack');
+    const shuffleBtn = document.getElementById('shuffleBtn');
+    const repeatBtn = document.getElementById('repeatBtn');
+    const volumeBtn = document.getElementById('volumeBtn');
     const musicStatus = document.getElementById('musicStatus');
+    const currentTrackName = document.getElementById('currentTrackName');
+    const trackNumber = document.getElementById('trackNumber');
     const backgroundMusic = document.getElementById('backgroundMusic');
-    let musicPlaying = false;
+    const currentSource = document.getElementById('currentSource');
     
-    musicToggle.addEventListener('click', () => {
-      if (musicPlaying) {
-        backgroundMusic.pause();
-        musicToggle.textContent = '🎵 음악 재생';
-        musicStatus.textContent = '음악이 꺼져있어요';
-        musicPlaying = false;
-      } else {
-        backgroundMusic.play().catch(() => {
-          musicStatus.textContent = '브라우저에서 음악 재생이 차단되었어요';
+    let isPlaying = false;
+    let isPaused = false;
+    let currentTrackIndex = 0;
+    let isShuffleMode = false;
+    let repeatMode = 0; // 0: 반복없음, 1: 전체반복, 2: 한곡반복
+    let volume = 0.7;
+    
+    // 음악 플레이리스트
+    const musicPlaylist = [
+      {
+        name: 'Happy Rock',
+        url: 'https://www.bensound.com/bensound-music/bensound-happyrock.mp3'
+      },
+      {
+        name: 'Bensound - Energy',
+        url: 'https://www.bensound.com/bensound-music/bensound-energy.mp3'
+      },
+      {
+        name: 'Bensound - Jazzy Frenchy',
+        url: 'https://www.bensound.com/bensound-music/bensound-jazzyfrenchy.mp3'
+      },
+      {
+        name: 'Bensound - November',
+        url: 'https://www.bensound.com/bensound-music/bensound-november.mp3'
+      },
+      {
+        name: 'Bensound - Going Higher',
+        url: 'https://www.bensound.com/bensound-music/bensound-goinghigher.mp3'
+      }
+    ];
+    
+    // 초기 설정
+    backgroundMusic.volume = volume;
+    
+    // UI 업데이트
+    function updateUI() {
+      const track = musicPlaylist[currentTrackIndex];
+      currentTrackName.textContent = `♪ ${track.name}`;
+      trackNumber.textContent = `${currentTrackIndex + 1} / ${musicPlaylist.length}`;
+      
+      // 버튼 상태 업데이트
+      playPauseBtn.textContent = isPlaying ? '⏸️' : '▶️';
+      playPauseBtn.title = isPlaying ? '일시정지' : '재생';
+      
+      // 셔플/반복 버튼 상태
+      shuffleBtn.style.opacity = isShuffleMode ? '1' : '0.5';
+      
+      const repeatIcons = ['🔁', '🔂', '🔂'];
+      repeatBtn.textContent = repeatIcons[repeatMode];
+      repeatBtn.style.opacity = repeatMode > 0 ? '1' : '0.5';
+    }
+    
+    // 트랙 로드
+    async function loadTrack(index) {
+      try {
+        currentTrackIndex = index;
+        const track = musicPlaylist[currentTrackIndex];
+        
+        console.log('트랙 로딩:', track.name, track.url);
+        musicStatus.textContent = '음악을 불러오는 중...';
+        
+        currentSource.src = track.url;
+        backgroundMusic.load();
+        
+        updateUI();
+        
+        // 로딩 완료 대기
+        await new Promise((resolve, reject) => {
+          const timeout = setTimeout(() => {
+            reject(new Error('로딩 타임아웃'));
+          }, 15000);
+          
+          const onCanPlay = () => {
+            clearTimeout(timeout);
+            backgroundMusic.removeEventListener('canplaythrough', onCanPlay);
+            backgroundMusic.removeEventListener('error', onError);
+            resolve();
+          };
+          
+          const onError = (e) => {
+            clearTimeout(timeout);
+            backgroundMusic.removeEventListener('canplaythrough', onCanPlay);
+            backgroundMusic.removeEventListener('error', onError);
+            reject(e);
+          };
+          
+          backgroundMusic.addEventListener('canplaythrough', onCanPlay);
+          backgroundMusic.addEventListener('error', onError);
         });
-        musicToggle.textContent = '🔇 음악 정지';
-        musicStatus.textContent = '음악이 재생중이에요 🎶';
-        musicPlaying = true;
+        
+        musicStatus.textContent = '재생 준비 완료';
+        return true;
+        
+      } catch (error) {
+        console.error('트랙 로딩 실패:', error);
+        musicStatus.textContent = '음악을 불러올 수 없습니다';
+        return false;
+      }
+    }
+    
+    // 다음 트랙 인덱스 계산
+    function getNextTrackIndex() {
+      if (isShuffleMode) {
+        let nextIndex;
+        do {
+          nextIndex = Math.floor(Math.random() * musicPlaylist.length);
+        } while (nextIndex === currentTrackIndex && musicPlaylist.length > 1);
+        return nextIndex;
+      } else {
+        return (currentTrackIndex + 1) % musicPlaylist.length;
+      }
+    }
+    
+    // 이전 트랙 인덱스 계산
+    function getPrevTrackIndex() {
+      if (isShuffleMode) {
+        return getNextTrackIndex();
+      } else {
+        return currentTrackIndex === 0 ? musicPlaylist.length - 1 : currentTrackIndex - 1;
+      }
+    }
+    
+    // 음악 재생
+    async function playMusic() {
+      try {
+        if (!currentSource.src) {
+          await loadTrack(0);
+        }
+        
+        musicStatus.textContent = '음악 재생 중...';
+        await backgroundMusic.play();
+        
+        isPlaying = true;
+        isPaused = false;
+        musicStatus.textContent = '재생 중 🎶';
+        updateUI();
+        createParticle('🎵');
+        
+      } catch (error) {
+        console.error('재생 실패:', error);
+        if (error.name === 'NotAllowedError') {
+          musicStatus.textContent = '브라우저에서 자동재생이 차단되었습니다. 다시 클릭해주세요!';
+        } else {
+          musicStatus.textContent = '음악 재생에 실패했습니다';
+        }
+        isPlaying = false;
+        updateUI();
+      }
+    }
+    
+    // 음악 일시정지
+    function pauseMusic() {
+      backgroundMusic.pause();
+      isPlaying = false;
+      isPaused = true;
+      musicStatus.textContent = '일시정지';
+      updateUI();
+    }
+    
+    // 음악 정지
+    function stopMusic() {
+      backgroundMusic.pause();
+      backgroundMusic.currentTime = 0;
+      isPlaying = false;
+      isPaused = false;
+      musicStatus.textContent = '정지됨';
+      updateUI();
+    }
+    
+    // 다음 곡
+    async function nextTrackFunc() {
+      const nextIndex = getNextTrackIndex();
+      const wasPlaying = isPlaying;
+      
+      try {
+        await loadTrack(nextIndex);
+        if (wasPlaying) {
+          await playMusic();
+        }
+        createParticle('⏭️');
+      } catch (error) {
+        console.error('다음 곡 실패:', error);
+        musicStatus.textContent = '다음 곡을 불러올 수 없습니다';
+      }
+    }
+    
+    // 이전 곡
+    async function prevTrackFunc() {
+      const prevIndex = getPrevTrackIndex();
+      const wasPlaying = isPlaying;
+      
+      try {
+        await loadTrack(prevIndex);
+        if (wasPlaying) {
+          await playMusic();
+        }
+        createParticle('⏮️');
+      } catch (error) {
+        console.error('이전 곡 실패:', error);
+        musicStatus.textContent = '이전 곡을 불러올 수 없습니다';
+      }
+    }
+    
+    // 이벤트 리스너들
+    
+    // 재생/일시정지 버튼
+    playPauseBtn.addEventListener('click', async () => {
+      if (isPlaying) {
+        pauseMusic();
+      } else {
+        await playMusic();
       }
     });
+    
+    // 정지 버튼
+    stopBtn.addEventListener('click', () => {
+      stopMusic();
+    });
+    
+    // 다음곡 버튼
+    nextTrack.addEventListener('click', () => {
+      nextTrackFunc();
+    });
+    
+    // 이전곡 버튼
+    prevTrack.addEventListener('click', () => {
+      prevTrackFunc();
+    });
+    
+    // 셔플 버튼
+    shuffleBtn.addEventListener('click', () => {
+      isShuffleMode = !isShuffleMode;
+      updateUI();
+      createParticle('🔀');
+      musicStatus.textContent = isShuffleMode ? '셔플 모드 켜짐' : '셔플 모드 꺼짐';
+    });
+    
+    // 반복 버튼 (없음 → 전체반복 → 한곡반복 → 없음)
+    repeatBtn.addEventListener('click', () => {
+      repeatMode = (repeatMode + 1) % 3;
+      updateUI();
+      createParticle('🔁');
+      const modes = ['반복 없음', '전체 반복', '한 곡 반복'];
+      musicStatus.textContent = modes[repeatMode];
+    });
+    
+    // 볼륨 버튼 (토글)
+    volumeBtn.addEventListener('click', () => {
+      if (backgroundMusic.volume > 0) {
+        backgroundMusic.volume = 0;
+        volumeBtn.textContent = '🔇';
+        musicStatus.textContent = '음소거';
+      } else {
+        backgroundMusic.volume = volume;
+        volumeBtn.textContent = '🔊';
+        musicStatus.textContent = '음소거 해제';
+      }
+      createParticle('🔊');
+    });
+    
+    // 오디오 이벤트들
+    backgroundMusic.addEventListener('ended', async () => {
+      if (repeatMode === 2) {
+        // 한 곡 반복
+        backgroundMusic.currentTime = 0;
+        await backgroundMusic.play();
+      } else if (repeatMode === 1 || currentTrackIndex < musicPlaylist.length - 1) {
+        // 전체 반복이거나 마지막 곡이 아닌 경우
+        await nextTrackFunc();
+      } else {
+        // 재생 목록 끝
+        stopMusic();
+        musicStatus.textContent = '재생 목록 끝';
+      }
+    });
+    
+    backgroundMusic.addEventListener('error', (e) => {
+      console.error('음악 재생 오류:', e);
+      musicStatus.textContent = '음악 파일 오류가 발생했습니다';
+      isPlaying = false;
+      updateUI();
+    });
+    
+    backgroundMusic.addEventListener('loadstart', () => {
+      musicStatus.textContent = '음악 로딩 중...';
+    });
+    
+    backgroundMusic.addEventListener('canplay', () => {
+      if (!isPlaying && !isPaused) {
+        musicStatus.textContent = '재생 준비 완료';
+      }
+    });
+    
+    // 초기화
+    updateUI();
 
     // 달력 시스템
     let currentDate = new Date();
@@ -903,131 +1225,731 @@
     
     loadGuestMessages();
 
-    // 퀴즈 시스템
-    const quizzes = [
-      {q: '한국의 수도는?', options: ['서울', '부산', '대구', '인천'], answer: 0},
-      {q: '태양계에서 가장 큰 행성은?', options: ['지구', '화성', '목성', '토성'], answer: 2},
-      {q: '물의 끓는점은?', options: ['90도', '100도', '110도', '120도'], answer: 1},
-      {q: '무지개의 색깔 개수는?', options: ['5개', '6개', '7개', '8개'], answer: 2}
+    // 세계역사 퀴즈 시스템
+    const historyQuizzes = [
+      // 고대사
+      {
+        category: '고대사',
+        q: '고대 이집트에서 파라오의 무덤으로 사용된 건축물은?',
+        options: ['신전', '피라미드', '궁전', '성벽'],
+        answer: 1,
+        explanation: '피라미드는 고대 이집트 파라오들의 무덤으로 건설되었습니다.'
+      },
+      {
+        category: '고대사',
+        q: '고대 그리스에서 민주주의가 시작된 도시국가는?',
+        options: ['스파르타', '아테네', '테베', '코린트'],
+        answer: 1,
+        explanation: '아테네에서 페리클레스 시대에 민주주의가 발달했습니다.'
+      },
+      {
+        category: '고대사',
+        q: '로마 공화정이 멸망하고 제정이 시작된 것은 누구 때문인가?',
+        options: ['율리우스 카이사르', '아우구스투스', '네로', '트라야누스'],
+        answer: 1,
+        explanation: '아우구스투스(옥타비아누스)가 초대 황제가 되며 로마 제정이 시작되었습니다.'
+      },
+      // 중세사
+      {
+        category: '중세사',
+        q: '서로마 제국이 멸망한 연도는?',
+        options: ['376년', '410년', '476년', '568년'],
+        answer: 2,
+        explanation: '476년 게르만족 오도아케르가 서로마 마지막 황제를 폐위시켰습니다.'
+      },
+      {
+        category: '중세사',
+        q: '십자군 전쟁의 주된 목적은?',
+        options: ['영토 확장', '성지 회복', '무역로 확보', '종교 개혁'],
+        answer: 1,
+        explanation: '예루살렘 등 성지를 이슬람으로부터 되찾는 것이 주된 목적이었습니다.'
+      },
+      {
+        category: '중세사',
+        q: '흑사병(페스트)이 유럽을 휩쓴 시기는?',
+        options: ['12세기', '13세기', '14세기', '15세기'],
+        answer: 2,
+        explanation: '14세기(1347-1353) 유럽 인구의 1/3이 흑사병으로 사망했습니다.'
+      },
+      // 근세사
+      {
+        category: '근세사',
+        q: '르네상스가 시작된 나라는?',
+        options: ['프랑스', '독일', '이탈리아', '영국'],
+        answer: 2,
+        explanation: '14-15세기 이탈리아에서 르네상스가 시작되었습니다.'
+      },
+      {
+        category: '근세사',
+        q: '아메리카 대륙을 발견한 탐험가는?',
+        options: ['바스코 다 가마', '콜럼버스', '마젤란', '코르테스'],
+        answer: 1,
+        explanation: '1492년 콜럼버스가 아메리카 대륙에 도달했습니다.'
+      },
+      {
+        category: '근세사',
+        q: '종교개혁을 시작한 인물은?',
+        options: ['칼뱅', '루터', '츠빙글리', '녹스'],
+        answer: 1,
+        explanation: '1517년 마르틴 루터가 95개조 반박문으로 종교개혁을 시작했습니다.'
+      },
+      // 근현대사
+      {
+        category: '근현대사',
+        q: '프랑스 대혁명이 일어난 연도는?',
+        options: ['1789년', '1799년', '1804년', '1815년'],
+        answer: 0,
+        explanation: '1789년 바스티유 감옥 습격으로 프랑스 대혁명이 시작되었습니다.'
+      },
+      {
+        category: '근현대사',
+        q: '제1차 세계대전의 직접적 원인이 된 사건은?',
+        options: ['탄노베르크 대전', '사라예보 사건', '파쇼다 사건', '모로코 사건'],
+        answer: 1,
+        explanation: '1914년 사라예보에서 오스트리아 황태자 부부가 암살당한 사건입니다.'
+      },
+      {
+        category: '근현대사',
+        q: '베를린 장벽이 무너진 연도는?',
+        options: ['1987년', '1988년', '1989년', '1990년'],
+        answer: 2,
+        explanation: '1989년 11월 9일 베를린 장벽이 붕괴되어 독일 통일의 계기가 되었습니다.'
+      },
+      // 추가 고대사
+      {
+        category: '고대사',
+        q: '페르시아 전쟁에서 그리스가 승리한 주요 전투는?',
+        options: ['마라톤 전투', '살라미스 해전', '플라타이아 전투', '모든 것'],
+        answer: 3,
+        explanation: '마라톤, 살라미스, 플라타이아 전투 모두에서 그리스가 승리했습니다.'
+      },
+      {
+        category: '고대사',
+        q: '진시황이 통일한 중국의 왕조는?',
+        options: ['한', '진', '송', '당'],
+        answer: 1,
+        explanation: '기원전 221년 진시황이 진나라로 중국을 최초 통일했습니다.'
+      },
+      {
+        category: '고대사',
+        q: '알렉산드로스 대왕의 스승은?',
+        options: ['플라톤', '아리스토텔레스', '소크라테스', '헤라클레이토스'],
+        answer: 1,
+        explanation: '아리스토텔레스가 알렉산드로스 대왕의 개인 교사였습니다.'
+      },
+      {
+        category: '고대사',
+        q: '한니발이 활약한 전쟁은?',
+        options: ['페르시아 전쟁', '펠로폰네소스 전쟁', '포에니 전쟁', '갈리아 전쟁'],
+        answer: 2,
+        explanation: '한니발은 제2차 포에니 전쟁에서 코끼리 부대로 알프스를 넘었습니다.'
+      },
+      // 추가 중세사
+      {
+        category: '중세사',
+        q: '샤를마뉴가 대관식을 받은 연도는?',
+        options: ['768년', '800년', '814년', '843년'],
+        answer: 1,
+        explanation: '800년 크리스마스에 교황으로부터 서로마 황제 관을 받았습니다.'
+      },
+      {
+        category: '중세사',
+        q: '비잔틴 제국의 수도는?',
+        options: ['로마', '콘스탄티노플', '테살로니키', '안티오키아'],
+        answer: 1,
+        explanation: '콘스탄티노플(현 이스탄불)이 비잔틴 제국의 수도였습니다.'
+      },
+      {
+        category: '중세사',
+        q: '백년전쟁에서 활약한 프랑스 여성은?',
+        options: ['마리 앙투아네트', '잔 다르크', '마담 퐁파두르', '클레오파트라'],
+        answer: 1,
+        explanation: '잔 다르크는 백년전쟁에서 프랑스를 승리로 이끈 영웅입니다.'
+      },
+      {
+        category: '중세사',
+        q: '이슬람 세력이 이베리아 반도를 점령한 시기는?',
+        options: ['6세기', '7세기', '8세기', '9세기'],
+        answer: 2,
+        explanation: '711년 우마이야 왕조가 이베리아 반도를 정복했습니다.'
+      },
+      // 추가 근세사
+      {
+        category: '근세사',
+        q: '구텐베르크가 발명한 것은?',
+        options: ['나침반', '화약', '인쇄술', '망원경'],
+        answer: 2,
+        explanation: '15세기 구텐베르크가 금속활자 인쇄술을 발명했습니다.'
+      },
+      {
+        category: '근세사',
+        q: '30년 전쟁을 종료시킨 조약은?',
+        options: ['웨스트팔리아 조약', '위트레흐트 조약', '아우크스부르크 조약', '베르됭 조약'],
+        answer: 0,
+        explanation: '1648년 웨스트팔리아 조약으로 30년 전쟁이 끝났습니다.'
+      },
+      {
+        category: '근세사',
+        q: '태양왕이라 불린 프랑스 왕은?',
+        options: ['루이 13세', '루이 14세', '루이 15세', '루이 16세'],
+        answer: 1,
+        explanation: '루이 14세는 절대왕정의 전성기를 이끈 태양왕입니다.'
+      },
+      {
+        category: '근세사',
+        q: '영국에서 명예혁명이 일어난 연도는?',
+        options: ['1688년', '1689년', '1690년', '1691년'],
+        answer: 0,
+        explanation: '1688년 명예혁명으로 윌리엄 3세가 왕위에 올랐습니다.'
+      },
+      // 추가 근현대사
+      {
+        category: '근현대사',
+        q: '나폴레옹이 유배된 섬은?',
+        options: ['엘바 섬', '세인트헬레나 섬', '코르시카 섬', '모든 것'],
+        answer: 3,
+        explanation: '엘바 섬에 1차 유배, 세인트헬레나 섬에 2차 유배되었습니다.'
+      },
+      {
+        category: '근현대사',
+        q: '미국 남북전쟁의 원인은?',
+        options: ['영토 문제', '노예제 문제', '종교 문제', '경제 문제'],
+        answer: 1,
+        explanation: '노예제 존폐를 둘러싼 대립이 남북전쟁의 주요 원인이었습니다.'
+      },
+      {
+        category: '근현대사',
+        q: '러시아 혁명이 일어난 연도는?',
+        options: ['1905년', '1917년', '1918년', '1922년'],
+        answer: 1,
+        explanation: '1917년 2월 혁명과 10월 혁명으로 제정 러시아가 무너졌습니다.'
+      },
+      {
+        category: '근현대사',
+        q: '제2차 세계대전이 끝난 연도는?',
+        options: ['1944년', '1945년', '1946년', '1947년'],
+        answer: 1,
+        explanation: '1945년 일본이 항복하면서 제2차 세계대전이 종료되었습니다.'
+      },
+      {
+        category: '근현대사',
+        q: '냉전의 상징적 사건인 베를린 봉쇄는?',
+        options: ['1947년', '1948년', '1949년', '1950년'],
+        answer: 1,
+        explanation: '1948-1949년 소련이 서베를린을 봉쇄한 사건입니다.'
+      }
     ];
     
-    let currentQuiz = 0;
-    let quizScore = 0;
+    let currentHistoryQuiz = null;
+    let historyQuizScore = storage.get('historyScore') || 0;
+    let totalHistoryQuestions = storage.get('totalHistoryQuestions') || 0;
     
-    function showQuiz() {
-      const quiz = quizzes[currentQuiz];
-      document.getElementById('question').textContent = quiz.q;
+    function getRandomHistoryQuiz() {
+      const randomIndex = Math.floor(Math.random() * historyQuizzes.length);
+      return historyQuizzes[randomIndex];
+    }
+    
+    function showHistoryQuiz() {
+      currentHistoryQuiz = getRandomHistoryQuiz();
+      document.getElementById('quizCategory').textContent = currentHistoryQuiz.category;
+      document.getElementById('question').textContent = currentHistoryQuiz.q;
       const optionsEl = document.getElementById('quizOptions');
       optionsEl.innerHTML = '';
       
-      quiz.options.forEach((option, i) => {
+      currentHistoryQuiz.options.forEach((option, i) => {
         const btn = document.createElement('button');
         btn.className = 'quiz-option';
         btn.textContent = option;
-        btn.addEventListener('click', () => checkQuizAnswer(i));
+        btn.addEventListener('click', () => checkHistoryAnswer(i));
         optionsEl.appendChild(btn);
       });
     }
     
-    function checkQuizAnswer(selected) {
-      const quiz = quizzes[currentQuiz];
-      const options = document.querySelectorAll('.quiz-option');
+    function checkHistoryAnswer(selected) {
+      if (!currentHistoryQuiz) return;
       
+      const options = document.querySelectorAll('.quiz-option');
+      const isCorrect = selected === currentHistoryQuiz.answer;
+      
+      // 버튼 색상 변경
       options.forEach((opt, i) => {
-        if (i === quiz.answer) opt.classList.add('correct');
-        else if (i === selected) opt.classList.add('wrong');
+        opt.style.pointerEvents = 'none'; // 클릭 비활성화
+        if (i === currentHistoryQuiz.answer) {
+          opt.classList.add('correct');
+        } else if (i === selected && !isCorrect) {
+          opt.classList.add('wrong');
+        }
       });
       
-      if (selected === quiz.answer) {
-        quizScore++;
-        createParticle('🎉');
+      // 점수 업데이트
+      totalHistoryQuestions++;
+      if (isCorrect) {
+        historyQuizScore++;
+        createParticle('🏛️');
       }
       
+      storage.set('historyScore', historyQuizScore);
+      storage.set('totalHistoryQuestions', totalHistoryQuestions);
+      
+      // 결과 표시
+      const scoreEl = document.getElementById('quizScore');
+      const accuracy = Math.round((historyQuizScore / totalHistoryQuestions) * 100);
+      scoreEl.innerHTML = `
+        ${isCorrect ? '정답!' : '오답'} 🎯 정답률: ${accuracy}%<br>
+        <small style="color: var(--muted);">${currentHistoryQuiz.explanation}</small>
+      `;
+      
+      // 2.5초 후 다음 문제
       setTimeout(() => {
-        currentQuiz = (currentQuiz + 1) % quizzes.length;
-        if (currentQuiz === 0) {
-          document.getElementById('quizScore').textContent = `점수: ${quizScore}/${quizzes.length}`;
-          quizScore = 0;
-        }
-        showQuiz();
-      }, 1500);
+        options.forEach(opt => {
+          opt.classList.remove('correct', 'wrong');
+          opt.style.pointerEvents = 'auto';
+        });
+        showHistoryQuiz();
+      }, 2500);
     }
     
-    document.getElementById('startQuiz').addEventListener('click', () => {
-      currentQuiz = 0;
-      quizScore = 0;
-      showQuiz();
-    });
+    document.getElementById('startQuiz').addEventListener('click', showHistoryQuiz);
 
-    // 영어 단어장
+    // 중학생 영어 단어장
     const vocabulary = [
-      {word: 'apple', meaning: '사과'},
-      {word: 'book', meaning: '책'},
-      {word: 'car', meaning: '자동차'},
-      {word: 'dog', meaning: '개'},
-      {word: 'elephant', meaning: '코끼리'},
-      {word: 'fish', meaning: '물고기'},
-      {word: 'house', meaning: '집'},
-      {word: 'moon', meaning: '달'}
+      {word: 'beautiful', meaning: '아름다운'},
+      {word: 'important', meaning: '중요한'},
+      {word: 'difficult', meaning: '어려운'},
+      {word: 'interesting', meaning: '흥미로운'},
+      {word: 'different', meaning: '다른'},
+      {word: 'popular', meaning: '인기있는'},
+      {word: 'successful', meaning: '성공한'},
+      {word: 'comfortable', meaning: '편안한'},
+      {word: 'dangerous', meaning: '위험한'},
+      {word: 'excited', meaning: '신난'},
+      {word: 'surprised', meaning: '놀란'},
+      {word: 'worried', meaning: '걱정하는'},
+      {word: 'environment', meaning: '환경'},
+      {word: 'experience', meaning: '경험'},
+      {word: 'culture', meaning: '문화'},
+      {word: 'society', meaning: '사회'},
+      {word: 'technology', meaning: '기술'},
+      {word: 'science', meaning: '과학'},
+      {word: 'nature', meaning: '자연'},
+      {word: 'future', meaning: '미래'},
+      {word: 'achieve', meaning: '달성하다'},
+      {word: 'improve', meaning: '향상시키다'},
+      {word: 'develop', meaning: '발전시키다'},
+      {word: 'discover', meaning: '발견하다'},
+      {word: 'organize', meaning: '조직하다'},
+      {word: 'communicate', meaning: '소통하다'},
+      {word: 'participate', meaning: '참여하다'},
+      {word: 'recommend', meaning: '추천하다'},
+      {word: 'relationship', meaning: '관계'},
+      {word: 'opportunity', meaning: '기회'},
+      {word: 'knowledge', meaning: '지식'},
+      {word: 'challenge', meaning: '도전'},
+      {word: 'confidence', meaning: '자신감'},
+      {word: 'responsibility', meaning: '책임'},
+      {word: 'creativity', meaning: '창의성'},
+      {word: 'independence', meaning: '독립'},
+      {word: 'government', meaning: '정부'},
+      {word: 'education', meaning: '교육'},
+      {word: 'democracy', meaning: '민주주의'},
+      {word: 'revolution', meaning: '혁명'},
+      {word: 'constitution', meaning: '헌법'},
+      {word: 'population', meaning: '인구'},
+      {word: 'transportation', meaning: '교통수단'},
+      {word: 'communication', meaning: '의사소통'},
+      {word: 'information', meaning: '정보'},
+      {word: 'entertainment', meaning: '오락'},
+      {word: 'competition', meaning: '경쟁'},
+      {word: 'cooperation', meaning: '협력'},
+      {word: 'celebration', meaning: '축하'},
+      {word: 'generation', meaning: '세대'},
+      {word: 'expectation', meaning: '기대'},
+      {word: 'explanation', meaning: '설명'},
+      {word: 'imagination', meaning: '상상력'},
+      {word: 'determination', meaning: '결심'},
+      {word: 'preparation', meaning: '준비'},
+      {word: 'protection', meaning: '보호'},
+      {word: 'direction', meaning: '방향'},
+      {word: 'connection', meaning: '연결'},
+      {word: 'collection', meaning: '수집'},
+      {word: 'reflection', meaning: '반성'},
+      {word: 'permission', meaning: '허가'},
+      {word: 'decision', meaning: '결정'},
+      {word: 'discussion', meaning: '토론'},
+      {word: 'expression', meaning: '표현'},
+      {word: 'impression', meaning: '인상'},
+      {word: 'profession', meaning: '직업'},
+      {word: 'possession', meaning: '소유물'},
+      {word: 'extension', meaning: '연장'},
+      {word: 'attention', meaning: '주의'},
+      {word: 'intention', meaning: '의도'},
+      {word: 'invention', meaning: '발명'},
+      {word: 'prevention', meaning: '예방'},
+      {word: 'convention', meaning: '관습'},
+      {word: 'tradition', meaning: '전통'},
+      {word: 'condition', meaning: '조건'},
+      {word: 'position', meaning: '위치'},
+      {word: 'situation', meaning: '상황'},
+      {word: 'nation', meaning: '국가'},
+      {word: 'vacation', meaning: '휴가'},
+      {word: 'station', meaning: '역'},
+      {word: 'operation', meaning: '수술'},
+      {word: 'creation', meaning: '창조'},
+      {word: 'pollution', meaning: '오염'},
+      {word: 'solution', meaning: '해결책'}
     ];
     
-    let currentWordIndex = 0;
+    let currentWord = null;
+    let vocabScore = storage.get('vocabScore') || 0;
     
-    function showWord() {
-      document.getElementById('wordDisplay').textContent = vocabulary[currentWordIndex].word;
-      document.getElementById('wordInput').value = '';
-      document.getElementById('vocabResult').textContent = '';
+    function getRandomWord() {
+      const randomIndex = Math.floor(Math.random() * vocabulary.length);
+      return vocabulary[randomIndex];
     }
     
-    document.getElementById('checkWord').addEventListener('click', () => {
+    function showWord() {
+      currentWord = getRandomWord();
+      document.getElementById('wordDisplay').textContent = currentWord.word;
+      document.getElementById('wordInput').value = '';
+      document.getElementById('vocabResult').textContent = '';
+      document.getElementById('wordInput').focus();
+    }
+    
+    function checkAnswer() {
+      if (!currentWord) return;
+      
       const input = document.getElementById('wordInput').value.trim();
-      const correct = vocabulary[currentWordIndex].meaning;
+      const correct = currentWord.meaning;
       const result = document.getElementById('vocabResult');
       
       if (input === correct) {
-        result.textContent = '정답! 🎉';
+        vocabScore++;
+        storage.set('vocabScore', vocabScore);
+        result.textContent = `정답! 🎉 (총 ${vocabScore}개 맞춤)`;
         result.style.color = 'var(--accent)';
         createParticle('📚');
+        
+        // 2초 후 자동으로 다음 단어
+        setTimeout(() => {
+          showWord();
+        }, 2000);
       } else {
         result.textContent = `틀렸어요. 정답은 "${correct}"입니다.`;
         result.style.color = '#ff6b6b';
       }
-    });
-    
-    document.getElementById('nextWord').addEventListener('click', () => {
-      currentWordIndex = (currentWordIndex + 1) % vocabulary.length;
-      showWord();
-    });
-    
-    showWord();
-
-    // 구구단 연습
-    let mathA, mathB;
-    
-    function generateMathProblem() {
-      mathA = Math.floor(Math.random() * 9) + 1;
-      mathB = Math.floor(Math.random() * 9) + 1;
-      document.getElementById('mathProblem').textContent = `${mathA} × ${mathB} = ?`;
-      document.getElementById('mathAnswer').value = '';
-      document.getElementById('mathResult').textContent = '';
     }
     
-    document.getElementById('checkMath').addEventListener('click', () => {
-      const answer = parseInt(document.getElementById('mathAnswer').value);
-      const correct = mathA * mathB;
+    document.getElementById('checkWord').addEventListener('click', checkAnswer);
+    
+    document.getElementById('wordInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        checkAnswer();
+      }
+    });
+    
+    document.getElementById('nextWord').addEventListener('click', showWord);
+    
+    // 초기 단어 표시
+    showWord();
+
+    // 중학 수학 문제
+    const mathProblems = [
+      // 일차방정식
+      {
+        type: '일차방정식',
+        problem: '2x + 5 = 11',
+        question: 'x = ?',
+        answer: 3,
+        solution: '2x = 11 - 5 = 6, x = 3'
+      },
+      {
+        type: '일차방정식',
+        problem: '3x - 7 = 14',
+        question: 'x = ?',
+        answer: 7,
+        solution: '3x = 14 + 7 = 21, x = 7'
+      },
+      {
+        type: '일차방정식',
+        problem: '4x + 8 = 20',
+        question: 'x = ?',
+        answer: 3,
+        solution: '4x = 20 - 8 = 12, x = 3'
+      },
+      // 연립방정식
+      {
+        type: '연립방정식',
+        problem: 'x + y = 7, x - y = 1',
+        question: 'x = ?',
+        answer: 4,
+        solution: '두 식을 더하면 2x = 8, x = 4'
+      },
+      {
+        type: '연립방정식',
+        problem: '2x + y = 10, x - y = 2',
+        question: 'x = ?',
+        answer: 4,
+        solution: '두 식을 더하면 3x = 12, x = 4'
+      },
+      // 이차방정식
+      {
+        type: '이차방정식',
+        problem: 'x² - 5x + 6 = 0',
+        question: 'x = ? (작은 값)',
+        answer: 2,
+        solution: '(x-2)(x-3) = 0, x = 2 또는 3'
+      },
+      {
+        type: '이차방정식',
+        problem: 'x² - 4 = 0',
+        question: 'x = ? (양수)',
+        answer: 2,
+        solution: 'x² = 4, x = ±2'
+      },
+      // 부등식
+      {
+        type: '부등식',
+        problem: '2x + 3 > 9',
+        question: 'x > ? (최소값)',
+        answer: 3,
+        solution: '2x > 6, x > 3'
+      },
+      {
+        type: '부등식',
+        problem: '3x - 5 ≤ 10',
+        question: 'x ≤ ? (최대값)',
+        answer: 5,
+        solution: '3x ≤ 15, x ≤ 5'
+      },
+      // 함수
+      {
+        type: '일차함수',
+        problem: 'y = 2x + 3에서 x = 4일 때',
+        question: 'y = ?',
+        answer: 11,
+        solution: 'y = 2(4) + 3 = 11'
+      },
+      {
+        type: '일차함수',
+        problem: 'y = -3x + 5에서 x = 2일 때',
+        question: 'y = ?',
+        answer: -1,
+        solution: 'y = -3(2) + 5 = -1'
+      },
+      // 기하
+      {
+        type: '기하',
+        problem: '반지름이 5인 원의 넓이',
+        question: '넓이 = ? (π=3)',
+        answer: 75,
+        solution: 'π × 5² = 3 × 25 = 75'
+      },
+      // 추가 일차방정식
+      {
+        type: '일차방정식',
+        problem: '5x - 12 = 3x + 8',
+        question: 'x = ?',
+        answer: 10,
+        solution: '5x - 3x = 8 + 12, 2x = 20, x = 10'
+      },
+      {
+        type: '일차방정식',
+        problem: '3(x + 2) = 15',
+        question: 'x = ?',
+        answer: 3,
+        solution: '3x + 6 = 15, 3x = 9, x = 3'
+      },
+      {
+        type: '일차방정식',
+        problem: '2x/3 + 1 = 5',
+        question: 'x = ?',
+        answer: 6,
+        solution: '2x/3 = 4, 2x = 12, x = 6'
+      },
+      // 추가 연립방정식
+      {
+        type: '연립방정식',
+        problem: '3x + 2y = 12, x - y = 1',
+        question: 'y = ?',
+        answer: 1.5,
+        solution: 'x = y + 1을 첫 번째 식에 대입: 3(y+1) + 2y = 12, y = 1.5'
+      },
+      {
+        type: '연립방정식',
+        problem: 'x + 3y = 11, 2x - y = 3',
+        question: 'x = ?',
+        answer: 4,
+        solution: '두 번째 식에서 y = 2x - 3, 대입하면 x = 4'
+      },
+      // 추가 이차방정식
+      {
+        type: '이차방정식',
+        problem: 'x² + 3x - 10 = 0',
+        question: 'x = ? (양수)',
+        answer: 2,
+        solution: '(x+5)(x-2) = 0, x = -5 또는 2'
+      },
+      {
+        type: '이차방정식',
+        problem: 'x² - 8x + 16 = 0',
+        question: 'x = ?',
+        answer: 4,
+        solution: '(x-4)² = 0, x = 4 (중근)'
+      },
+      {
+        type: '이차방정식',
+        problem: '2x² - 8 = 0',
+        question: 'x = ? (양수)',
+        answer: 2,
+        solution: 'x² = 4, x = ±2'
+      },
+      // 추가 부등식
+      {
+        type: '부등식',
+        problem: '4x - 7 < 5',
+        question: 'x < ?',
+        answer: 3,
+        solution: '4x < 12, x < 3'
+      },
+      {
+        type: '부등식',
+        problem: '-2x + 6 ≥ 0',
+        question: 'x ≤ ?',
+        answer: 3,
+        solution: '-2x ≥ -6, x ≤ 3'
+      },
+      {
+        type: '부등식',
+        problem: '3x + 5 > 2x - 1',
+        question: 'x > ?',
+        answer: -6,
+        solution: '3x - 2x > -1 - 5, x > -6'
+      },
+      // 추가 일차함수
+      {
+        type: '일차함수',
+        problem: 'y = -2x + 7에서 x = 3일 때',
+        question: 'y = ?',
+        answer: 1,
+        solution: 'y = -2(3) + 7 = 1'
+      },
+      {
+        type: '일차함수',
+        problem: 'y = 4x - 1이 x축과 만나는 점',
+        question: 'x = ?',
+        answer: 0.25,
+        solution: '0 = 4x - 1, x = 1/4 = 0.25'
+      },
+      {
+        type: '일차함수',
+        problem: 'y = 3x + 2가 y축과 만나는 점',
+        question: 'y = ?',
+        answer: 2,
+        solution: 'x = 0일 때, y = 3(0) + 2 = 2'
+      },
+      // 추가 기하
+      {
+        type: '기하',
+        problem: '정사각형의 한 변이 6일 때 넓이',
+        question: '넓이 = ?',
+        answer: 36,
+        solution: '6 × 6 = 36'
+      },
+      {
+        type: '기하',
+        problem: '직각삼각형의 밑변 3, 높이 4일 때 넓이',
+        question: '넓이 = ?',
+        answer: 6,
+        solution: '(1/2) × 3 × 4 = 6'
+      },
+      {
+        type: '기하',
+        problem: '직사각형의 가로 8, 세로 5일 때 둘레',
+        question: '둘레 = ?',
+        answer: 26,
+        solution: '2 × (8 + 5) = 26'
+      },
+      {
+        type: '기하',
+        problem: '반지름이 4인 원의 둘레 (π=3)',
+        question: '둘레 = ?',
+        answer: 24,
+        solution: '2 × π × 4 = 2 × 3 × 4 = 24'
+      },
+      // 추가 확률과 통계
+      {
+        type: '확률통계',
+        problem: '주사위를 던져 3이 나올 확률',
+        question: '확률 = ? (분수)',
+        answer: 1/6,
+        solution: '전체 6가지 중 3이 나오는 경우 1가지: 1/6'
+      },
+      {
+        type: '확률통계',
+        problem: '동전 2개를 던져 모두 앞면이 나올 확률',
+        question: '확률 = ? (분수)',
+        answer: 0.25,
+        solution: '전체 4가지 중 앞앞 1가지: 1/4 = 0.25'
+      },
+      {
+        type: '확률통계',
+        problem: '카드 52장 중 하트를 뽑을 확률',
+        question: '확률 = ? (분수)',
+        answer: 0.25,
+        solution: '하트 13장 / 전체 52장 = 1/4 = 0.25'
+      }
+    ];
+    
+    let currentMathProblem = null;
+    let mathScore = storage.get('mathScore') || 0;
+    
+    function generateMathProblem() {
+      const randomIndex = Math.floor(Math.random() * mathProblems.length);
+      currentMathProblem = mathProblems[randomIndex];
+      
+      document.getElementById('mathType').textContent = currentMathProblem.type;
+      document.getElementById('mathProblem').textContent = currentMathProblem.problem;
+      document.getElementById('mathQuestion').textContent = currentMathProblem.question;
+      document.getElementById('mathAnswer').value = '';
+      document.getElementById('mathResult').textContent = '';
+      document.getElementById('mathAnswer').focus();
+    }
+    
+    function checkMathAnswer() {
+      if (!currentMathProblem) return;
+      
+      const answer = parseFloat(document.getElementById('mathAnswer').value);
+      const correct = currentMathProblem.answer;
       const result = document.getElementById('mathResult');
       
       if (answer === correct) {
-        result.textContent = '정답! 🎉';
+        mathScore++;
+        storage.set('mathScore', mathScore);
+        result.innerHTML = `정답! 🎉 (총 ${mathScore}개 맞춤)<br><small style="color: var(--muted);">${currentMathProblem.solution}</small>`;
         result.style.color = 'var(--accent)';
         createParticle('🔢');
+        
+        // 3초 후 자동으로 다음 문제
+        setTimeout(() => {
+          generateMathProblem();
+        }, 3000);
       } else {
-        result.textContent = `틀렸어요. 정답은 ${correct}입니다.`;
+        result.innerHTML = `틀렸어요. 정답은 ${correct}입니다.<br><small style="color: var(--muted);">${currentMathProblem.solution}</small>`;
         result.style.color = '#ff6b6b';
+      }
+    }
+    
+    document.getElementById('checkMath').addEventListener('click', checkMathAnswer);
+    
+    document.getElementById('mathAnswer').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        checkMathAnswer();
       }
     });
     
     document.getElementById('nextMath').addEventListener('click', generateMathProblem);
+    
+    // 초기 문제 생성
     generateMathProblem();
 
     // 타이핑 연습
@@ -1188,7 +2110,120 @@
       wall.appendChild(s);
     }
     palette.addEventListener('click', (e)=>{ const emoji=e.target.getAttribute('data-emoji'); if(emoji) addSticker(emoji, 20+Math.random()*200, 80+Math.random()*200); });
-    document.getElementById('stickerAdd').addEventListener('click', ()=> addSticker('✨', 160+Math.random()*200, 80+Math.random()*200));
+    // 일반 운세 시스템
+    const fortunes = [
+      {
+        emoji: '🌞',
+        title: '활력 충전 운세',
+        text: '오늘은 에너지가 넘치는 하루가 될 것 같습니다! 새로운 도전을 해보는 것은 어떨까요?',
+        score: '★★★★★',
+        type: 'excellent'
+      },
+      {
+        emoji: '💝',
+        title: '인연 만남 운세',
+        text: '소중한 사람과의 만남이나 새로운 인연이 기다리고 있을 수 있어요. 마음을 열고 소통해보세요!',
+        score: '★★★★☆',
+        type: 'good'
+      },
+      {
+        emoji: '🍀',
+        title: '행운의 클over 운세',
+        text: '작은 행운들이 연속으로 찾아올 운세입니다. 평소보다 조금 더 적극적으로 행동해보세요!',
+        score: '★★★★★',
+        type: 'excellent'
+      },
+      {
+        emoji: '🎯',
+        title: '목표 달성 운세',
+        text: '계획했던 일들이 순조롭게 진행될 것 같습니다. 꾸준함과 인내심이 좋은 결과를 가져다줄 거예요.',
+        score: '★★★★☆',
+        type: 'good'
+      },
+      {
+        emoji: '🌈',
+        title: '희망 무지개 운세',
+        text: '어려운 상황이 있었다면 곧 해결될 조짐이 보입니다. 긍정적인 마음가짐을 유지하세요!',
+        score: '★★★★★',
+        type: 'excellent'
+      },
+      {
+        emoji: '📚',
+        title: '성장 학습 운세',
+        text: '새로운 것을 배우거나 자기계발에 좋은 시기입니다. 독서나 취미 활동을 시작해보는 건 어떨까요?',
+        score: '★★★☆☆',
+        type: 'normal'
+      },
+      {
+        emoji: '💪',
+        title: '의지력 강화 운세',
+        text: '평소보다 의지력과 집중력이 높아지는 날입니다. 미뤄왔던 일들을 해결하기 좋은 때예요!',
+        score: '★★★★☆',
+        type: 'good'
+      },
+      {
+        emoji: '🎨',
+        title: '창의력 폭발 운세',
+        text: '예술적 감각이나 창의적 아이디어가 떠오를 수 있는 운세입니다. 새로운 취미를 시작해보세요!',
+        score: '★★★★☆',
+        type: 'good'
+      },
+      {
+        emoji: '🌸',
+        title: '평화로운 힐링 운세',
+        text: '마음이 평온해지고 스트레스가 해소되는 하루가 될 것 같습니다. 여유롭게 휴식을 취해보세요.',
+        score: '★★★☆☆',
+        type: 'normal'
+      },
+      {
+        emoji: '🎁',
+        title: '깜짝 선물 운세',
+        text: '예상치 못한 좋은 소식이나 선물같은 일이 생길 수 있어요. 하루종일 기대감을 가져보세요!',
+        score: '★★★★☆',
+        type: 'good'
+      }
+    ];
+
+    function showFortune() {
+      const fortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+      const fortuneSection = document.getElementById('fortuneSection');
+      const fortuneEmoji = document.getElementById('fortuneEmoji');
+      const fortuneTitle = document.getElementById('fortuneTitle');
+      const fortuneText = document.getElementById('fortuneText');
+      const fortuneScore = document.getElementById('fortuneScore');
+      
+      // 애니메이션 효과
+      fortuneSection.style.display = 'block';
+      fortuneSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // 운세 내용 업데이트
+      fortuneEmoji.textContent = fortune.emoji;
+      fortuneTitle.textContent = fortune.title;
+      fortuneText.textContent = fortune.text;
+      fortuneScore.textContent = `행운 지수: ${fortune.score}`;
+      
+      // 타입에 따른 색상 변경
+      const content = document.getElementById('fortuneContent');
+      switch(fortune.type) {
+        case 'excellent':
+          content.style.borderColor = '#22c55e';
+          break;
+        case 'good':
+          content.style.borderColor = '#3b82f6';
+          break;
+        case 'normal':
+          content.style.borderColor = '#f59e0b';
+          break;
+      }
+      
+      // 파티클 효과
+      createParticle(fortune.emoji);
+      createParticle('✨');
+    }
+
+    // 운세 버튼 이벤트
+    document.getElementById('fortuneBtn').addEventListener('click', showFortune);
+    document.getElementById('fortuneRefresh').addEventListener('click', showFortune);
   </script>
 </body>
 </html>
