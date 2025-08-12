@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>이선호의 반짝반짝 놀이터 ✨</title>
-  <meta name="description" content="초등학생을 위한 화려하고 동적인 개인 홈페이지 템플릿" />
-  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+  <title>이선호 | Developer Portfolio</title>
+  <meta name="description" content="창의적이고 혁신적인 개발자 이선호의 포트폴리오 웹사이트" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0b1020;         /* 기본(우주) */
@@ -19,16 +19,16 @@
       --shadow: 0 14px 36px rgba(2,8,23,.45);
     }
     /* 테마 변환용 */
-    body.theme-candy{ --bg:#ffcad4; --bg2:#ffd6a5; --text:#432818; --muted:#6f1d1b; --brand:#ff006e; --accent:#8338ec; --panel:rgba(255,255,255,.6); --ring:rgba(255,0,110,.35); --shadow:0 14px 36px rgba(255,0,110,.35) }
-    body.theme-ocean{ --bg:#001219; --bg2:#005f73; --text:#e0fbfc; --muted:#94d2bd; --brand:#0a9396; --accent:#e9d8a6; }
-    body.theme-forest{ --bg:#0f3d2e; --bg2:#1b5e3b; --text:#f4fce3; --muted:#c0eb75; --brand:#80ed99; --accent:#ffd166; }
+    body.theme-candy{ --bg:#1a1a1a; --bg2:#2d2d2d; --text:#ffffff; --muted:#a3a3a3; --brand:#ef4444; --accent:#f97316; --panel:rgba(255,255,255,.1); --ring:rgba(239,68,68,.35); --shadow:0 14px 36px rgba(239,68,68,.25) }
+    body.theme-ocean{ --bg:#0c1929; --bg2:#1e3a5f; --text:#f1f5f9; --muted:#64748b; --brand:#0ea5e9; --accent:#06b6d4; }
+    body.theme-forest{ --bg:#0f1419; --bg2:#1a2332; --text:#f8fafc; --muted:#94a3b8; --brand:#10b981; --accent:#22c55e; }
     body.theme-space{ --bg:#0b1020; --bg2:#1b1f3b; --text:#f8fafc; --muted:#cbd5e1; --brand:#7c3aed; --accent:#22d3ee; }
 
     *{ box-sizing:border-box }
     html,body{ height:100% }
     body{
       margin:0;
-      font: 17px/1.6 'Jua', 'Baloo 2', ui-sans-serif, system-ui, -apple-system, 'Noto Sans KR', Segoe UI, Roboto, Helvetica, Arial;
+      font: 16px/1.6 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial;
       color:var(--text);
       background: radial-gradient(1000px 500px at 10% -10%, var(--accent), transparent),
                   radial-gradient(800px 400px at 110% 10%, var(--brand), transparent),
@@ -55,12 +55,14 @@
     @media(max-width:900px){ .hero{ grid-template-columns:1fr } }
     .card{ background:linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.07)); border:2px solid rgba(255,255,255,.35); border-radius:24px; padding:22px; box-shadow:var(--shadow) }
     .kicker{ color:var(--muted); letter-spacing:.06em }
-    h1{ font-size:48px; line-height:1.15; margin:.2em 0 .3em; text-shadow:0 4px 0 rgba(0,0,0,.15) }
+    h1{ font-size:48px; line-height:1.15; margin:.2em 0 .3em; text-shadow:0 4px 0 rgba(0,0,0,.15); font-weight:700; }
 
     .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px }
-    .btn{ cursor:pointer; border:2px solid rgba(255,255,255,.4); padding:12px 16px; border-radius:16px; font-size:18px; background:linear-gradient(135deg, var(--brand), var(--accent)); color:#fff; box-shadow:var(--shadow) }
-    .btn.ghost{ background:var(--panel); color:var(--text) }
-    .btn:active{ transform:translateY(2px) }
+    .btn{ cursor:pointer; border:2px solid rgba(255,255,255,.4); padding:12px 20px; border-radius:12px; font-size:16px; font-weight:500; background:linear-gradient(135deg, var(--brand), var(--accent)); color:#fff; box-shadow:var(--shadow); transition:all 0.2s ease; }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 16px 42px rgba(2,8,23,.6); }
+    .btn.ghost{ background:var(--panel); color:var(--text); border:2px solid rgba(255,255,255,.2); }
+    .btn.ghost:hover{ background:rgba(255,255,255,.15); border:2px solid rgba(255,255,255,.4); }
+    .btn:active{ transform:translateY(1px) }
 
     .mascot{ display:grid; place-items:center }
     .bubble{ width:220px; height:220px; border-radius:36px; background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.35)); border:2px solid rgba(255,255,255,.7); position:relative; box-shadow:var(--shadow) }
@@ -68,13 +70,13 @@
     @media (prefers-reduced-motion:no-preference){ .bubble{ animation:float 3.6s ease-in-out infinite } @keyframes float{ 0%,100%{ transform:translateY(-6px)} 50%{ transform:translateY(6px)} } }
 
     section{ margin:36px 0 }
-    h2{ margin:.2em 0 .6em; font-size:30px; text-shadow:0 3px 0 rgba(0,0,0,.14) }
+    h2{ margin:.2em 0 .6em; font-size:30px; text-shadow:0 3px 0 rgba(0,0,0,.14); font-weight:600; }
 
     .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px }
     @media(max-width:900px){ .grid{ grid-template-columns:1fr 1fr } }
     @media(max-width:640px){ .grid{ grid-template-columns:1fr } }
     .tile{ padding:16px; border-radius:18px; border:2px solid rgba(255,255,255,.35); background:linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.07)); box-shadow:var(--shadow); position:relative; overflow:hidden }
-    .tile h3{ margin:.2em 0; font-size:22px }
+    .tile h3{ margin:.2em 0; font-size:22px; font-weight:600; }
     .tile .back{ position:absolute; inset:0; padding:16px; background:rgba(0,0,0,.35); transform:translateY(100%); transition:transform .25s }
     .tile:hover .back{ transform:translateY(0) }
 
@@ -174,31 +176,31 @@
     <section class="hero" id="about">
       <div class="card">
         <div class="kicker">WELCOME</div>
-        <h1>안녕! 나는 <span style="color:var(--accent)" id="nameDisplay">이선호</span>야</h1>
-        <p>여기는 내가 만든 작품들을 모아놓은 놀이터야. 아래 버튼을 눌러 <strong>테마를 바꾸거나</strong> <strong>파티 모드</strong>를 켜봐!</p>
+        <h1>안녕하세요, <span style="color:var(--accent)" id="nameDisplay">이선호</span>입니다</h1>
+        <p>창의적인 개발과 혁신적인 아이디어로 디지털 경험을 만들어가는 개발자입니다. <strong>테마 변경</strong>과 <strong>인터랙티브 기능</strong>들을 체험해보세요.</p>
         <div class="actions">
-          <button class="btn" id="themeBtn" aria-label="테마 바꾸기">🎨 테마 바꾸기</button>
-          <button class="btn ghost" id="partyBtn" aria-label="파티 모드">🎊 파티 모드</button>
-          <button class="btn ghost" id="stickerAdd" aria-label="스티커 추가">🧸 스티커 추가</button>
+          <button class="btn" id="themeBtn" aria-label="테마 바꾸기">🎯 테마 변경</button>
+          <button class="btn ghost" id="partyBtn" aria-label="파티 모드">✨ 이펙트</button>
+          <button class="btn ghost" id="stickerAdd" aria-label="스티커 추가">📌 스티커</button>
         </div>
       </div>
       <div class="card mascot" aria-label="마스코트">
         <div class="bubble">
           <div class="face" id="mascotFace" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
-            <div style="font-size: 70px;">🌟</div>
+            <div style="font-size: 70px;">💻</div>
           </div>
         </div>
-        <div class="kicker" style="margin-top:8px">반짝! 반짝! 오늘도 즐거운 하루 ✨</div>
+        <div class="kicker" style="margin-top:8px">혁신적인 개발자 포트폴리오 ⚡</div>
       </div>
     </section>
 
     <section id="projects">
-      <h2>📚 내 작품</h2>
+      <h2>🔬 프로젝트</h2>
       <div class="grid">
         <article class="tile">
           <div class="front">
-            <h3>종이접기 로봇</h3>
-            <p>색종이로 만든 귀여운 로봇 가족</p>
+            <h3>Interactive Robot UI</h3>
+            <p>모듈형 로봇 인터페이스 설계</p>
             <div class="rating-system">
               <div class="rating-stars" data-project="robot">
                 <span class="star" data-rating="1">⭐</span>
@@ -216,8 +218,8 @@
         </article>
         <article class="tile">
           <div class="front">
-            <h3>코딩: 고양이 점프</h3>
-            <p>점프해서 별을 모으는 간단한 게임</p>
+            <h3>Cat Jump Game</h3>
+            <p>JavaScript 기반 아케이드 게임</p>
             <div class="rating-system">
               <div class="rating-stars" data-project="coding">
                 <span class="star" data-rating="1">⭐</span>
@@ -235,8 +237,8 @@
         </article>
         <article class="tile">
           <div class="front">
-            <h3>슬라임 연구소</h3>
-            <p>말랑말랑! 슬라임 비법 노트</p>
+            <h3>Smart Lab System</h3>
+            <p>데이터 기반 실험 관리 플랫폼</p>
             <div class="rating-system">
               <div class="rating-stars" data-project="slime">
                 <span class="star" data-rating="1">⭐</span>
@@ -267,7 +269,7 @@
 
     <!-- 달력/일기장 섹션 -->
     <section id="calendar-section">
-      <h2>📅 내 달력 & 일기</h2>
+      <h2>📊 일정 관리</h2>
       <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
           <button class="btn ghost" id="prevMonth">◀</button>
@@ -294,14 +296,14 @@
     <section>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
         <div class="card">
-          <h3>👥 방문자 수</h3>
+          <h3>📈 방문자 통계</h3>
           <div style="text-align: center; font-size: 32px; color: var(--accent);">
             <span id="visitorCount">0</span>명
           </div>
-          <p style="text-align: center; margin: 8px 0 0; color: var(--muted);">오늘도 놀러와 줘서 고마워! 🎈</p>
+          <p style="text-align: center; margin: 8px 0 0; color: var(--muted);">방문해주셔서 감사합니다 💡</p>
         </div>
         <div class="card">
-          <h3>⭐ 내 아바타</h3>
+          <h3>🎨 프로필</h3>
           <div style="text-align: center; margin: 12px 0;">
             <div id="currentAvatar" style="width: 80px; height: 80px; margin: 8px auto; border-radius: 50%; border: 3px solid var(--accent); background: var(--panel); display: flex; align-items: center; justify-content: center;">
               <div style="font-size: 60px;">🌟</div>
@@ -334,7 +336,7 @@
     <!-- 닉네임 설정 -->
     <section>
       <div class="card">
-        <h3>📝 내 이름 설정</h3>
+        <h3>⚙️ 사용자 설정</h3>
         <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
           <input type="text" id="nicknameInput" placeholder="새로운 이름을 입력하세요" style="flex: 1; min-width: 200px; padding: 8px 12px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); font-family: inherit;">
           <button class="btn" id="saveNickname">저장</button>
@@ -346,7 +348,7 @@
     <!-- 배경음악 컨트롤 -->
     <section>
       <div class="card">
-        <h3>🎵 배경음악</h3>
+        <h3>🎧 사운드</h3>
         <div style="display: flex; gap: 8px; align-items: center;">
           <button class="btn" id="musicToggle">🎵 음악 재생</button>
           <span id="musicStatus" style="color: var(--muted);">음악이 꺼져있어요</span>
@@ -387,7 +389,7 @@
 
     <!-- 게스트북 -->
     <section id="guestbook">
-      <h2>💌 게스트북</h2>
+      <h2>💬 방명록</h2>
       <div class="card">
         <div style="margin-bottom: 16px;">
           <input type="text" id="guestName" placeholder="이름" style="width: 100%; margin-bottom: 8px; padding: 8px 12px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); font-family: inherit;">
@@ -400,11 +402,11 @@
 
     <!-- 교육 게임들 -->
     <section id="educational-games">
-      <h2>🎓 재밌는 공부</h2>
+      <h2>🧠 학습 도구</h2>
       <div class="grid">
         <!-- 미니 퀴즈 -->
         <div class="card">
-          <h3>🧠 퀴즈 타임!</h3>
+          <h3>💡 퀴즈</h3>
           <div id="quizArea">
             <div id="question" style="font-size: 18px; margin-bottom: 12px;">퀴즈를 시작해보세요!</div>
             <div id="quizOptions" style="display: grid; gap: 8px; margin-bottom: 12px;"></div>
@@ -415,7 +417,7 @@
 
         <!-- 영어 단어장 -->
         <div class="card">
-          <h3>🇺🇸 영어 단어</h3>
+          <h3>🌐 영어</h3>
           <div id="vocabArea">
             <div id="wordDisplay" style="font-size: 24px; text-align: center; margin: 12px 0; color: var(--accent);">apple</div>
             <input type="text" id="wordInput" placeholder="한국어 뜻을 입력하세요" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); font-family: inherit;">
@@ -427,7 +429,7 @@
 
         <!-- 구구단 연습 -->
         <div class="card">
-          <h3>✖️ 구구단 연습</h3>
+          <h3>🔢 수학</h3>
           <div id="mathArea">
             <div id="mathProblem" style="font-size: 20px; text-align: center; margin: 12px 0;">2 × 3 = ?</div>
             <input type="number" id="mathAnswer" placeholder="답을 입력하세요" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); font-family: inherit;">
@@ -442,7 +444,7 @@
     <!-- 타이핑 연습 -->
     <section>
       <div class="card">
-        <h2>⌨️ 타이핑 연습</h2>
+        <h2>⌨️ 타이핑</h2>
         <div id="typingTarget" style="font-size: 18px; text-align: center; margin: 12px 0; padding: 12px; background: var(--panel); border-radius: 8px; border: 2px solid rgba(255,255,255,.3);">안녕하세요</div>
         <input type="text" id="typingInput" placeholder="위의 문장을 똑같이 입력해보세요" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 8px; border: 2px solid rgba(255,255,255,.3); background: var(--panel); color: var(--text); font-family: inherit;">
         <div style="display: flex; gap: 8px; align-items: center;">
@@ -455,31 +457,27 @@
     <!-- QR 코드 -->
     <section>
       <div class="card">
-        <h2>📱 QR 코드</h2>
-        <p>친구들과 내 홈페이지를 공유해보세요!</p>
+        <h2>📱 공유</h2>
+        <p>포트폴리오를 간편하게 공유하세요</p>
         <div style="text-align: center; margin: 16px 0;">
           <div id="qrcode" style="display: inline-block; padding: 16px; background: white; border-radius: 8px; min-height: 200px; min-width: 200px; display: flex; align-items: center; justify-content: center; color: #666;">
             QR 코드를 생성하려면 아래 버튼을 클릭하세요
           </div>
         </div>
         <button class="btn" id="generateQR">QR 코드 생성</button>
-        <div style="margin-top: 12px; text-align: center;">
-          <p style="font-size: 14px; color: var(--muted);">
-            QR 코드는 Google Charts API를 사용하여 생성됩니다
-          </p>
-        </div>
+        
       </div>
     </section>
 
     <section id="contact">
-      <h2>📬 연락해요</h2>
+      <h2>📧 연락처</h2>
       <div class="card">
-        <p>이메일: <a href="mailto:kid@example.com" style="color:#fff; text-decoration:underline">kid@example.com</a></p>
-        <p>선생님/친구에게 보여주고 싶은 내용이 있으면 여기로 보내주세요!</p>
+        <p>이메일: <a href="mailto:sunho@developer.com" style="color:#fff; text-decoration:underline">sunho@developer.com</a></p>
+        <p>프로젝트 문의나 협업 제안은 언제든 환영합니다.</p>
       </div>
     </section>
 
-    <footer>© <span id="year"></span> 이선호의 놀이터 — 반짝이는 하루가 되길! ✨</footer>
+    <footer>© <span id="year"></span> 이선호 Portfolio — Innovative Developer ⚡</footer>
   </div>
 
   <script>
@@ -1018,7 +1016,8 @@
     // 타이핑 연습
     const typingTexts = ['안녕하세요', '반갑습니다', '좋은 하루', '열심히 공부', '재미있는 게임'];
     let currentTypingText = 0;
-    let startTime;
+    let startTime = null;
+    let typingInProgress = false;
     
     function showTypingText() {
       document.getElementById('typingTarget').textContent = typingTexts[currentTypingText];
@@ -1028,11 +1027,19 @@
     
     document.getElementById('startTyping').addEventListener('click', () => {
       startTime = Date.now();
+      typingInProgress = true;
       showTypingText();
       document.getElementById('typingInput').focus();
+      document.getElementById('typingResult').textContent = '타이핑을 시작하세요!';
+      document.getElementById('typingResult').style.color = 'var(--muted)';
     });
     
     document.getElementById('typingInput').addEventListener('input', (e) => {
+      // 연습이 시작되지 않았으면 무시
+      if (!typingInProgress || startTime === null) {
+        return;
+      }
+      
       const target = typingTexts[currentTypingText];
       const input = e.target.value;
       const result = document.getElementById('typingResult');
@@ -1042,13 +1049,78 @@
         result.textContent = `완료! ${time}초 걸렸어요 ⚡`;
         result.style.color = 'var(--accent)';
         createParticle('⌨️');
+        typingInProgress = false;
         
         setTimeout(() => {
           currentTypingText = (currentTypingText + 1) % typingTexts.length;
           showTypingText();
         }, 1000);
+      } else {
+        // 진행률 표시
+        const progress = Math.floor((input.length / target.length) * 100);
+        result.textContent = `진행률: ${progress}%`;
+        result.style.color = 'var(--muted)';
       }
     });
+
+    // 클립보드 복사 함수
+    function copyToClipboard(text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          // 성공 메시지 표시
+          const button = event.target;
+          const originalText = button.innerHTML;
+          button.innerHTML = '✅ 복사됨!';
+          button.style.background = '#22c55e';
+          
+          setTimeout(() => {
+            button.innerHTML = originalText;
+            button.style.background = '#4CAF50';
+          }, 2000);
+          
+          createParticle('📋');
+        }).catch(err => {
+          console.error('클립보드 복사 실패:', err);
+          // 대체 방법으로 복사 시도
+          fallbackCopyToClipboard(text);
+        });
+      } else {
+        // 구형 브라우저 대응
+        fallbackCopyToClipboard(text);
+      }
+    }
+    
+    // 대체 클립보드 복사 방법
+    function fallbackCopyToClipboard(text) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        document.execCommand('copy');
+        const button = event.target;
+        const originalText = button.innerHTML;
+        button.innerHTML = '✅ 복사됨!';
+        button.style.background = '#22c55e';
+        
+        setTimeout(() => {
+          button.innerHTML = originalText;
+          button.style.background = '#4CAF50';
+        }, 2000);
+        
+        createParticle('📋');
+      } catch (err) {
+        console.error('클립보드 복사 실패:', err);
+        alert('클립보드 복사에 실패했습니다. URL을 수동으로 복사해주세요.');
+      }
+      
+      document.body.removeChild(textArea);
+    }
 
     // QR 코드 생성 (사용자 제공 QR 코드 이미지 사용)
     document.getElementById('generateQR').addEventListener('click', () => {
@@ -1064,9 +1136,9 @@
                onerror="this.parentElement.innerHTML='<div style=\\'color: #ff6b6b; padding: 20px;\\'>QR 코드를 표시할 수 없습니다.</div>'">
           <p style="color: black; font-size: 10px; margin: 8px 0; word-break: break-all; max-width: 200px;">${url}</p>
           <div style="margin-top: 8px;">
-            <button onclick="navigator.share && navigator.share({title: '이선호의 놀이터', url: '${url}'}).catch(()=>{})" 
+            <button onclick="copyToClipboard('${url}')" 
                     style="background: #4CAF50; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">
-              📤 공유하기
+              📋 URL 복사
             </button>
           </div>
         </div>
