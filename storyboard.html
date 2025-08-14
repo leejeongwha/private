@@ -287,7 +287,7 @@
     <section class="card controls">
       <div class="row">
         <label class="hint">🔑 Unsplash Access Key</label>
-        <input id="key" type="text" placeholder="Client-ID 입력 (필수)" style="min-width:350px"/>
+        <input id="key" type="text" placeholder="Client-ID 입력 (필수)" style="min-width:350px" value="paReFaltgLAfX2n3XIe51GIGQ6i0ik8vtcyXBtuRWTA"/>
         <span class="hint"><a href="https://unsplash.com/developers" target="_blank" rel="noreferrer" style="color:var(--accent)">📖 키 발급 가이드</a></span>
       </div>
       
@@ -454,6 +454,13 @@
         const pageEl = document.createElement('article');
         pageEl.className = 'page';
         pageEl.dataset.pageNumber = pageNumber;
+        
+        // 이미지 URL을 데이터 속성으로 저장 (내보내기 시 사용)
+        pageEl.dataset.bgUrl = pageData.bgUrl;
+        pageEl.dataset.text = pageData.text;
+        pageEl.dataset.creditLink = pageData.credit.link;
+        pageEl.dataset.creditAuthor = pageData.credit.author;
+        pageEl.dataset.creditAuthorLink = pageData.credit.authorLink;
         
         pageEl.innerHTML = `
           <div class="story-bg" style="background-image: url('${pageData.bgUrl.replace(/'/g, "%27")}');"></div>
@@ -833,23 +840,27 @@
 
       generateExportHTML(title) {
         const pagesHTML = this.pages.map((page, index) => {
-          const bgEl = page.querySelector('.story-bg');
-          const textEl = page.querySelector('.story-text');
-          const creditEl = page.querySelector('.credit');
-          const pageNumberEl = page.querySelector('.page-number');
+          // 데이터 속성에서 원본 정보 추출
+          const bgUrl = page.dataset.bgUrl;
+          const text = page.dataset.text;
+          const creditLink = page.dataset.creditLink;
+          const creditAuthor = page.dataset.creditAuthor;
+          const creditAuthorLink = page.dataset.creditAuthorLink;
+          const pageNumber = `${index + 1} / ${this.pages.length}`;
           
-          const bgImage = bgEl.style.backgroundImage;
-          const text = textEl.textContent;
-          const credit = creditEl.innerHTML;
-          const pageNumber = pageNumberEl.textContent;
+          // 안전한 URL 처리
+          const safeUrl = bgUrl.replace(/'/g, "%27");
           
           return `
             <article class="page ${index === 0 ? 'active' : ''}">
-              <div class="story-bg" style="background-image: ${bgImage};"></div>
+              <div class="story-bg" style="background-image: url('${safeUrl}');"></div>
               <div class="story-content">
-                <div class="story-text">${text}</div>
+                <div class="story-text">${this.escapeHtml(text)}</div>
                 <div class="page-meta">
-                  <div class="credit">${credit}</div>
+                  <div class="credit">
+                    📷 <a href="${creditLink}" target="_blank" rel="noreferrer">Unsplash</a> · 
+                    <a href="${creditAuthorLink}" target="_blank" rel="noreferrer">${this.escapeHtml(creditAuthor)}</a>
+                  </div>
                   <div class="page-number">${pageNumber}</div>
                 </div>
               </div>
@@ -866,8 +877,8 @@
   <style>
     body{margin:0;background:#000;color:#fff;font-family:'Noto Sans KR',system-ui,sans-serif;overflow:hidden}
     .book-container{position:relative;width:100vw;height:100vh}
-    .page{position:absolute;inset:0;display:none}
-    .page.active{display:block}
+    .page{position:absolute;inset:0;opacity:0;transition:opacity 0.6s ease-in-out;pointer-events:none}
+    .page.active{opacity:1;pointer-events:auto}
     .story-bg{position:absolute;inset:0;background:center/cover no-repeat;filter:brightness(.7)}
     .story-content{position:absolute;left:0;right:0;bottom:0;padding:30px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.8))}
     .story-text{font-size:28px;line-height:1.4;margin:0 auto 20px;text-shadow:0 2px 8px rgba(0,0,0,.8);font-weight:500}
@@ -876,6 +887,8 @@
     .controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:100}
     .btn{padding:10px 20px;background:rgba(139,92,246,.9);color:white;border:none;border-radius:25px;cursor:pointer;font-weight:600}
     .btn:hover{background:rgba(139,92,246,1)}
+    .credit a{color:#fff;text-decoration:none}
+    .credit a:hover{text-decoration:underline}
   </style>
 </head>
 <body>
@@ -891,8 +904,28 @@
     const pages = document.querySelectorAll('.page');
     
     function showPage(index) {
-      currentPage = (index + pages.length) % pages.length;
-      pages.forEach((p, i) => p.classList.toggle('active', i === currentPage));
+      const newIndex = (index + pages.length) % pages.length;
+      if (newIndex === currentPage) return;
+      
+      // 현재 페이지 fade out
+      const currentPageEl = pages[currentPage];
+      if (currentPageEl) {
+        currentPageEl.style.opacity = '0';
+      }
+      
+      // 새 페이지 fade in
+      setTimeout(() => {
+        pages.forEach((p, i) => {
+          if (i === newIndex) {
+            p.classList.add('active');
+            p.style.opacity = '1';
+          } else {
+            p.classList.remove('active');
+            p.style.opacity = '0';
+          }
+        });
+        currentPage = newIndex;
+      }, 300);
     }
     
     function prevPage() { showPage(currentPage - 1); }
@@ -911,6 +944,14 @@
       if (e.key === 'ArrowLeft') prevPage();
       else if (e.key === 'ArrowRight') nextPage();
       else if (e.code === 'Space') { e.preventDefault(); toggleAutoplay(); }
+    });
+    
+    // 초기화: 첫 페이지 표시
+    document.addEventListener('DOMContentLoaded', () => {
+      if (pages.length > 0) {
+        pages[0].classList.add('active');
+        pages[0].style.opacity = '1';
+      }
     });
   <\/script>
 </body>
