@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>📚 Story Book Maker</title>
+  <style>
+    :root{
+      --ink:#0f172a; --muted:#64748b; --accent:#8b5cf6; --bg:#f8fafc; --card:#ffffff;
+      --book-shadow: 0 15px 35px rgba(0,0,0,.1), 0 5px 15px rgba(0,0,0,.07);
+      --page-shadow: 0 8px 20px rgba(0,0,0,.15);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+      color:var(--ink);
+      font-family:'Noto Sans KR', system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* 책상 배경 */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%),
+        linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+      z-index: -1;
+    }
+
+    .wrap{max-width:1200px;margin:0 auto;padding:20px}
+    header{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:20px}
+    h1{margin:0;font-size:28px;font-weight:800;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,0.3)}
+    .subtitle{color:rgba(255,255,255,0.9);font-size:14px;margin-top:4px}
+    
+    .card{
+      background:var(--card);
+      border:1px solid #e5e7eb;
+      border-radius:var(--radius);
+      box-shadow:var(--book-shadow);
+      backdrop-filter: blur(10px);
+    }
+    .controls{padding:20px;display:grid;gap:15px}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    
+    textarea{
+      width:100%;
+      min-height:160px;
+      border:2px solid #e5e7eb;
+      border-radius:12px;
+      padding:15px;
+      font:inherit;
+      line-height:1.6;
+      transition: border-color 0.3s ease;
+      resize: vertical;
+    }
+    textarea:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(139,92,246,0.1)}
+    
+    input[type="text"], input[type="number"]{
+      border:2px solid #e5e7eb;
+      border-radius:10px;
+      padding:10px;
+      font:inherit;
+      transition: border-color 0.3s ease;
+    }
+    input:focus{border-color:var(--accent);outline:none}
+    
+    .btn{
+      appearance:none;
+      border:2px solid var(--accent);
+      background:var(--accent);
+      color:#fff;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(139,92,246,0.4)}
+    .btn.secondary{background:#fff;color:var(--accent)}
+    .btn.ghost{background:rgba(255,255,255,0.9);border-color:rgba(255,255,255,0.3);color:var(--ink)}
+    .btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+    
+    .hint{font-size:13px;color:var(--muted)}
+    .progress{height:12px;background:#eef2ff;border-radius:999px;overflow:hidden}
+    .progress>div{height:100%;background:var(--accent);width:0;transition:width 0.3s ease}
+    .credit{font-size:12px;color:#cbd5e1}
+
+    /* 책 뷰어 스타일 */
+    .viewer{
+      position:relative;
+      height:75vh;
+      max-height:800px;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:var(--page-shadow);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    
+    .book-container{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+    
+    .page{
+      position:absolute;
+      inset:0;
+      opacity: 0;
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: opacity 0.6s ease-in-out;
+      pointer-events: none;
+    }
+    .page.active{
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .page.fade-out{
+      opacity: 0;
+      transition: opacity 0.4s ease-out;
+    }
+    .page.fade-in{
+      opacity: 1;
+      transition: opacity 0.6s ease-in;
+    }
+    
+    .story-bg{
+      position:absolute;
+      inset:0;
+      background:#000 center/cover no-repeat;
+      filter:brightness(.7) contrast(1.1);
+    }
+    
+    .story-content{
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      padding:25px 30px;
+      background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.75) 100%);
+      color:#fff;
+    }
+    
+    .story-text{
+      font-size:24px;
+      line-height:1.4;
+      max-width:900px;
+      margin:0 auto 15px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      font-weight: 500;
+    }
+    
+    .page-meta{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:15px;
+      font-size:13px;
+      opacity:0.9;
+    }
+    
+    .page-number{
+      background: rgba(255,255,255,0.2);
+      padding: 4px 10px;
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+    }
+
+    /* 컨트롤 바 */
+    .controlsBar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:15px;
+      padding: 15px 20px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .page-nav{
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    
+    .dots{display:flex;gap:8px;align-items:center}
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#cbd5e1;
+      opacity:.6;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .dot.active{opacity:1;background:var(--accent);transform:scale(1.2)}
+    .dot:hover{opacity:0.8;transform:scale(1.1)}
+    
+    .kbd{
+      font:inherit;
+      border:1px solid #e5e7eb;
+      border-bottom-width:2px;
+      background:#fff;
+      border-radius:6px;
+      padding:3px 8px;
+      font-size:12px;
+    }
+    
+    /* 읽기 모드 */
+    .reading-mode .controls { display: none; }
+    .reading-mode .controlsBar { 
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: auto;
+      min-width: 300px;
+    }
+    .reading-mode .viewer {
+      height: 100vh;
+      border-radius: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+    }
+    
+    /* 자동 재생 표시 */
+    .autoplay-indicator {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(139,92,246,0.9);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 10;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    
+    /* 반응형 */
+    @media (max-width: 768px) {
+      .wrap { padding: 15px; }
+      .story-text { font-size: 20px; }
+      .story-content { padding: 20px; }
+      .controlsBar { flex-direction: column; gap: 10px; }
+      .page-nav { order: -1; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>📚 Story Book Maker</h1>
+        <div class="subtitle">이미지와 텍스트로 나만의 스토리북 만들기</div>
+      </div>
+    </header>
+
+    <section class="card controls">
+      <div class="row">
+        <label class="hint">🔑 Unsplash Access Key</label>
+        <input id="key" type="text" placeholder="Client-ID 입력 (필수)" style="min-width:350px"/>
+        <span class="hint"><a href="https://unsplash.com/developers" target="_blank" rel="noreferrer" style="color:var(--accent)">📖 키 발급 가이드</a></span>
+      </div>
+      
+      <label><b>📝 스토리 작성</b> <span class="hint">각 문장이 책의 한 페이지가 됩니다</span></label>
+      <textarea id="story" placeholder="예시:&#10;&#10;어느 날 우리는 오래된 등대를 찾아 떠났다.&#10;안개가 짙게 깔린 바닷가에서 파도 소리가 들렸다.&#10;빛나는 해변 유리 조각을 모아 소원을 빌었다.&#10;해가 질 무렵, 등대지기 할아버지를 만났다.&#10;할아버지는 오랜 바다 이야기를 들려주셨다."></textarea>
+      
+      <div class="row">
+        <label class="hint">🖼️ 이미지 개수</label>
+        <input id="count" type="number" min="1" max="10" value="1" style="width:80px"/>
+        <span class="hint">한 페이지당 검색할 이미지 수 (1 추천)</span>
+      </div>
+      
+      <div class="row">
+        <button class="btn" id="startBuild">
+          <span>🚀</span> 제작 시작
+        </button>
+        <button class="btn secondary" id="viewStoryBook" disabled>
+          <span>📖</span> 스토리북 보기
+        </button>
+        <button class="btn secondary" id="prev" disabled>
+          <span>⬅️</span> 이전 페이지
+        </button>
+        <button class="btn secondary" id="next" disabled>
+          <span>➡️</span> 다음 페이지
+        </button>
+        <button class="btn ghost" id="readingMode" disabled>
+          <span>📚</span> 읽기 모드
+        </button>
+        <button class="btn ghost" id="exportHTML" disabled>
+          <span>💾</span> HTML 저장
+        </button>
+      </div>
+      
+      <div class="progress" aria-hidden="true"><div id="meter"></div></div>
+      <div id="status" class="hint">✨ 스토리북을 만들 준비가 되었습니다</div>
+      <div id="pageStatus" class="hint" style="display: none; margin-top: 8px; padding: 8px 12px; background: rgba(139,92,246,0.1); border-radius: 8px;"></div>
+      <div class="hint">💡 Unsplash 정책에 따라 사진 출처와 작가 정보가 각 페이지에 표시됩니다.</div>
+    </section>
+
+    <section class="viewer card" id="viewer" aria-live="polite">
+      <div class="book-container" id="bookContainer"></div>
+    </section>
+
+    <div class="controlsBar" id="controlsBar">
+      <div class="page-nav">
+        <div class="hint">
+          단축키: <span class="kbd">←</span> 이전 · <span class="kbd">→</span> 다음 · <span class="kbd">Space</span> 자동재생 · <span class="kbd">Esc</span> 읽기모드
+        </div>
+      </div>
+      <div class="row">
+        <button class="btn ghost" id="autoplay">
+          <span>⏸️</span> 자동 넘김: 끔
+        </button>
+        <div class="dots" id="dots"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 📚 Story Book Maker - Enhanced Version
+    class StoryBookMaker {
+      constructor() {
+        this.initElements();
+        this.pages = [];
+        this.currentPageIndex = 0;
+        this.isAutoplay = false;
+        this.autoplayTimer = null;
+        this.isReadingMode = false;
+        this.isAnimating = false;
+        this.isBuilding = false;
+        this.isStoryBookComplete = false;
+        this.setupEventListeners();
+      }
+
+      initElements() {
+        this.keyEl = document.getElementById('key');
+        this.storyEl = document.getElementById('story');
+        this.startBuildBtn = document.getElementById('startBuild');
+        this.viewStoryBookBtn = document.getElementById('viewStoryBook');
+        this.prevBtn = document.getElementById('prev');
+        this.nextBtn = document.getElementById('next');
+        this.readingModeBtn = document.getElementById('readingMode');
+        this.exportBtn = document.getElementById('exportHTML');
+        this.bookContainer = document.getElementById('bookContainer');
+        this.statusEl = document.getElementById('status');
+        this.pageStatusEl = document.getElementById('pageStatus');
+        this.meter = document.getElementById('meter');
+        this.dots = document.getElementById('dots');
+        this.autoplayBtn = document.getElementById('autoplay');
+        this.controlsBar = document.getElementById('controlsBar');
+      }
+
+      setupEventListeners() {
+        this.startBuildBtn.addEventListener('click', () => this.startBuildProcess());
+        this.viewStoryBookBtn.addEventListener('click', () => this.viewStoryBook());
+        this.prevBtn.addEventListener('click', () => this.prevPage());
+        this.nextBtn.addEventListener('click', () => this.nextPage());
+        this.readingModeBtn.addEventListener('click', () => this.toggleReadingMode());
+        this.exportBtn.addEventListener('click', () => this.exportHTML());
+        this.autoplayBtn.addEventListener('click', () => this.toggleAutoplay());
+        
+        // 키보드 단축키 (스토리북이 완성된 후에만 작동)
+        document.addEventListener('keydown', (e) => {
+          if (!this.isStoryBookComplete) return;
+          
+          if (e.key === 'ArrowLeft') this.prevPage();
+          else if (e.key === 'ArrowRight') this.nextPage();
+          else if (e.code === 'Space') { e.preventDefault(); this.toggleAutoplay(); }
+          else if (e.key === 'Escape') this.toggleReadingMode();
+        });
+      }
+
+      splitSentences(text) {
+        return text
+          .replace(/([.!?…])+/g, '$1\n')
+          .replace(/([\.\?\!]|[。！？]|[\u3002\uFF01\uFF1F])/g, '$1\n')
+          .split(/\n+/)
+          .map(s => s.trim())
+          .filter(Boolean);
+      }
+
+      async fetchUnsplash(query, key, count = 1) {
+        const url = new URL('https://api.unsplash.com/search/photos');
+        url.search = new URLSearchParams({ 
+          query, 
+          per_page: String(Math.min(30, Math.max(1, count))),
+          orientation: 'landscape' 
+        }).toString();
+        
+        const response = await fetch(url, { 
+          headers: { Authorization: `Client-ID ${key}` } 
+        });
+        
+        if (!response.ok) {
+          throw new Error(`Unsplash API 오류: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const results = (data.results || []).map(item => ({
+          image: item.urls?.regular || item.urls?.full || item.urls?.small,
+          thumb: item.urls?.thumb,
+          color: item.color || '#000',
+          alt: item.alt_description || item.description || query,
+          link: item.links?.html,
+          author: item.user?.name,
+          authorLink: item.user?.links?.html
+        }));
+        
+        return results[0]; // 첫 번째 결과 사용
+      }
+
+      updateProgress(done, total) {
+        const percentage = total ? Math.round((done / total) * 100) : 0;
+        this.meter.style.width = percentage + '%';
+        
+        if (total) {
+          this.statusEl.innerHTML = `📖 ${done}/${total} 페이지 제작 중...`;
+        } else {
+          this.statusEl.innerHTML = '✨ 스토리북을 만들 준비가 되었습니다';
+        }
+      }
+
+      createPage(pageData, pageNumber, totalPages) {
+        const pageEl = document.createElement('article');
+        pageEl.className = 'page';
+        pageEl.dataset.pageNumber = pageNumber;
+        
+        pageEl.innerHTML = `
+          <div class="story-bg" style="background-image: url('${pageData.bgUrl.replace(/'/g, "%27")}');"></div>
+          <div class="story-content">
+            <div class="story-text">${this.escapeHtml(pageData.text)}</div>
+            <div class="page-meta">
+              <div class="credit">
+                📷 <a href="${pageData.credit.link}" target="_blank" rel="noreferrer">Unsplash</a> · 
+                <a href="${pageData.credit.authorLink}" target="_blank" rel="noreferrer">${this.escapeHtml(pageData.credit.author)}</a>
+              </div>
+              <div class="page-number">${pageNumber} / ${totalPages}</div>
+            </div>
+          </div>
+        `;
+        
+        return pageEl;
+      }
+
+      // 제작 시작 버튼 클릭
+      async startBuildProcess() {
+        const key = this.keyEl.value.trim();
+        const text = this.storyEl.value.trim();
+        
+        if (!key) {
+          alert('🔑 Unsplash Access Key를 입력해 주세요!');
+          return;
+        }
+        
+        if (!text) {
+          alert('📝 스토리를 입력해 주세요!');
+          return;
+        }
+
+        // 상태 초기화
+        this.isBuilding = true;
+        this.isStoryBookComplete = false;
+        this.pages = [];
+        this.bookContainer.innerHTML = '';
+        this.dots.innerHTML = '';
+        this.currentPageIndex = 0;
+        this.stopAutoplay();
+        
+        // 버튼 상태 업데이트
+        this.updateButtonStates();
+        
+        // 스토리 문장 분리
+        const sentences = this.splitSentences(text);
+        
+        // 제작 시작 알림
+        this.statusEl.innerHTML = `🚀 스토리북 제작을 시작합니다! (총 ${sentences.length}페이지)`;
+        this.pageStatusEl.style.display = 'block';
+        this.pageStatusEl.innerHTML = '📋 페이지 분석 완료';
+        
+        // 프로그레스 바 초기화
+        this.updateProgress(0, sentences.length);
+        
+        try {
+          await this.buildAllPages(sentences);
+        } catch (error) {
+          console.error('스토리북 제작 중 오류:', error);
+          this.statusEl.innerHTML = '❌ 스토리북 제작 중 오류가 발생했습니다';
+          this.isBuilding = false;
+          this.updateButtonStates();
+        }
+      }
+
+      // 모든 페이지 제작
+      async buildAllPages(sentences) {
+        const key = this.keyEl.value.trim();
+        const count = Number(document.getElementById('count').value || 1);
+        
+        for (let i = 0; i < sentences.length; i++) {
+          const sentence = sentences[i];
+          const pageNumber = i + 1;
+          
+          // 현재 페이지 제작 상태 표시
+          this.pageStatusEl.innerHTML = `🔍 페이지 ${pageNumber}: "${sentence.substring(0, 30)}..." 이미지 검색 중...`;
+          
+          try {
+            // API 호출
+            const imageData = await this.fetchUnsplash(sentence, key, count);
+            
+            if (!imageData) {
+              throw new Error('검색 결과 없음');
+            }
+            
+            // 페이지 데이터 생성
+            const pageData = {
+              bgUrl: imageData.image,
+              color: imageData.color,
+              text: sentence,
+              credit: {
+                link: imageData.link,
+                author: imageData.author || 'Unknown',
+                authorLink: imageData.authorLink || imageData.link
+              }
+            };
+            
+            // 페이지 생성 및 추가
+            const pageEl = this.createPage(pageData, pageNumber, sentences.length);
+            this.pages.push(pageEl);
+            this.bookContainer.appendChild(pageEl);
+            this.addPageDot(i);
+            
+            // 성공 상태 표시
+            this.pageStatusEl.innerHTML = `✅ 페이지 ${pageNumber} 완성! (이미지: ${imageData.author})`;
+            
+          } catch (error) {
+            console.error(`페이지 ${pageNumber} 생성 오류:`, error);
+            
+            // 폴백 이미지로 페이지 생성
+            const fallbackPageData = {
+              bgUrl: this.createFallbackImage(sentence),
+              color: '#2d3748',
+              text: sentence,
+              credit: {
+                link: 'https://unsplash.com',
+                author: 'N/A',
+                authorLink: 'https://unsplash.com'
+              }
+            };
+            
+            const pageEl = this.createPage(fallbackPageData, pageNumber, sentences.length);
+            this.pages.push(pageEl);
+            this.bookContainer.appendChild(pageEl);
+            this.addPageDot(i);
+            
+            // 오류 상태 표시
+            this.pageStatusEl.innerHTML = `⚠️ 페이지 ${pageNumber} 완성 (기본 이미지 사용)`;
+          }
+          
+          // 프로그레스 바 업데이트
+          this.updateProgress(pageNumber, sentences.length);
+          
+          // API 호출 간격 조절
+          await this.sleep(200);
+        }
+        
+        // 제작 완료
+        this.completeBuildProcess(sentences.length);
+      }
+
+      // 제작 완료 처리
+      completeBuildProcess(totalPages) {
+        this.isBuilding = false;
+        this.isStoryBookComplete = true;
+        
+        // 상태 메시지 업데이트
+        this.statusEl.innerHTML = `🎉 스토리북 제작 완료! (총 ${totalPages}페이지)`;
+        this.pageStatusEl.innerHTML = `📚 모든 페이지가 준비되었습니다. "스토리북 보기" 버튼을 클릭하세요!`;
+        
+        // 버튼 상태 업데이트
+        this.updateButtonStates();
+        
+        // 첫 페이지 미리 준비 (표시하지는 않음)
+        if (this.pages.length > 0) {
+          this.currentPageIndex = 0;
+        }
+        
+        // 완료 알림
+        setTimeout(() => {
+          if (confirm('🎉 스토리북이 완성되었습니다!\n\n📖 지금 스토리북을 감상하시겠습니까?')) {
+            this.viewStoryBook();
+          }
+        }, 500);
+      }
+
+      // 스토리북 보기 시작
+      viewStoryBook() {
+        if (!this.isStoryBookComplete || this.pages.length === 0) {
+          alert('📖 먼저 스토리북을 제작해주세요!');
+          return;
+        }
+        
+        // 첫 페이지 표시
+        this.showPage(0);
+        
+        // 상태 메시지 업데이트
+        this.statusEl.innerHTML = `📖 스토리북 감상 중 (${this.pages.length}페이지)`;
+        this.pageStatusEl.innerHTML = `현재 페이지: 1 / ${this.pages.length}`;
+        
+        // 버튼 상태 업데이트
+        this.updateButtonStates();
+        
+        // 자동으로 읽기 모드 제안
+        setTimeout(() => {
+          if (confirm('📚 전체화면 읽기 모드로 감상하시겠습니까?')) {
+            this.toggleReadingMode();
+          }
+        }, 1000);
+      }
+
+      // 버튼 상태 업데이트
+      updateButtonStates() {
+        if (this.isBuilding) {
+          // 제작 중
+          this.startBuildBtn.disabled = true;
+          this.startBuildBtn.innerHTML = '<span>⏳</span> 제작 중...';
+          this.viewStoryBookBtn.disabled = true;
+          this.prevBtn.disabled = true;
+          this.nextBtn.disabled = true;
+          this.readingModeBtn.disabled = true;
+          this.exportBtn.disabled = true;
+        } else if (this.isStoryBookComplete) {
+          // 제작 완료
+          this.startBuildBtn.disabled = false;
+          this.startBuildBtn.innerHTML = '<span>🔄</span> 다시 제작';
+          this.viewStoryBookBtn.disabled = false;
+          this.prevBtn.disabled = false;
+          this.nextBtn.disabled = false;
+          this.readingModeBtn.disabled = false;
+          this.exportBtn.disabled = false;
+        } else {
+          // 초기 상태
+          this.startBuildBtn.disabled = false;
+          this.startBuildBtn.innerHTML = '<span>🚀</span> 제작 시작';
+          this.viewStoryBookBtn.disabled = true;
+          this.prevBtn.disabled = true;
+          this.nextBtn.disabled = true;
+          this.readingModeBtn.disabled = true;
+          this.exportBtn.disabled = true;
+        }
+      }
+
+      createFallbackImage(text) {
+        const svg = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800">
+            <defs>
+              <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#bg)"/>
+            <text x="50%" y="45%" fill="white" font-size="28" text-anchor="middle" font-family="Arial, sans-serif">📖</text>
+            <text x="50%" y="55%" fill="rgba(255,255,255,0.9)" font-size="16" text-anchor="middle" font-family="Arial, sans-serif">이미지를 찾을 수 없습니다</text>
+          </svg>
+        `;
+        return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+      }
+
+      addPageDot(index) {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        dot.title = `페이지 ${index + 1}`;
+        dot.addEventListener('click', () => this.showPage(index));
+        this.dots.appendChild(dot);
+      }
+
+      showPage(index) {
+        if (!this.pages.length || this.isAnimating) return;
+        
+        this.currentPageIndex = (index + this.pages.length) % this.pages.length;
+        
+        // 페이지 전환 애니메이션 (자연스러운 fade 효과)
+        if (this.pages.length > 0) {
+          this.isAnimating = true;
+          
+          // 현재 활성 페이지를 fade out
+          const currentPage = this.bookContainer.querySelector('.page.active');
+          if (currentPage) {
+            currentPage.classList.add('fade-out');
+            currentPage.classList.remove('active');
+          }
+          
+          // fade out 완료 후 새 페이지를 fade in
+          setTimeout(() => {
+            // 모든 페이지 정리
+            this.pages.forEach(page => {
+              page.classList.remove('active', 'fade-out', 'fade-in');
+            });
+            
+            // 새 페이지 활성화 및 fade in
+            const newPage = this.pages[this.currentPageIndex];
+            newPage.classList.add('active', 'fade-in');
+            
+            // 도트 업데이트
+            Array.from(this.dots.children).forEach((dot, i) => {
+              dot.classList.toggle('active', i === this.currentPageIndex);
+            });
+            
+            // 페이지 상태 업데이트
+            if (this.isStoryBookComplete) {
+              this.pageStatusEl.innerHTML = `현재 페이지: ${this.currentPageIndex + 1} / ${this.pages.length}`;
+            }
+            
+            // fade in 완료 후 애니메이션 종료
+            setTimeout(() => {
+              newPage.classList.remove('fade-in');
+              this.isAnimating = false;
+            }, 600); // fade-in 지속시간과 맞춤
+            
+          }, 400); // fade-out 지속시간과 맞춤
+        }
+      }
+
+      prevPage() {
+        if (this.isAnimating) return;
+        this.showPage(this.currentPageIndex - 1);
+      }
+
+      nextPage() {
+        if (this.isAnimating) return;
+        this.showPage(this.currentPageIndex + 1);
+      }
+
+      toggleReadingMode() {
+        this.isReadingMode = !this.isReadingMode;
+        document.body.classList.toggle('reading-mode', this.isReadingMode);
+        
+        if (this.isReadingMode) {
+          this.readingModeBtn.innerHTML = '<span>📖</span> 편집 모드';
+          // 읽기 모드에서는 자동 재생 시작
+          if (!this.isAutoplay) {
+            this.toggleAutoplay();
+          }
+        } else {
+          this.readingModeBtn.innerHTML = '<span>📚</span> 읽기 모드';
+        }
+      }
+
+      toggleAutoplay() {
+        this.isAutoplay = !this.isAutoplay;
+        
+        if (this.isAutoplay) {
+          this.autoplayBtn.innerHTML = '<span>⏸️</span> 자동 넘김: 켜짐';
+          this.autoplayTimer = setInterval(() => {
+            this.nextPage();
+          }, 6000);
+          
+          // 자동 재생 표시기 추가
+          const indicator = document.createElement('div');
+          indicator.className = 'autoplay-indicator';
+          indicator.textContent = '▶️ 자동 재생 중';
+          this.bookContainer.appendChild(indicator);
+          
+        } else {
+          this.stopAutoplay();
+        }
+      }
+
+      stopAutoplay() {
+        if (this.autoplayTimer) {
+          clearInterval(this.autoplayTimer);
+          this.autoplayTimer = null;
+        }
+        this.isAutoplay = false;
+        this.autoplayBtn.innerHTML = '<span>⏸️</span> 자동 넘김: 끔';
+        
+        // 자동 재생 표시기 제거
+        const indicator = this.bookContainer.querySelector('.autoplay-indicator');
+        if (indicator) {
+          indicator.remove();
+        }
+      }
+
+      exportHTML() {
+        if (!this.pages.length) {
+          alert('📖 먼저 스토리북을 제작해주세요!');
+          return;
+        }
+        
+        const title = '내 스토리북';
+        const html = this.generateExportHTML(title);
+        
+        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'my-storybook.html';
+        a.click();
+        
+        setTimeout(() => URL.revokeObjectURL(url), 500);
+        
+        this.statusEl.innerHTML = '💾 스토리북이 HTML 파일로 저장되었습니다!';
+      }
+
+      generateExportHTML(title) {
+        const pagesHTML = this.pages.map((page, index) => {
+          const bgEl = page.querySelector('.story-bg');
+          const textEl = page.querySelector('.story-text');
+          const creditEl = page.querySelector('.credit');
+          const pageNumberEl = page.querySelector('.page-number');
+          
+          const bgImage = bgEl.style.backgroundImage;
+          const text = textEl.textContent;
+          const credit = creditEl.innerHTML;
+          const pageNumber = pageNumberEl.textContent;
+          
+          return `
+            <article class="page ${index === 0 ? 'active' : ''}">
+              <div class="story-bg" style="background-image: ${bgImage};"></div>
+              <div class="story-content">
+                <div class="story-text">${text}</div>
+                <div class="page-meta">
+                  <div class="credit">${credit}</div>
+                  <div class="page-number">${pageNumber}</div>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+        
+        return `<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${title}</title>
+  <style>
+    body{margin:0;background:#000;color:#fff;font-family:'Noto Sans KR',system-ui,sans-serif;overflow:hidden}
+    .book-container{position:relative;width:100vw;height:100vh}
+    .page{position:absolute;inset:0;display:none}
+    .page.active{display:block}
+    .story-bg{position:absolute;inset:0;background:center/cover no-repeat;filter:brightness(.7)}
+    .story-content{position:absolute;left:0;right:0;bottom:0;padding:30px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.8))}
+    .story-text{font-size:28px;line-height:1.4;margin:0 auto 20px;text-shadow:0 2px 8px rgba(0,0,0,.8);font-weight:500}
+    .page-meta{display:flex;justify-content:space-between;align-items:center;font-size:14px;opacity:.9}
+    .page-number{background:rgba(255,255,255,.2);padding:6px 12px;border-radius:15px}
+    .controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:100}
+    .btn{padding:10px 20px;background:rgba(139,92,246,.9);color:white;border:none;border-radius:25px;cursor:pointer;font-weight:600}
+    .btn:hover{background:rgba(139,92,246,1)}
+  </style>
+</head>
+<body>
+  <div class="book-container">${pagesHTML}</div>
+  <div class="controls">
+    <button class="btn" onclick="prevPage()">⬅️ 이전</button>
+    <button class="btn" onclick="toggleAutoplay()">⏸️ 자동재생</button>
+    <button class="btn" onclick="nextPage()">➡️ 다음</button>
+  </div>
+  <script>
+    let currentPage = 0;
+    let autoplayTimer = null;
+    const pages = document.querySelectorAll('.page');
+    
+    function showPage(index) {
+      currentPage = (index + pages.length) % pages.length;
+      pages.forEach((p, i) => p.classList.toggle('active', i === currentPage));
+    }
+    
+    function prevPage() { showPage(currentPage - 1); }
+    function nextPage() { showPage(currentPage + 1); }
+    
+    function toggleAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      } else {
+        autoplayTimer = setInterval(nextPage, 6000);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevPage();
+      else if (e.key === 'ArrowRight') nextPage();
+      else if (e.code === 'Space') { e.preventDefault(); toggleAutoplay(); }
+    });
+  <\/script>
+</body>
+</html>`;
+      }
+
+      escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+    }
+
+    // 앱 초기화
+    const storyBookMaker = new StoryBookMaker();
+    
+    // 초기 상태 설정
+    storyBookMaker.updateButtonStates();
+  </script>
+</body>
+</html>
