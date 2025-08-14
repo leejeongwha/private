@@ -264,13 +264,213 @@
       50% { opacity: 0.7; }
     }
     
-    /* 반응형 */
+    /* 모바일 최적화 */
     @media (max-width: 768px) {
-      .wrap { padding: 15px; }
-      .story-text { font-size: 20px; }
-      .story-content { padding: 20px; }
-      .controlsBar { flex-direction: column; gap: 10px; }
-      .page-nav { order: -1; }
+      .wrap { 
+        padding: 10px; 
+        max-width: 100%;
+      }
+      
+      h1 { 
+        font-size: 22px; 
+        text-align: center;
+      }
+      
+      .subtitle { 
+        font-size: 12px; 
+        text-align: center;
+      }
+      
+      .controls { 
+        padding: 15px; 
+        gap: 12px;
+      }
+      
+      .row { 
+        flex-direction: column; 
+        gap: 8px; 
+        align-items: stretch;
+      }
+      
+      .row .btn {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 5px;
+      }
+      
+      textarea { 
+        min-height: 120px; 
+        font-size: 16px; /* iOS 줌 방지 */
+      }
+      
+      input[type="text"], input[type="number"] { 
+        width: 100%; 
+        font-size: 16px; /* iOS 줌 방지 */
+      }
+      
+      .viewer { 
+        height: 60vh;
+        min-height: 400px;
+        margin: 15px 0;
+      }
+      
+      .story-text { 
+        font-size: 18px; 
+        line-height: 1.5;
+        margin-bottom: 80px; /* 리모컨을 위한 여백 확보 */
+      }
+      
+      .story-content { 
+        padding: 20px 15px 100px 15px; /* 하단 패딩 증가 */
+        background: linear-gradient(180deg,transparent 0%, rgba(0,0,0,.5) 30%, rgba(0,0,0,.85) 100%);
+      }
+      
+      .page-meta {
+        font-size: 12px;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+      
+      .page-number {
+        align-self: flex-end;
+        font-size: 11px;
+        padding: 3px 8px;
+      }
+      
+      .controlsBar { 
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        flex-direction: column; 
+        gap: 8px;
+        padding: 12px 15px;
+        background: rgba(0,0,0,0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.1);
+        z-index: 200;
+      }
+      
+      .page-nav { 
+        order: -1;
+        text-align: center;
+      }
+      
+      .page-nav .hint {
+        font-size: 10px;
+        margin-bottom: 8px;
+      }
+      
+      .row .btn {
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 20px;
+      }
+      
+      .dots { 
+        justify-content: center;
+        margin-top: 5px;
+      }
+      
+      .dot { 
+        width: 8px; 
+        height: 8px; 
+        margin: 0 2px;
+      }
+      
+      /* 읽기 모드에서 모바일 최적화 */
+      .reading-mode .controlsBar {
+        bottom: 5px;
+        left: 5px;
+        right: 5px;
+        padding: 10px;
+      }
+      
+      .reading-mode .viewer {
+        height: 100vh;
+        padding-bottom: 0;
+      }
+      
+      .reading-mode .story-content {
+        padding-bottom: 120px; /* 읽기 모드에서 더 많은 여백 */
+      }
+      
+      /* 자동재생 표시기 모바일 최적화 */
+      .autoplay-indicator {
+        top: 10px;
+        right: 10px;
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+      
+      /* 상태 표시 모바일 최적화 */
+      #pageStatus {
+        font-size: 12px;
+        padding: 6px 10px;
+        text-align: center;
+      }
+    }
+    
+    /* 작은 모바일 기기 (480px 이하) */
+    @media (max-width: 480px) {
+      h1 { font-size: 20px; }
+      
+      .story-text { 
+        font-size: 16px;
+        margin-bottom: 90px;
+      }
+      
+      .story-content {
+        padding: 15px 10px 110px 10px;
+      }
+      
+      .controlsBar {
+        bottom: 5px;
+        left: 5px;
+        right: 5px;
+        padding: 8px 10px;
+      }
+      
+      .row .btn {
+        padding: 6px 10px;
+        font-size: 13px;
+      }
+      
+      .page-nav .hint {
+        font-size: 9px;
+      }
+    }
+    
+    /* 가로 모드 모바일 최적화 */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .viewer {
+        height: 70vh;
+      }
+      
+      .story-text {
+        font-size: 16px;
+        margin-bottom: 70px;
+      }
+      
+      .story-content {
+        padding: 15px 20px 90px 20px;
+      }
+      
+      .controlsBar {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 8px 15px;
+      }
+      
+      .page-nav {
+        order: 0;
+        flex: 1;
+      }
+      
+      .page-nav .hint {
+        display: none; /* 가로 모드에서는 힌트 숨김 */
+      }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -398,6 +598,9 @@
           else if (e.code === 'Space') { e.preventDefault(); this.toggleAutoplay(); }
           else if (e.key === 'Escape') this.toggleReadingMode();
         });
+        
+        // 터치 제스처 지원 (모바일 스와이프)
+        this.setupTouchGestures();
       }
 
       splitSentences(text) {
@@ -880,15 +1083,41 @@
     .page{position:absolute;inset:0;opacity:0;transition:opacity 0.6s ease-in-out;pointer-events:none}
     .page.active{opacity:1;pointer-events:auto}
     .story-bg{position:absolute;inset:0;background:center/cover no-repeat;filter:brightness(.7)}
-    .story-content{position:absolute;left:0;right:0;bottom:0;padding:30px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.8))}
+    .story-content{position:absolute;left:0;right:0;bottom:0;padding:30px 30px 80px 30px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.8))}
     .story-text{font-size:28px;line-height:1.4;margin:0 auto 20px;text-shadow:0 2px 8px rgba(0,0,0,.8);font-weight:500}
     .page-meta{display:flex;justify-content:space-between;align-items:center;font-size:14px;opacity:.9}
     .page-number{background:rgba(255,255,255,.2);padding:6px 12px;border-radius:15px}
-    .controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:100}
-    .btn{padding:10px 20px;background:rgba(139,92,246,.9);color:white;border:none;border-radius:25px;cursor:pointer;font-weight:600}
+    .controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:100;background:rgba(0,0,0,.9);padding:10px 15px;border-radius:25px;backdrop-filter:blur(10px)}
+    .btn{padding:10px 20px;background:rgba(139,92,246,.9);color:white;border:none;border-radius:25px;cursor:pointer;font-weight:600;touch-action:manipulation}
     .btn:hover{background:rgba(139,92,246,1)}
+    .btn:active{transform:scale(0.95)}
     .credit a{color:#fff;text-decoration:none}
     .credit a:hover{text-decoration:underline}
+    
+    /* 모바일 최적화 */
+    @media (max-width: 768px) {
+      .story-content{padding:20px 15px 100px 15px;background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.5) 30%,rgba(0,0,0,.85) 100%)}
+      .story-text{font-size:18px;line-height:1.5;margin-bottom:0}
+      .page-meta{font-size:12px;flex-direction:column;gap:8px;align-items:flex-start}
+      .page-number{align-self:flex-end;font-size:11px;padding:3px 8px}
+      .controls{bottom:10px;left:10px;right:10px;transform:none;flex-direction:column;gap:8px;padding:12px;border-radius:15px}
+      .btn{width:100%;padding:12px;font-size:14px;border-radius:20px}
+    }
+    
+    @media (max-width: 480px) {
+      .story-content{padding:15px 10px 110px 10px}
+      .story-text{font-size:16px}
+      .controls{bottom:5px;left:5px;right:5px;padding:10px}
+      .btn{padding:10px;font-size:13px}
+    }
+    
+    /* 가로 모드 모바일 */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .story-content{padding:15px 20px 90px 20px}
+      .story-text{font-size:16px}
+      .controls{flex-direction:row;justify-content:center;gap:10px;padding:8px 15px}
+      .btn{width:auto;padding:8px 16px;font-size:14px}
+    }
   </style>
 </head>
 <body>
@@ -946,6 +1175,36 @@
       else if (e.code === 'Space') { e.preventDefault(); toggleAutoplay(); }
     });
     
+    // 터치 제스처 지원
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const minSwipeDistance = 50;
+    
+    document.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    }, { passive: true });
+    
+    document.addEventListener('touchend', (e) => {
+      const touch = e.changedTouches[0];
+      const touchEndX = touch.clientX;
+      const touchEndY = touch.clientY;
+      
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = touchEndY - touchStartY;
+      
+      // 수직 스크롤보다 수평 스와이프가 더 클 때만 페이지 전환
+      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+        if (deltaX > 0) {
+          prevPage(); // 오른쪽 스와이프 - 이전 페이지
+        } else {
+          nextPage(); // 왼쪽 스와이프 - 다음 페이지
+        }
+        e.preventDefault();
+      }
+    }, { passive: false });
+    
     // 초기화: 첫 페이지 표시
     document.addEventListener('DOMContentLoaded', () => {
       if (pages.length > 0) {
@@ -966,6 +1225,46 @@
 
       sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      // 터치 제스처 설정 (모바일 스와이프)
+      setupTouchGestures() {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+        const minSwipeDistance = 50;
+        
+        this.bookContainer.addEventListener('touchstart', (e) => {
+          if (!this.isStoryBookComplete || this.isAnimating) return;
+          
+          const touch = e.touches[0];
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+        }, { passive: true });
+        
+        this.bookContainer.addEventListener('touchend', (e) => {
+          if (!this.isStoryBookComplete || this.isAnimating) return;
+          
+          const touch = e.changedTouches[0];
+          touchEndX = touch.clientX;
+          touchEndY = touch.clientY;
+          
+          const deltaX = touchEndX - touchStartX;
+          const deltaY = touchEndY - touchStartY;
+          
+          // 수직 스크롤보다 수평 스와이프가 더 클 때만 페이지 전환
+          if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+            if (deltaX > 0) {
+              // 오른쪽 스와이프 - 이전 페이지
+              this.prevPage();
+            } else {
+              // 왼쪽 스와이프 - 다음 페이지
+              this.nextPage();
+            }
+            e.preventDefault();
+          }
+        }, { passive: false });
       }
     }
 
